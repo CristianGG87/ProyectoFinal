@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { registerUserService } from "../services";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
+  const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [pass1, setPass1] = useState("");
@@ -19,6 +21,9 @@ export const RegisterPage = () => {
 
     try {
       await registerUserService({ userName, email, password: pass1 });
+
+      navigate("/login");
+
     } catch (error) {
       setError(error.message);
     }

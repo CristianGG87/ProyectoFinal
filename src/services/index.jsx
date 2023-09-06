@@ -6,6 +6,7 @@ export const getAllNewsService = async () => {
   }
   return json.data;
 };
+
 export const getSingleNewsService = async (id) => {
   const response = await fetch(`http://localhost:8000/news/${id}`);
   const json = await response.json();
@@ -14,6 +15,7 @@ export const getSingleNewsService = async (id) => {
   }
   return json.data.news;
 };
+
 export const registerUserService = async ({ userName, email, password }) => {
   const response = await fetch(`http://localhost:8000/users/register`, {
     method: "POST",
@@ -26,4 +28,19 @@ export const registerUserService = async ({ userName, email, password }) => {
   if (!response.ok) {
     throw new Error(json.message);
   }
+};
+
+export const loginUserService = async ({email, password}) => {
+  const response = await fetch(`http://localhost:8000/users/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    } ,
+    body: JSON.stringify({ email, password }),
+  });
+  const json = await response.json();
+  if (!response.ok) {
+    throw new Error(json.message);
+  }
+  return json.data.token;
 };
