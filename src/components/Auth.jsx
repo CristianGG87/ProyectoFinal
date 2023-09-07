@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export const Auth = () => {
-  const {token} = useContext(AuthContext)
+  const {logout, user} = useContext(AuthContext)
 
-  return (
+  return  user ? (
+    <p>
+      El usuario {user.user.username} está conectado  <button onClick={() => logout()}>Cerrar sesión </button>
+    </p>
+  ) : (
     <ul>
       <li>
         <Link to="/register">Registro</Link>
