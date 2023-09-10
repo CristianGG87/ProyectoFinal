@@ -3,7 +3,6 @@ import { getMyUserDataService } from '../services';
 
 export const AuthContext = createContext();
 
-
 export const AuthProviderComponent = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState(null);
@@ -12,15 +11,13 @@ export const AuthProviderComponent = ({ children }) => {
     }, [token]);
     useEffect(() => {
         const getUserData = async () => {
-
-            try{
-                const data = await getMyUserDataService({token})
-                console.log("Datos del usuario:", data);
+            try {
+                const data = await getMyUserDataService({ token });
+                /*{console.log("Datos del usuario:", data);}*/
                 setUser(data);
-            } catch (error){
+            } catch (error) {
                 logout();
             }
-
         };
 
         if (token) getUserData();
@@ -33,7 +30,7 @@ export const AuthProviderComponent = ({ children }) => {
     const logout = () => {
         setToken('');
         setUser(null);
-    }
+    };
 
     return (
         <AuthContext.Provider value={{ token, user, login, logout }}>

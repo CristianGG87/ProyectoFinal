@@ -1,23 +1,31 @@
-import { useEffect, useState } from "react";
-import { getAllNewsService } from "../services";
+import { useEffect, useState } from 'react';
+import { getAllNewsService } from '../services';
+
 const useNews = () => {
-  const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  useEffect(() => {
-    const loadNews = async () => {
-      try {
-        setLoading(true);
-        const data = await getAllNewsService();
-        setNews(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
+    const [news, setNews] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const loadNews = async () => {
+            try {
+                setLoading(true);
+                const data = await getAllNewsService();
+                setNews(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadNews();
+    }, []);
+
+    const addNews = (oneNews) => {
+        setNews([oneNews, ...news]);
     };
-    loadNews();
-  }, []);
-  return { news, loading, error };
+
+    return { news, loading, error, addNews };
 };
+
 export default useNews;
