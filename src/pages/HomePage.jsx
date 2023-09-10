@@ -6,7 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 import { CreateNews } from '../components/CreateNews';
 
 export const HomePage = () => {
-    const { news, loading, error, addNews } = useNews();
+    const { news, loading, error, addNews, removeNews } = useNews();
     const { user } = useContext(AuthContext);
 
     if (loading) return <p>Cargando noticias...</p>;
@@ -14,10 +14,12 @@ export const HomePage = () => {
 
     return (
         <section>
-            <h1>Ultimas Noticias</h1>
             {user ? <CreateNews addNews={addNews} /> : null}
 
-            <NewsList news={news} />
+            <h1>Ultimas Noticias</h1>
+
+            <NewsList news={news} removeNews={removeNews} />
+
         </section>
     );
 };

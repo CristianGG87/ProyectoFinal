@@ -25,7 +25,11 @@ const useNews = () => {
         setNews([oneNews, ...news]);
     };
 
-    return { news, loading, error, addNews };
+    const removeNews = (id) => {
+        setNews(news.filter((news) => news.id !== id))
+    }
+
+    return { news, loading, error, addNews, removeNews };
 };
 
 export default useNews;

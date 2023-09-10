@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 export const CreateNews = ({ addNews }) => {
     const [error, setError] = useState('');
     const [sending, setSending] = useState(false);
+    const [image, setImage] =useState();
     const { token } = useContext(AuthContext);
     const handleForm = async (e) => {
         e.preventDefault();
@@ -16,6 +17,8 @@ export const CreateNews = ({ addNews }) => {
             console.log(addNews);
 
             addNews(oneNews);
+            e.target.reset();
+            setImage(null);
         } catch (error) {
             setError(error.message);
         } finally {
@@ -49,7 +52,8 @@ export const CreateNews = ({ addNews }) => {
             </fieldset>
             <fieldset>
                 <label htmlFor="photo">Foto (opcional)</label>
-                <input type="file" id="photo" name="photo" accept="image/*" />
+                <input type="file" id="photo" name="photo" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+                {image ? <figure><img src={URL.createObjectURL(image)} alt='Preview' style={{width: '100px'}} /></figure> : null}
             </fieldset>
             <button>Publicar noticia</button>
             {sending ? <p>Publicando noticia</p> : null}

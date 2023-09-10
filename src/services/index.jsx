@@ -72,3 +72,16 @@ export const sendNewsService = async ({ data, token }) => {
     }
     return json.data.news;
 };
+
+export const deleteNewsService = async ({id, token}) => {
+    const response = await fetch(`http://localhost:8000/news/${id}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: token,
+        },
+    });
+    const json = await response.json();
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+};
