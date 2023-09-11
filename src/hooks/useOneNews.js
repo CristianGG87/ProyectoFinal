@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { getSingleNewsService } from '../services';
 
 const useOneNews = (id) => {
-    const [news, setNews] = useState(null);
+    const [news, setNews] = useState([]);
+    const [oneNews, setOneNews] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -10,10 +11,9 @@ const useOneNews = (id) => {
         const loadNews = async () => {
             try {
                 setLoading(true);
-
                 const data = await getSingleNewsService(id);
 
-                setNews(data);
+                setOneNews(data);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -22,8 +22,10 @@ const useOneNews = (id) => {
         };
         loadNews();
     }, [id]);
-
-    return { news, loading, error };
+    const removeNews = (id) => {
+        setNews(news.filter((oneNews) => oneNews.id !== id));
+    };
+    return { oneNews, loading, error, removeNews };
 };
 
 export default useOneNews;

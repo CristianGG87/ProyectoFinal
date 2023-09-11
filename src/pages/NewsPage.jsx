@@ -6,14 +6,14 @@ import { ErrorMessage } from '../components/ErrorMessage';
 export const NewsPage = () => {
     const { id } = useParams();
 
-    const { news, loading, error } = useOneNews(id);
+    const { oneNews, loading, error } = useOneNews(id);
 
     if (loading) return <p>Cargando noticia...</p>;
     if (error) return <ErrorMessage message={error} />;
 
     return (
         <section>
-            <OneNews news={news} />
+            <OneNews oneNews={oneNews} />
         </section>
     );
 };
