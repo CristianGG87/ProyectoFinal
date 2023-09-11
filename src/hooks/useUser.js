@@ -21,4 +21,4 @@ const useUser = (id) => {
     return {user, loading, error}
 }
 
-export default useUser
+export default useUser;
