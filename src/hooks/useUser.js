@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import { getUserDataService } from "../services";
+import { useEffect, useState } from 'react';
+import { getUserDataService } from '../services';
 
 const useUser = (id) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const loadUser = async () => {
@@ -15,14 +15,14 @@ const useUser = (id) => {
                 setUser(data);
             } catch (error) {
                 setError(error.message);
-            }finally {
+            } finally {
                 setLoading(false);
             }
-        }
-       loadUser();
-    }, [id])
+        };
+        loadUser();
+    }, [id]);
 
-    return {user, loading, error}
-}
+    return { user, loading, error };
+};
 
 export default useUser;

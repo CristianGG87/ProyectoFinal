@@ -4,15 +4,14 @@ import { AuthContext } from '../context/AuthContext';
 export const News = ({ news, removeNews }) => {
     const { user, token } = useContext(AuthContext);
     const [error, setError] = useState('');
+    console.log(news);
 
     const deleteNews = async (id) => {
         try {
             removeNews(id, token);
-
         } catch (error) {
             setError(error.message);
         }
-
     };
     const fechaNoticia = new Date(news.date);
     const fechaActual = new Date();
