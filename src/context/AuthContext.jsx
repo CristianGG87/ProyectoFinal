@@ -13,7 +13,7 @@ export const AuthProviderComponent = ({ children }) => {
         const getUserData = async () => {
             try {
                 const data = await getMyUserDataService({ token });
-                /*{console.log("Datos del usuario:", data);}*/
+
                 setUser(data);
             } catch (error) {
                 logout();

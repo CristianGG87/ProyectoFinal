@@ -1,20 +1,18 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { deleteNewsService } from '../services';
 export const News = ({ news, removeNews }) => {
     const { user, token } = useContext(AuthContext);
     const [error, setError] = useState('');
-    console.log(removeNews);
-    console.log(news);
+
     const deleteNews = async (id) => {
         try {
-            await deleteNewsService({ id, token });
-            removeNews(id);
-            console.log(removeNews);
+            removeNews(id, token);
+
         } catch (error) {
             setError(error.message);
         }
+
     };
     const fechaNoticia = new Date(news.date);
     const fechaActual = new Date();
@@ -46,7 +44,8 @@ export const News = ({ news, removeNews }) => {
                 />
             ) : null}
             <p>
-                Autor: {news.userName} {fechaTexto}
+                Autor: <Link to={`/users/${news.userId}`}>{news.userName}</Link>{' '}
+                {fechaTexto}
             </p>
             {user && user.id === news.userId ? (
                 <section>

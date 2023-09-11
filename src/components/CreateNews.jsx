@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { sendNewsService } from '../services';
 import { AuthContext } from '../context/AuthContext';
 
 export const CreateNews = ({ addNews }) => {
@@ -7,16 +6,14 @@ export const CreateNews = ({ addNews }) => {
     const [sending, setSending] = useState(false);
     const [image, setImage] =useState();
     const { token } = useContext(AuthContext);
+    
     const handleForm = async (e) => {
         e.preventDefault();
         try {
             setSending(true);
             const data = new FormData(e.target);
-            const oneNews = await sendNewsService({ data, token });
-            console.log(oneNews);
-            console.log(addNews);
-
-            addNews(oneNews);
+            
+            addNews(data, token);
             e.target.reset();
             setImage(null);
         } catch (error) {

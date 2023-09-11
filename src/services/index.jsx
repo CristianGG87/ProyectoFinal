@@ -58,7 +58,8 @@ export const getMyUserDataService = async ({ token }) => {
     return json.data;
 };
 
-export const sendNewsService = async ({ data, token }) => {
+export const sendNewsService = async ( data, token ) => {
+    console.log(token);
     const response = await fetch('http://localhost:8000/news', {
         method: 'POST',
         body: data,
@@ -73,7 +74,7 @@ export const sendNewsService = async ({ data, token }) => {
     return json.data.news;
 };
 
-export const deleteNewsService = async ({id, token}) => {
+export const deleteNewsService = async (id, token) => {
     const response = await fetch(`http://localhost:8000/news/${id}`, {
         method: 'DELETE',
         headers: {

@@ -1,1 +1,110 @@
+/* Estilo para el cuerpo de la página */
+body {
+    background-color: #080D21; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilo para el encabezado */
+  header {
+    background-color: #555555; 
+    text-align: left;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
+  /* Estilo para el titulo */
+  .header-title {
+    margin-left: 20px;
+    color: #B52B2B;
+  }
+
+  /* Estilo para el menu de nevegacion*/
+  nav {
+    margin-right: 20px;
+  }
+  
+  /* Estilo para el pie de página */
+  footer {
+    background-color: #555555; 
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  /* Estilo para el contenido principal */
+  main {
+    background-color: #D7D9D6; /* Color de fondo gris claro */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Estilo para los enlaces de navegación */
+  nav a {
+    color: #B52B2B; 
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-weight: bold;
+  }
+  
+  nav a:hover {
+    color: #fff; /* Color de texto blanco al pasar el mouse */
+    background-color: #333; /* Color de fondo oscuro al pasar el mouse */
+    border-radius: 5px;
+  }
+  
+  /* Estilo para las noticias */
+  .news {
+    background-color: #D7D9D6; 
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: left;
+  }
+  
+  /* Estilo para el título de las noticias */
+  .news h2 {
+    color: #B52B2B; 
+    background-color: #555555; 
+    padding: 10px;
+    margin-top: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  /* Estilo para el contenido de las noticias */
+  .news p {
+    color: #426FB2; 
+    margin: 10px 0;
+  }
+  
+  /* Estilo para el botón de registro y login */
+  .button {
+    background-color: #555555; 
+    color: #426FB2; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .button:hover {
+    background-color: #ff007f; /* Color de fondo al pasar el mouse */
+  }
+  
+  /* Estilo para la página no encontrada */
+  .not-found {
+    font-size: 24px;
+    color: #ff0000; /* Color de texto rojo */
+    margin-top: 20px;
+  }
+  
+a {
+    text-decoration: none;
+    color: #B52B2B;
+}
