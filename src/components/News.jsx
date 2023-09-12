@@ -4,6 +4,35 @@ import { AuthContext } from '../context/AuthContext';
 export const News = ({ news, removeNews }) => {
     const { user, token } = useContext(AuthContext);
     const [error, setError] = useState('');
+    const [likes, setLikes] = useState(0);
+    const [dislikes, setDislikes] = useState(0);
+    console.log(news);
+    const handleLikeClick = async () => {
+        setLikes(likes + 1);
+        try {
+            const response = await fetch(`/news/${news.id}/votes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token, // Asegúrate de enviar el token de autenticación
+                },
+                body: JSON.stringify({ value: 1 }), // 1 para "like", 0 para "dislike"
+            });
+
+            if (response.ok) {
+                // La solicitud fue exitosa
+                // Puedes manejar cualquier respuesta del servidor si es necesario
+            } else {
+                // Maneja errores si es necesario
+            }
+        } catch (error) {
+            // Maneja errores de red si es necesario
+        }
+    };
+
+    const handleDislikeClick = () => {
+        setDislikes(dislikes + 1);
+    };
 
     const deleteNews = async (id) => {
         try {
@@ -42,6 +71,14 @@ export const News = ({ news, removeNews }) => {
                     alt={news.title}
                 />
             ) : null}
+            <section>
+                <button onClick={handleLikeClick}>
+                    Like ({news.vPositiveeee})
+                </button>
+                <button onClick={handleDislikeClick}>
+                    Dislike ({news.vNegative})
+                </button>
+            </section>
             <p>
                 Autor: <Link to={`/users/${news.userId}`}>{news.userName}</Link>{' '}
                 {fechaTexto}
