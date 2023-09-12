@@ -18,6 +18,7 @@ export const UserPage = () => {
                 <>
                     <p>Nombre: {user.user.userName}</p>
                     <p>Correo electrónico: {user.user.email}</p>
+
                     <p>Biografía: {user.user.biography}</p>
                     {user.user.photo ? (
                         <img
