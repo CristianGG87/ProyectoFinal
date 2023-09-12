@@ -1,35 +1,52 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import useUser from '../hooks/useUser';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { UserNews } from '../components/UserNews';
 
 export const UserPage = () => {
     const { id } = useParams();
     const { user, loading, error } = useUser(id);
-    console.log(id);
-    if (loading) return <p>Cargando los datos del usuario...</p>;
-    if (error) return <ErrorMessage message={error} />;
+    if (user) {
+        console.log(user.user.news);
+    }
     return (
         <section>
             <h1> Datos del perfil </h1>
-            <p>Nombre: {user.user.userName}</p>
-            <p>Correo electronico:{user.user.email}</p>
-            <p>
-                Cambiar contraseña (aqui ira la funcion para cambiar la
-                contraseña)
-            </p>
-            <p>Biografia:{user.user.biography}</p>
-            {user.user.photo ? (
-                <img
-                    src={`http://localhost:8000/${user.user.photo}`}
-                    alt={user.user.userName}
-                />
-            ) : null}
-            <p>
-                Registrado el:
-                {new Date(user.user.createdAt).toLocaleDateString()}
-            </p>
-            <UserNews id={user.id} />
+            {loading && <p>Cargando los datos del usuario...</p>}
+            {error && <ErrorMessage message={error} />}
+
+            {user && (
+                <>
+                    <p>Nombre: {user.user.userName}</p>
+                    <p>Correo electrónico: {user.user.email}</p>
+                    <p>Biografía: {user.user.biography}</p>
+                    {user.user.photo ? (
+                        <img
+                            src={`http://localhost:8000/${user.user.photo}`}
+                            alt={user.user.userName}
+                        />
+                    ) : null}
+                    <p>
+                        Registrado el:
+                        {new Date(user.user.createdAt).toLocaleDateString()}
+                    </p>
+
+                    <h2>Noticias:</h2>
+                    {user.user.news.map((newsItem) => (
+                        <div key={newsItem.id}>
+                            <Link to={`/news/${newsItem.id}`}>
+                                <h3>{newsItem.title}</h3>
+                            </Link>
+                            <p>{newsItem.intro}</p>
+                            {newsItem.photo && (
+                                <img
+                                    src={`http://localhost:8000/${newsItem.photo}`}
+                                    alt={newsItem.title}
+                                />
+                            )}
+                        </div>
+                    ))}
+                </>
+            )}
         </section>
     );
 };

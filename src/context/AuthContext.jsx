@@ -6,6 +6,8 @@ export const AuthContext = createContext();
 export const AuthProviderComponent = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState(null);
+    const [email, setEmail] = useState('');
+
     useEffect(() => {
         localStorage.setItem('token', token);
     }, [token]);
@@ -15,13 +17,14 @@ export const AuthProviderComponent = ({ children }) => {
                 const data = await getMyUserDataService({ token });
 
                 setUser(data);
+                setEmail(data.email);
             } catch (error) {
                 logout();
             }
         };
 
         if (token) getUserData();
-    }, [token]);
+    }, [token, setEmail]);
 
     const login = (token) => {
         setToken(token);
@@ -33,7 +36,7 @@ export const AuthProviderComponent = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, user, login, logout }}>
+        <AuthContext.Provider value={{ token, user, login, logout, email }}>
             {children}
         </AuthContext.Provider>
     );

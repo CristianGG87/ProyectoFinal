@@ -4,7 +4,6 @@ import { AuthContext } from '../context/AuthContext';
 export const News = ({ news, removeNews }) => {
     const { user, token } = useContext(AuthContext);
     const [error, setError] = useState('');
-    console.log(news);
 
     const deleteNews = async (id) => {
         try {
@@ -30,6 +29,7 @@ export const News = ({ news, removeNews }) => {
     } else {
         fechaTexto = `Hace unos segundos`;
     }
+
     return (
         <article>
             <Link to={`/news/${news.id}`}>
@@ -46,7 +46,7 @@ export const News = ({ news, removeNews }) => {
                 Autor: <Link to={`/users/${news.userId}`}>{news.userName}</Link>{' '}
                 {fechaTexto}
             </p>
-            {user && user.id === news.userId ? (
+            {user && user.user.id === news.userId ? (
                 <section>
                     <button
                         onClick={() => {

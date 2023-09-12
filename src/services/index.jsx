@@ -14,7 +14,7 @@ export const getUserNewsService = async (id) => {
         throw new Error(json.message);
     }
     return json.data;
-}
+};
 
 export const getSingleNewsService = async (id) => {
     const response = await fetch(`http://localhost:8000/news/${id}`);
@@ -68,17 +68,16 @@ export const getMyUserDataService = async ({ token }) => {
 };
 
 export const getUserDataService = async (id) => {
-    const response = await fetch(`http://localhost:8000/users/${id}`)
+    const response = await fetch(`http://localhost:8000/users/${id}`);
 
     const json = await response.json();
     if (!response.ok) {
         throw new Error(json.message);
     }
-    return json.data;    
-}
+    return json.data;
+};
 
-export const sendNewsService = async ( data, token ) => {
-    console.log(token);
+export const sendNewsService = async (data, token) => {
     const response = await fetch('http://localhost:8000/news', {
         method: 'POST',
         body: data,

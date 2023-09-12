@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import useNews from '../hooks/useNews';
 
 export const OneNews = ({ news }) => {
-    const {title, intro, text, photo, userName, date, id, userId} = news
-    console.log(date)
+    const { title, intro, text, photo, userName, date, id, userId } = news;
+
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -17,23 +17,21 @@ export const OneNews = ({ news }) => {
         try {
             setLoading(true);
             await removeNews(id, token);
-            navigate('/')
+            navigate('/');
         } catch (error) {
-            setLoading(false)
-            setError(error.message)
-        } 
-    }
+            setLoading(false);
+            setError(error.message);
+        }
+    };
 
     return (
         <article>
+            <p>variable es: </p>
             <h2>{title}</h2>
             <h3>{intro}</h3>
             <p>{text}</p>
             {photo ? (
-                <img
-                    src={`http://localhost:8000/${photo}`}
-                    alt={title}
-                />
+                <img src={`http://localhost:8000/${photo}`} alt={title} />
             ) : null}
             <p>
                 Autor: {userName} el {new Date(date).toLocaleString()}
