@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { deleteNewsService, getAllNewsService, getUserNewsService, sendNewsService } from '../services';
+import {
+    deleteNewsService,
+    getAllNewsService,
+    getUserNewsService,
+    sendNewsService,
+} from '../services';
 
 const useNews = (id) => {
     const [news, setNews] = useState([]);
@@ -10,7 +15,9 @@ const useNews = (id) => {
         const loadNews = async () => {
             try {
                 setLoading(true);
-                const data = id ? getUserNewsService(id) : await getAllNewsService();
+                const data = id
+                    ? getUserNewsService(id)
+                    : await getAllNewsService();
                 setNews(data);
             } catch (error) {
                 setError(error.message);
@@ -22,18 +29,18 @@ const useNews = (id) => {
     }, [id]);
 
     const addNews = async (oneNews, token) => {
-        await sendNewsService(oneNews, token)
-        const allNews = await getAllNewsService()
-        setNews(allNews);  
+        await sendNewsService(oneNews, token);
+        const allNews = await getAllNewsService();
+        setNews(allNews);
     };
 
     const removeNews = async (id, token) => {
-        await deleteNewsService( id, token)
-        const allNews = await getAllNewsService()
+        await deleteNewsService(id, token);
+        const allNews = await getAllNewsService();
         setNews(allNews);
-    }
+    };
 
-    return { news, loading, error, addNews, removeNews };
+    return { news, setNews, loading, error, addNews, removeNews };
 };
 
 export default useNews;

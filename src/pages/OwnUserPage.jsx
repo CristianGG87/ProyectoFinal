@@ -17,6 +17,7 @@ export const OwnUserPage = () => {
     const handleDelete = async (news) => {
         try {
             await removeNews(news, token);
+            location.reload();
         } catch (error) {
             setError(error.message);
         }

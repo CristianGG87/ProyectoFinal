@@ -4,14 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import useNews from '../hooks/useNews';
 
 export const OneNews = ({ news }) => {
-    const { title, intro, text, photo, userName, date, id, userId } = news;
-
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { user, token } = useContext(AuthContext);
     const [likes, setLikes] = useState(news.vPositive);
     const [dislikes, setDislikes] = useState(news.vNegative);
     const env = import.meta.env.VITE_BACKEND;
+    const { title, intro, text, photo, userName, date, id, userId } = news;
 
     const handleLikeClick = async () => {
         try {

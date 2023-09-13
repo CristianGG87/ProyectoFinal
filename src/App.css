@@ -1,110 +1,135 @@
 /* Estilo para el cuerpo de la página */
 body {
-    background-color: #080D21; 
+    background-color: #080d21;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-  }
-  
-  /* Estilo para el encabezado */
-  header {
-    background-color: #555555; 
+}
+
+/* Estilo para el encabezado */
+header {
+    background-color: #555555;
     text-align: left;
     padding: 20px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
 
-  /* Estilo para el titulo */
-  .header-title {
+/* Estilo para el titulo */
+.header-title {
     margin-left: 20px;
-    color: #B52B2B;
-  }
+    color: #b52b2b;
+}
 
-  /* Estilo para el menu de nevegacion*/
-  nav {
+/* Estilo para el menu de nevegacion*/
+nav {
     margin-right: 20px;
-  }
-  
-  /* Estilo para el pie de página */
-  footer {
-    background-color: #555555; 
+}
+
+/* Estilo para el pie de página */
+footer {
+    background-color: #555555;
     text-align: center;
     padding: 20px 0;
-  }
-  
-  /* Estilo para el contenido principal */
-  main {
-    background-color: #D7D9D6; /* Color de fondo gris claro */
+}
+
+/* Estilo para el contenido principal */
+main {
+    background-color: #d7d9d6; /* Color de fondo gris claro */
     padding: 20px;
     text-align: center;
-  }
-  
-  /* Estilo para los enlaces de navegación */
-  nav a {
-    color: #B52B2B; 
+}
+
+/* Estilo para los enlaces de navegación */
+nav a {
+    color: #b52b2b;
     text-decoration: none;
     padding: 10px 20px;
     margin: 0 10px;
     font-weight: bold;
-  }
-  
-  nav a:hover {
+}
+
+nav a:hover {
     color: #fff; /* Color de texto blanco al pasar el mouse */
     background-color: #333; /* Color de fondo oscuro al pasar el mouse */
     border-radius: 5px;
-  }
-  
-  /* Estilo para las noticias */
-  .news {
-    background-color: #D7D9D6; 
+}
+
+/* Estilo para las noticias */
+.news {
+    background-color: #d7d9d6;
     padding: 20px;
     margin: 10px;
     border-radius: 10px;
     text-align: left;
-  }
-  
-  /* Estilo para el título de las noticias */
-  .news h2 {
-    color: #B52B2B; 
-    background-color: #555555; 
+}
+
+/* Estilo para el título de las noticias */
+.news h2 {
+    color: #b52b2b;
+    background-color: #555555;
     padding: 10px;
     margin-top: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-  }
-  
-  /* Estilo para el contenido de las noticias */
-  .news p {
-    color: #426FB2; 
+}
+
+/* Estilo para el contenido de las noticias */
+.news p {
+    color: #426fb2;
     margin: 10px 0;
-  }
-  
-  /* Estilo para el botón de registro y login */
-  .button {
-    background-color: #555555; 
-    color: #426FB2; 
+}
+
+/* Estilo para el botón de registro y login */
+.button {
+    background-color: #555555;
+    color: #426fb2;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
-  }
-  
-  .button:hover {
+}
+
+.button:hover {
     background-color: #ff007f; /* Color de fondo al pasar el mouse */
-  }
-  
-  /* Estilo para la página no encontrada */
-  .not-found {
+}
+
+/* Estilo para la página no encontrada */
+.not-found {
     font-size: 24px;
     color: #ff0000; /* Color de texto rojo */
     margin-top: 20px;
-  }
-  
+}
+
 a {
     text-decoration: none;
-    color: #B52B2B;
+    color: #b52b2b;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+/* CSS Variables */
+:root {
+    --bg: #242526;
+    --bg-accent: #484a4d;
+    --text-color: #dadce1;
+    --nav-size: 60px;
+    --border: 1px solid #474a4d;
+    --border-radius: 8px;
+    --speed: 500ms;
 }

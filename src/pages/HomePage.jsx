@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { NewsList } from '../components/NewsList';
-import useNews from '../hooks/useNews';
+
 import { AuthContext } from '../context/AuthContext';
 import { CreateNews } from '../components/CreateNews';
+import useNews from '../hooks/useNews';
 
 export const HomePage = () => {
-    const { news, loading, error, addNews, removeNews } = useNews();
+    const { news, setNews, loading, error, addNews, removeNews } = useNews();
     const { user } = useContext(AuthContext);
 
     if (loading) return <p>Cargando noticias...</p>;
@@ -18,8 +19,7 @@ export const HomePage = () => {
 
             <h1>Ultimas Noticias</h1>
 
-            <NewsList news={news} removeNews={removeNews} />
-
+            <NewsList news={news} setNews={setNews} removeNews={removeNews} />
         </section>
     );
 };
