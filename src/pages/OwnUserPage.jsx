@@ -1,19 +1,31 @@
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { getMyUserDataService } from '../services'; // Importa el servicio
+import { getMyUserDataService } from '../services';
 import { Link } from 'react-router-dom';
+import useNews from '../hooks/useNews';
 
 export const OwnUserPage = () => {
-    const { token } = useContext(AuthContext); // Obtén el token de autenticación del contexto AuthContext
+    const { token } = useContext(AuthContext);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const env = import.meta.env.VITE_BACKEND;
+
+    const { removeNews } = useNews();
+
+    const handleDelete = async (news) => {
+        try {
+            await removeNews(news, token);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const userData = await getMyUserDataService({ token }); // Utiliza el servicio
+                const userData = await getMyUserDataService({ token });
                 setUser(userData);
                 setLoading(false);
             } catch (error) {
@@ -46,7 +58,7 @@ export const OwnUserPage = () => {
                 <div>
                     {user.user.photo ? (
                         <img
-                            src={`http://localhost:8000/${user.user.photo}`}
+                            src={`${env}/${user.user.photo}`}
                             alt={user.user.userName}
                         />
                     ) : null}
@@ -58,28 +70,41 @@ export const OwnUserPage = () => {
                     {new Date(user.user.createdAt).toLocaleDateString()}
                 </p>
 
-                <h2>Noticias:</h2>
-                {user.user.news.map((newsItem) => (
-                    <div key={newsItem.id}>
-                        <Link to={`/news/${newsItem.id}`}>
-                            <h3>{newsItem.title}</h3>
+                <h2>Mis Noticias:</h2>
+                {user.user.news.map((news) => (
+                    <div key={news.id}>
+                        {console.log(news)}
+                        <Link to={`/news/${news.id}`}>
+                            <h3>{news.title}</h3>
                         </Link>
-                        <p>{newsItem.intro}</p>
-                        {newsItem.photo && (
+                        <p>{news.intro}</p>
+                        {news.photo && (
                             <img
-                                src={`http://localhost:8000/${newsItem.photo}`}
-                                alt={newsItem.title}
+                                src={`${env}/${news.photo}`}
+                                alt={news.title}
                             />
                         )}
                         <button>Editar foto</button>
+                        <section>
+                            <button
+                                onClick={() => {
+                                    if (
+                                        window.confirm(
+                                            'Se borrará la Noticia, ¿está seguro?'
+                                        )
+                                    )
+                                        handleDelete(news.id);
+                                }}
+                            >
+                                Borrar noticia
+                            </button>
+                            {error && <p>{error}</p>}
+                        </section>
                     </div>
                 ))}
-                {/* Otras acciones que puedes realizar en el perfil propio */}
             </section>
         );
     }
 
     return null;
 };
-
-//aaaa

@@ -6,32 +6,45 @@ export const News = ({ news, removeNews }) => {
     const [error, setError] = useState('');
     const [likes, setLikes] = useState(0);
     const [dislikes, setDislikes] = useState(0);
-    console.log(news);
+    const env = import.meta.env.VITE_BACKEND;
+
     const handleLikeClick = async () => {
         setLikes(likes + 1);
         try {
-            const response = await fetch(`/news/${news.id}/votes`, {
+            const response = await fetch(`${env}/news/${news.id}/votes`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: token, // Asegúrate de enviar el token de autenticación
+                    Authorization: token,
                 },
-                body: JSON.stringify({ value: 1 }), // 1 para "like", 0 para "dislike"
+                body: JSON.stringify({ value: '1' }),
             });
 
-            if (response.ok) {
-                // La solicitud fue exitosa
-                // Puedes manejar cualquier respuesta del servidor si es necesario
-            } else {
-                // Maneja errores si es necesario
+            if (!response.ok) {
+                throw new Error('Error al enviar el voto.');
             }
         } catch (error) {
-            // Maneja errores de red si es necesario
+            setError(error.message);
         }
     };
-
-    const handleDislikeClick = () => {
+    const handleDislikeClick = async () => {
         setDislikes(dislikes + 1);
+        try {
+            const response = await fetch(`${env}/news/${news.id}/votes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token,
+                },
+                body: JSON.stringify({ value: '0' }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al enviar el voto.');
+            }
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
     const deleteNews = async (id) => {
@@ -66,14 +79,11 @@ export const News = ({ news, removeNews }) => {
             </Link>
             <h3>{news.intro}</h3>
             {news.photo ? (
-                <img
-                    src={`http://localhost:8000/${news.photo}`}
-                    alt={news.title}
-                />
+                <img src={`${env}/${news.photo}`} alt={news.title} />
             ) : null}
             <section>
                 <button onClick={handleLikeClick}>
-                    Like ({news.vPositiveeee})
+                    Like ({news.vPositive})
                 </button>
                 <button onClick={handleDislikeClick}>
                     Dislike ({news.vNegative})

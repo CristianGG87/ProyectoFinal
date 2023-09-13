@@ -1,5 +1,6 @@
 export const getAllNewsService = async () => {
-    const response = await fetch('http://localhost:8000/news');
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/news`);
     const json = await response.json();
     if (!response.ok) {
         throw new Error(json.message);
@@ -8,7 +9,8 @@ export const getAllNewsService = async () => {
 };
 
 export const getUserNewsService = async (id) => {
-    const response = await fetch(`http://localhost:8000/users/${id}/news`);
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/${id}/news`);
     const json = await response.json();
     if (!response.ok) {
         throw new Error(json.message);
@@ -17,7 +19,8 @@ export const getUserNewsService = async (id) => {
 };
 
 export const getSingleNewsService = async (id) => {
-    const response = await fetch(`http://localhost:8000/news/${id}`);
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/news/${id}`);
     const json = await response.json();
     if (!response.ok) {
         throw new Error(json.message);
@@ -26,7 +29,8 @@ export const getSingleNewsService = async (id) => {
 };
 
 export const registerUserService = async ({ userName, email, password }) => {
-    const response = await fetch(`http://localhost:8000/users/register`, {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -40,7 +44,8 @@ export const registerUserService = async ({ userName, email, password }) => {
 };
 
 export const loginUserService = async ({ email, password }) => {
-    const response = await fetch(`http://localhost:8000/users/login`, {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -55,7 +60,8 @@ export const loginUserService = async ({ email, password }) => {
 };
 
 export const getMyUserDataService = async ({ token }) => {
-    const response = await fetch('http://localhost:8000/users', {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users`, {
         headers: {
             Authorization: token,
         },
@@ -68,7 +74,8 @@ export const getMyUserDataService = async ({ token }) => {
 };
 
 export const getUserDataService = async (id) => {
-    const response = await fetch(`http://localhost:8000/users/${id}`);
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/${id}`);
 
     const json = await response.json();
     if (!response.ok) {
@@ -78,7 +85,8 @@ export const getUserDataService = async (id) => {
 };
 
 export const sendNewsService = async (data, token) => {
-    const response = await fetch('http://localhost:8000/news', {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/news`, {
         method: 'POST',
         body: data,
         headers: {
@@ -93,9 +101,25 @@ export const sendNewsService = async (data, token) => {
 };
 
 export const deleteNewsService = async (id, token) => {
-    const response = await fetch(`http://localhost:8000/news/${id}`, {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/news/${id}`, {
         method: 'DELETE',
         headers: {
+            Authorization: token,
+        },
+    });
+    const json = await response.json();
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+};
+
+export const voteNewsService = async (id, token) => {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/news/${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
             Authorization: token,
         },
     });

@@ -26,4 +26,3 @@ const useUser = (id) => {
 };
 
 export default useUser;
-//aaa;

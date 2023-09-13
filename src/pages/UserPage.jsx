@@ -5,9 +5,8 @@ import { ErrorMessage } from '../components/ErrorMessage';
 export const UserPage = () => {
     const { id } = useParams();
     const { user, loading, error } = useUser(id);
-    if (user) {
-        console.log(user.user.news);
-    }
+    const env = import.meta.env.VITE_BACKEND;
+
     return (
         <section>
             <h1> Datos del perfil </h1>
@@ -22,7 +21,7 @@ export const UserPage = () => {
                     <p>Biografía: {user.user.biography}</p>
                     {user.user.photo ? (
                         <img
-                            src={`http://localhost:8000/${user.user.photo}`}
+                            src={`${env}/${user.user.photo}`}
                             alt={user.user.userName}
                         />
                     ) : null}
@@ -40,7 +39,7 @@ export const UserPage = () => {
                             <p>{newsItem.intro}</p>
                             {newsItem.photo && (
                                 <img
-                                    src={`http://localhost:8000/${newsItem.photo}`}
+                                    src={`${env}/${newsItem.photo}`}
                                     alt={newsItem.title}
                                 />
                             )}
