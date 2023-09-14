@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { getMyUserDataService } from '../services';
-import { Link } from 'react-router-dom';
+import { updateEmailService, getMyUserDataService } from '../services';
+
 import useNews from '../hooks/useNews';
 import UserNewsList from '../components/UserNewsList';
 
@@ -12,6 +12,9 @@ export const OwnUserPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const env = import.meta.env.VITE_BACKEND;
+    const [editEmail, setEditEmail] = useState(false);
+    const [newEmail, setNewEmail] = useState('');
+    const [oldEmail, setOldEmail] = useState('');
 
     const { removeNews } = useNews();
 
@@ -43,6 +46,20 @@ export const OwnUserPage = () => {
         return <p>Cargando los datos del usuario...</p>;
     }
 
+    const handleEditEmail = () => {
+        setEditEmail(true);
+    };
+    const handleSaveEmail = async () => {
+        try {
+            await updateEmailService(token, oldEmail, newEmail);
+            setUser({ ...user, user: { ...user.user, email: newEmail } });
+            setEditEmail(false);
+        } catch (error) {
+            console.error(error);
+            setError('Error al actualizar el correo electrónico');
+        }
+    };
+
     if (error) {
         return <ErrorMessage message={error} />;
     }
@@ -52,8 +69,27 @@ export const OwnUserPage = () => {
             <section>
                 <h1>Perfil Propio</h1>
                 <p>Nombre: {user.user.userName}</p>
-                <p>Correo electrónico: {user.user.email}</p>
-                <button>Editar Email</button>
+                {editEmail ? (
+                    <div>
+                        <input
+                            type="email"
+                            placeholder="Antiguo correo electrónico"
+                            value={oldEmail}
+                            onChange={(e) => setOldEmail(e.target.value)}
+                        />
+                        <input
+                            type="email"
+                            placeholder="Nuevo correo electrónico"
+                            value={newEmail}
+                            onChange={(e) => setNewEmail(e.target.value)}
+                        />
+                        <button onClick={handleSaveEmail}>Guardar</button>
+                    </div>
+                ) : (
+                    <p>Correo electrónico: {user.user.email}</p>
+                )}
+                <button onClick={handleEditEmail}>Editar Email</button>
+
                 <p>Biografía: {user.user.biography}</p>
                 <button>Editar Biografia</button>
                 <div>

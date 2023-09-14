@@ -128,3 +128,21 @@ export const voteNewsService = async (id, token) => {
         throw new Error(json.message);
     }
 };
+
+export const updateEmailService = async (token, oldEmail, newEmail) => {
+    const url = 'http://localhost:8000/users/email';
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+        },
+        body: JSON.stringify({ oldEmail, newEmail }),
+    };
+    const response = await fetch(url, requestOptions);
+    const json = await response.json();
+    if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${json.message}`);
+    }
+    return json;
+};
