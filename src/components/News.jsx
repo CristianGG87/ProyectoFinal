@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-export const News = ({ news, removeNews }) => {
+export const News = ({ news, setNews, removeNews }) => {
     const { user, token } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [likes, setLikes] = useState(0);
@@ -11,7 +11,8 @@ export const News = ({ news, removeNews }) => {
     const handleLikeClick = async () => {
         //comprobar si tiene un dislike (0) dado por mi, si tiene un dislike lo borro y doy like
         // Comprobar si tiene un like dado por mi, si lo tine lo borro. sinó lo doy
-        setLikes(likes + 1);
+        // actualizar la info de la noticia, para eso tengo que volver a recuperar todas las noticias y actualizar setNews
+
         try {
             const response = await fetch(`${env}/news/${news.id}/votes`, {
                 method: 'POST',
@@ -32,7 +33,7 @@ export const News = ({ news, removeNews }) => {
     const handleDislikeClick = async () => {
         //comprobar si tiene un like (1) dado por mi, si tiene un like lo borro y doy dislike
         // Comprobar si tiene un dislike dado por mi, si lo tine lo borro. sinó lo doy
-        setDislikes(dislikes + 1);
+
         try {
             const response = await fetch(`${env}/news/${news.id}/votes`, {
                 method: 'POST',
@@ -40,7 +41,7 @@ export const News = ({ news, removeNews }) => {
                     'Content-Type': 'application/json',
                     Authorization: token,
                 },
-                body: JSON.stringify({ value: '0' }),
+                body: JSON.stringify({ value: '2' }),
             });
 
             if (!response.ok) {
@@ -117,3 +118,4 @@ export const News = ({ news, removeNews }) => {
         </article>
     );
 };
+///////////////////////////////////////////////////////

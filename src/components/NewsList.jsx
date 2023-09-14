@@ -18,3 +18,4 @@ export const NewsList = ({ news, setNews, removeNews }) => {
         return <p>Aun no hay noticias...</p>;
     }
 };
+////////////////////////

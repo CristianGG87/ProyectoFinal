@@ -13,6 +13,10 @@ export const OneNews = ({ news }) => {
     const { title, intro, text, photo, userName, date, id, userId } = news;
 
     const handleLikeClick = async () => {
+        //comprobar si tiene un dislike (0) dado por mi, si tiene un dislike lo borro y doy like
+        // Comprobar si tiene un like dado por mi, si lo tine lo borro. sinó lo doy
+        // actualizar la info de la noticia, para eso tengo que volver a recuperar todas las noticias y actualizar setNews
+
         try {
             const response = await fetch(`${env}/news/${news.id}/votes`, {
                 method: 'POST',
@@ -26,14 +30,14 @@ export const OneNews = ({ news }) => {
             if (!response.ok) {
                 throw new Error('Error al enviar el voto.');
             }
-            console.log('Incrementando likes');
-            setLikes((prevLikes) => prevLikes + 1);
         } catch (error) {
             setError(error.message);
         }
     };
-
     const handleDislikeClick = async () => {
+        //comprobar si tiene un like (1) dado por mi, si tiene un like lo borro y doy dislike
+        // Comprobar si tiene un dislike dado por mi, si lo tine lo borro. sinó lo doy
+
         try {
             const response = await fetch(`${env}/news/${news.id}/votes`, {
                 method: 'POST',
@@ -41,14 +45,12 @@ export const OneNews = ({ news }) => {
                     'Content-Type': 'application/json',
                     Authorization: token,
                 },
-                body: JSON.stringify({ value: '0' }),
+                body: JSON.stringify({ value: '2' }),
             });
 
             if (!response.ok) {
                 throw new Error('Error al enviar el voto.');
             }
-
-            setDislikes(dislikes + 1);
         } catch (error) {
             setError(error.message);
         }

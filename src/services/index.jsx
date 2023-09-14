@@ -116,7 +116,7 @@ export const deleteNewsService = async (id, token) => {
 
 export const voteNewsService = async (id, token) => {
     const env = import.meta.env.VITE_BACKEND;
-    const response = await fetch(`${env}/news/${id}`, {
+    const response = await fetch(`${env}/news/${id}/votes`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
