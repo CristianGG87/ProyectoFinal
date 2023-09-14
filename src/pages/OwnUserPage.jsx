@@ -1,7 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { updateEmailService, getMyUserDataService } from '../services';
+import {
+    updateEmailService,
+    getMyUserDataService,
+    editUserBioService,
+} from '../services';
 
 import useNews from '../hooks/useNews';
 import UserNewsList from '../components/UserNewsList';
@@ -15,6 +19,8 @@ export const OwnUserPage = () => {
     const [editEmail, setEditEmail] = useState(false);
     const [newEmail, setNewEmail] = useState('');
     const [oldEmail, setOldEmail] = useState('');
+    const [biography, setBiography] = useState(''); // Estado para la biografía
+    const [isEditingBiography, setIsEditingBiography] = useState(false); // Estado para controlar la edición de la biografía
 
     const { removeNews } = useNews();
 
@@ -31,6 +37,7 @@ export const OwnUserPage = () => {
             try {
                 const userData = await getMyUserDataService({ token });
                 setUser(userData);
+                setBiography(userData.user.biography); // Establecer la biografía desde los datos del usuario
                 setLoading(false);
             } catch (error) {
                 console.error(error);
@@ -49,6 +56,12 @@ export const OwnUserPage = () => {
     const handleEditEmail = () => {
         setEditEmail(true);
     };
+
+    // Función para activar la edición de la biografía
+    const handleEditBiography = () => {
+        setIsEditingBiography(true);
+    };
+
     const handleSaveEmail = async () => {
         try {
             await updateEmailService(token, oldEmail, newEmail);
@@ -57,6 +70,17 @@ export const OwnUserPage = () => {
         } catch (error) {
             console.error(error);
             setError('Error al actualizar el correo electrónico');
+        }
+    };
+
+    const handleSaveBiography = async () => {
+        try {
+            await editUserBioService(token, biography);
+            setUser({ ...user, user: { ...user.user, biography: biography } });
+            setIsEditingBiography(false);
+        } catch (error) {
+            console.error(error);
+            setError('Error al actualizar la biografía');
         }
     };
 
@@ -90,8 +114,26 @@ export const OwnUserPage = () => {
                 )}
                 <button onClick={handleEditEmail}>Editar Email</button>
 
-                <p>Biografía: {user.user.biography}</p>
-                <button>Editar Biografia</button>
+                {isEditingBiography ? (
+                    <div>
+                        <textarea
+                            placeholder="Nueva biografía del usuario"
+                            value={biography}
+                            onChange={(e) => setBiography(e.target.value)}
+                        />
+                        <button onClick={handleSaveBiography}>
+                            Guardar Biografía
+                        </button>
+                    </div>
+                ) : (
+                    <p>Biografía: {user.user.biography}</p>
+                )}
+                {isEditingBiography ? null : (
+                    <button onClick={handleEditBiography}>
+                        Editar Biografía
+                    </button>
+                )}
+
                 <div>
                     {user.user.photo ? (
                         <img
@@ -118,6 +160,6 @@ export const OwnUserPage = () => {
             </section>
         );
     }
+
     return null;
 };
-///////////

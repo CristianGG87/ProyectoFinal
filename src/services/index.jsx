@@ -130,19 +130,52 @@ export const voteNewsService = async (id, token) => {
 };
 
 export const updateEmailService = async (token, oldEmail, newEmail) => {
-    const url = 'http://localhost:8000/users/email';
-    const requestOptions = {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/email`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             Authorization: token,
         },
         body: JSON.stringify({ oldEmail, newEmail }),
-    };
-    const response = await fetch(url, requestOptions);
+    });
+    const json = await response.json();
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+    return json;
+};
+
+export const updatePhotoService = async (token, oldEmail, newEmail) => {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/email`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+        },
+        body: JSON.stringify({ oldEmail, newEmail }),
+    });
     const json = await response.json();
     if (!response.ok) {
         throw new Error(`Error en la solicitud: ${json.message}`);
+    }
+    return json;
+};
+
+export const editUserBioService = async (token, biography) => {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/biography`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+        },
+        body: JSON.stringify({ biography }),
+    });
+    const json = await response.json();
+    if (!response.ok) {
+        throw new Error(json.message);
     }
     return json;
 };
