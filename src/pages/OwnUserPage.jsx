@@ -4,6 +4,7 @@ import { ErrorMessage } from '../components/ErrorMessage';
 import { getMyUserDataService } from '../services';
 import { Link } from 'react-router-dom';
 import useNews from '../hooks/useNews';
+import UserNewsList from '../components/UserNewsList';
 
 export const OwnUserPage = () => {
     const { token } = useContext(AuthContext);
@@ -17,7 +18,6 @@ export const OwnUserPage = () => {
     const handleDelete = async (news) => {
         try {
             await removeNews(news, token);
-            location.reload();
         } catch (error) {
             setError(error.message);
         }
@@ -72,40 +72,16 @@ export const OwnUserPage = () => {
                 </p>
 
                 <h2>Mis Noticias:</h2>
-                {user.user.news.map((news) => (
-                    <div key={news.id}>
-                        {console.log(news)}
-                        <Link to={`/news/${news.id}`}>
-                            <h3>{news.title}</h3>
-                        </Link>
-                        <p>{news.intro}</p>
-                        {news.photo && (
-                            <img
-                                src={`${env}/${news.photo}`}
-                                alt={news.title}
-                            />
-                        )}
-                        <button>Editar foto</button>
-                        <section>
-                            <button
-                                onClick={() => {
-                                    if (
-                                        window.confirm(
-                                            'Se borrará la Noticia, ¿está seguro?'
-                                        )
-                                    )
-                                        handleDelete(news.id);
-                                }}
-                            >
-                                Borrar noticia
-                            </button>
-                            {error && <p>{error}</p>}
-                        </section>
-                    </div>
-                ))}
+                <UserNewsList
+                    news={user.user.news}
+                    setUser={setUser}
+                    env={env}
+                    handleDelete={handleDelete}
+                    error={error}
+                />
             </section>
         );
     }
-
     return null;
 };
+///////////
