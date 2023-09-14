@@ -71,6 +71,7 @@ export const OneNews = ({ news }) => {
     return (
         <article>
             <h2>{title}</h2>
+            <button>✏️</button>
             <h3>{intro}</h3>
             <p>{text}</p>
             {photo ? <img src={`${env}/${photo}`} alt={title} /> : null}

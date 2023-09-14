@@ -5,6 +5,7 @@ import {
     updateEmailService,
     getMyUserDataService,
     editUserBioService,
+    editUserPhotoService,
 } from '../services';
 
 import useNews from '../hooks/useNews';
@@ -21,6 +22,8 @@ export const OwnUserPage = () => {
     const [oldEmail, setOldEmail] = useState('');
     const [biography, setBiography] = useState(''); // Estado para la biografía
     const [isEditingBiography, setIsEditingBiography] = useState(false); // Estado para controlar la edición de la biografía
+    const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen seleccionada
+    const [isEditingPhoto, setIsEditingPhoto] = useState(false); // Estado para controlar la edición de la foto
 
     const { removeNews } = useNews();
 
@@ -61,7 +64,6 @@ export const OwnUserPage = () => {
     const handleEditBiography = () => {
         setIsEditingBiography(true);
     };
-
     const handleSaveEmail = async () => {
         try {
             await updateEmailService(token, oldEmail, newEmail);
@@ -81,6 +83,31 @@ export const OwnUserPage = () => {
         } catch (error) {
             console.error(error);
             setError('Error al actualizar la biografía');
+        }
+    };
+
+    const handleImageChange = (e) => {
+        setSelectedImage(e.target.files[0]);
+    };
+    const handleUploadImage = async () => {
+        try {
+            if (selectedImage) {
+                const formData = new FormData();
+                formData.append('photo', selectedImage);
+
+                await editUserPhotoService(token, formData);
+
+                // Actualiza el estado del usuario con la nueva foto
+                const updatedUserData = await getMyUserDataService({ token });
+                setUser(updatedUserData);
+
+                // Reinicia el estado de la imagen seleccionada y la edición de la foto
+                setSelectedImage(null);
+                setIsEditingPhoto(false);
+            }
+        } catch (error) {
+            console.error(error);
+            setError('Error al actualizar la foto del usuario');
         }
     };
 
@@ -135,14 +162,41 @@ export const OwnUserPage = () => {
                 )}
 
                 <div>
-                    {user.user.photo ? (
+                    {selectedImage ? (
+                        <figure>
+                            <img
+                                src={URL.createObjectURL(selectedImage)}
+                                alt="Preview"
+                                style={{ width: '100px' }}
+                            />
+                        </figure>
+                    ) : user.user.photo ? (
                         <img
                             src={`${env}/${user.user.photo}`}
                             alt={user.user.userName}
                         />
                     ) : null}
-                    <button>Editar foto</button>
+                    <button
+                        onClick={() => {
+                            document.getElementById('imageUpload').click();
+                        }}
+                    >
+                        Editar Foto
+                    </button>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        id="imageUpload"
+                        style={{ display: 'none' }}
+                        onChange={handleImageChange}
+                    />
+                    {selectedImage ? (
+                        <button onClick={handleUploadImage}>
+                            Guardar Foto
+                        </button>
+                    ) : null}
                 </div>
+
                 <p>
                     {' '}
                     Registrado el:
@@ -163,3 +217,4 @@ export const OwnUserPage = () => {
 
     return null;
 };
+///////////////////////////////////////////////////////////////////////////////////

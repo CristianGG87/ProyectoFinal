@@ -146,23 +146,6 @@ export const updateEmailService = async (token, oldEmail, newEmail) => {
     return json;
 };
 
-export const updatePhotoService = async (token, oldEmail, newEmail) => {
-    const env = import.meta.env.VITE_BACKEND;
-    const response = await fetch(`${env}/users/email`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: token,
-        },
-        body: JSON.stringify({ oldEmail, newEmail }),
-    });
-    const json = await response.json();
-    if (!response.ok) {
-        throw new Error(`Error en la solicitud: ${json.message}`);
-    }
-    return json;
-};
-
 export const editUserBioService = async (token, biography) => {
     const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/biography`, {
@@ -172,6 +155,22 @@ export const editUserBioService = async (token, biography) => {
             Authorization: token,
         },
         body: JSON.stringify({ biography }),
+    });
+    const json = await response.json();
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+    return json;
+};
+
+export const editUserPhotoService = async (token, photo) => {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/photo`, {
+        method: 'PUT',
+        headers: {
+            Authorization: token,
+        },
+        body: photo, // Asegúrate de enviar los datos de la imagen adecuadamente
     });
     const json = await response.json();
     if (!response.ok) {
