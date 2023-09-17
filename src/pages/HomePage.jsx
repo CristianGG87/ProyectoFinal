@@ -1,9 +1,7 @@
 import { useContext } from 'react';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { NewsList } from '../components/NewsList';
-
 import { AuthContext } from '../context/AuthContext';
-import { CreateNews } from '../components/CreateNews';
 import useNews from '../hooks/useNews';
 
 export const HomePage = () => {
@@ -14,10 +12,10 @@ export const HomePage = () => {
     if (error) return <ErrorMessage message={error} />;
 
     return (
-        <section>
-            {user ? <CreateNews addNews={addNews} /> : null}
-
-            <NewsList news={news} setNews={setNews} removeNews={removeNews} />
-        </section>
+        <div className="news-container">
+            <div className="news-list">
+            {user ? <NewsList news={news} setNews={setNews} addNews={addNews} removeNews={removeNews} />: null}
+            </div>
+        </div>
     );
 };

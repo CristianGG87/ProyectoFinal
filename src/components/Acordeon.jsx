@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function Acordeon({ children }) {
   const [showForm, setShowForm] = useState(false);
