@@ -1,0 +1,22 @@
+/* NavBar.css */
+.navBar {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.navBar button {
+    margin: 5px 0; /* Agrega margen vertical entre los botones */
+    background-color: #f1f1f1; /* Color de fondo */
+    color: black; /* Color del texto */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 15px; /* Relleno interno */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+    font-size: 0.9em;
+}
+
+.navBar button:hover {
+    background-color: #d7d2df; /* Cambia el color de fondo al pasar el cursor por encima */
+}

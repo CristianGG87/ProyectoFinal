@@ -1,55 +1,54 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-export const News = ({ news, setNews, removeNews }) => {
+import './News.css';
+
+export const News = ({ news, removeNews }) => {
     const { user, token } = useContext(AuthContext);
     const [error, setError] = useState('');
-    const [likes, setLikes] = useState(0);
-    const [dislikes, setDislikes] = useState(0);
+    const [likes, setLikes] = useState(news.vPositive || 0);
+    const [dislikes, setDislikes] = useState(news.vNegative || 0);
     const env = import.meta.env.VITE_BACKEND;
 
-    const handleLikeClick = async () => {
-        //comprobar si tiene un dislike (0) dado por mi, si tiene un dislike lo borro y doy like
-        // Comprobar si tiene un like dado por mi, si lo tine lo borro. sinó lo doy
-        // actualizar la info de la noticia, para eso tengo que volver a recuperar todas las noticias y actualizar setNews
-
+    const sendVoteToBackend = async (value) => {
         try {
+            console.log('Sending vote with value:', value);
             const response = await fetch(`${env}/news/${news.id}/votes`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: token,
                 },
-                body: JSON.stringify({ value: '1' }),
+                body: JSON.stringify({ value }),
             });
 
             if (!response.ok) {
                 throw new Error('Error al enviar el voto.');
             }
+
+            // Parsea la respuesta para obtener el nuevo recuento de votos.
+            const responseData = await response.json();
+            console.log('Respuesta del servidor:', responseData);
+            // Actualiza los estados locales con el nuevo recuento de votos.
+            setLikes(responseData.data.vPos);
+            console.log('importante', responseData.data.vPos);
+            setDislikes(responseData.data.vNeg);
+            console.log('Likes:', likes); // Agregar logs para verificar los valores de likes y dislikes después de la actualización.
+            console.log('Dislikes:', dislikes);
         } catch (error) {
             setError(error.message);
         }
     };
-    const handleDislikeClick = async () => {
-        //comprobar si tiene un like (1) dado por mi, si tiene un like lo borro y doy dislike
-        // Comprobar si tiene un dislike dado por mi, si lo tine lo borro. sinó lo doy
 
-        try {
-            const response = await fetch(`${env}/news/${news.id}/votes`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: token,
-                },
-                body: JSON.stringify({ value: '2' }),
-            });
+    const handleLikeClick = () => {
+        // Envía un voto de "like" (valor 1) al backend y actualiza el recuento local.
+        sendVoteToBackend('1');
+        console.log('votos:', news.vPositive);
+    };
 
-            if (!response.ok) {
-                throw new Error('Error al enviar el voto.');
-            }
-        } catch (error) {
-            setError(error.message);
-        }
+    const handleDislikeClick = () => {
+        // Envía un voto de "dislike" (valor 2) al backend y actualiza el recuento local.
+        sendVoteToBackend('2');
     };
 
     const deleteNews = async (id) => {
@@ -86,13 +85,10 @@ export const News = ({ news, setNews, removeNews }) => {
             {news.photo ? (
                 <img src={`${env}/${news.photo}`} alt={news.title} />
             ) : null}
-            <section>
-                <button onClick={handleLikeClick}>
-                    Like ({news.vPositive})
-                </button>
-                <button onClick={handleDislikeClick}>
-                    Dislike ({news.vNegative})
-                </button>
+            <p className="topic">Tema: {news.topic}</p>
+            <section className="likes">
+                <button onClick={handleLikeClick}>👍{likes}</button>
+                <button onClick={handleDislikeClick}>👎 {dislikes}</button>
             </section>
             <p>
                 Autor: <Link to={`/users/${news.userId}`}>{news.userName}</Link>{' '}
@@ -118,4 +114,4 @@ export const News = ({ news, setNews, removeNews }) => {
         </article>
     );
 };
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////

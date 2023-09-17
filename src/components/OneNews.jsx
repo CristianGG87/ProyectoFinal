@@ -7,16 +7,13 @@ export const OneNews = ({ news }) => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { user, token } = useContext(AuthContext);
-    const [likes, setLikes] = useState(news.vPositive);
-    const [dislikes, setDislikes] = useState(news.vNegative);
+    const [likes, setLikes] = useState(news.vPositive || 0);
+    const [dislikes, setDislikes] = useState(news.vNegative || 0);
     const env = import.meta.env.VITE_BACKEND;
-    const { title, intro, text, photo, userName, date, id, userId } = news;
+    const { title, intro, text, photo, userName, date, id, userId, topic } =
+        news;
 
-    const handleLikeClick = async () => {
-        //comprobar si tiene un dislike (0) dado por mi, si tiene un dislike lo borro y doy like
-        // Comprobar si tiene un like dado por mi, si lo tine lo borro. sinó lo doy
-        // actualizar la info de la noticia, para eso tengo que volver a recuperar todas las noticias y actualizar setNews
-
+    const sendVoteToBackend = async (value) => {
         try {
             const response = await fetch(`${env}/news/${news.id}/votes`, {
                 method: 'POST',
@@ -24,36 +21,32 @@ export const OneNews = ({ news }) => {
                     'Content-Type': 'application/json',
                     Authorization: token,
                 },
-                body: JSON.stringify({ value: '1' }),
+                body: JSON.stringify({ value }),
             });
 
             if (!response.ok) {
                 throw new Error('Error al enviar el voto.');
             }
+
+            const responseData = await response.json();
+            console.log('Respuesta del servidor:', responseData);
+
+            setLikes(responseData.data.vPos);
+            setDislikes(responseData.data.vNeg);
         } catch (error) {
             setError(error.message);
         }
     };
-    const handleDislikeClick = async () => {
-        //comprobar si tiene un like (1) dado por mi, si tiene un like lo borro y doy dislike
-        // Comprobar si tiene un dislike dado por mi, si lo tine lo borro. sinó lo doy
 
-        try {
-            const response = await fetch(`${env}/news/${news.id}/votes`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: token,
-                },
-                body: JSON.stringify({ value: '2' }),
-            });
+    const handleLikeClick = () => {
+        // Envía un voto de "like" (valor 1) al backend y actualiza el recuento local.
+        sendVoteToBackend('1');
+        console.log('votos:', news.vPositive);
+    };
 
-            if (!response.ok) {
-                throw new Error('Error al enviar el voto.');
-            }
-        } catch (error) {
-            setError(error.message);
-        }
+    const handleDislikeClick = () => {
+        // Envía un voto de "dislike" (valor 2) al backend y actualiza el recuento local.
+        sendVoteToBackend('2');
     };
 
     const { removeNews } = useNews();
@@ -70,16 +63,18 @@ export const OneNews = ({ news }) => {
 
     return (
         <article>
-            <h2>{title}</h2>
-            <button>✏️</button>
+            <h2>
+                {title}
+                <button>✏️</button>
+            </h2>
+
             <h3>{intro}</h3>
             <p>{text}</p>
             {photo ? <img src={`${env}/${photo}`} alt={title} /> : null}
+            <p>Tema: {topic}</p>
             <section>
-                <button onClick={handleLikeClick}>Like ({likes})</button>
-                <button onClick={handleDislikeClick}>
-                    Dislike ({dislikes})
-                </button>
+                <button onClick={handleLikeClick}>👍({likes})</button>
+                <button onClick={handleDislikeClick}>👎 ({dislikes})</button>
             </section>
             <p>
                 Autor: {userName} el {new Date(date).toLocaleString()}
@@ -104,3 +99,4 @@ export const OneNews = ({ news }) => {
         </article>
     );
 };
+/////////////////////////////////////////////////////

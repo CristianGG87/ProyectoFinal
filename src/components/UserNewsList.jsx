@@ -8,7 +8,6 @@ const UserNewsList = ({ news, setUser, env }) => {
     const { removeNews } = useNews();
     const { token } = useContext(AuthContext);
     const handleDelete = async (id) => {
-        console.log(id);
         try {
             await removeNews(id, token);
             //tengo que recuperar el usuario porque contiene el listado nuevo
@@ -33,7 +32,13 @@ const UserNewsList = ({ news, setUser, env }) => {
                             alt={newsItem.title}
                         />
                     )}
-                    <button>Editar foto</button>
+                    <p>Tema: {newsItem.topic}</p>
+                    <section>
+                        <p>
+                            👍 {newsItem.votes.positivos} 👎
+                            {newsItem.votes.negativos}
+                        </p>
+                    </section>
                     <section>
                         <button
                             onClick={() => {

@@ -1,6 +1,7 @@
 /* Estilo para el cuerpo de la página */
 body {
-    background-color: #080d21;
+    background-color: #f1f1f1;
+
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -8,9 +9,9 @@ body {
 
 /* Estilo para el encabezado */
 header {
-    background-color: #555555;
+    background-color: #f1f1f1;
     text-align: left;
-    padding: 20px 0;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,15 +30,15 @@ nav {
 
 /* Estilo para el pie de página */
 footer {
-    background-color: #555555;
+    background-color: #f1f1f1;
     text-align: center;
     padding: 20px 0;
 }
 
 /* Estilo para el contenido principal */
 main {
-    background-color: #d7d9d6; /* Color de fondo gris claro */
-    padding: 20px;
+    background-color: #f1f1f1; /* Color de fondo gris claro */
+    padding: 0px;
     text-align: center;
 }
 
@@ -45,8 +46,7 @@ main {
 nav a {
     color: #b52b2b;
     text-decoration: none;
-    padding: 10px 20px;
-    margin: 0 10px;
+    padding: 10px;
     font-weight: bold;
 }
 

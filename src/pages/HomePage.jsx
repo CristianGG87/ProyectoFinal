@@ -17,8 +17,6 @@ export const HomePage = () => {
         <section>
             {user ? <CreateNews addNews={addNews} /> : null}
 
-            <h1>Ultimas Noticias</h1>
-
             <NewsList news={news} setNews={setNews} removeNews={removeNews} />
         </section>
     );

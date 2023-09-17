@@ -1,0 +1,15 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+img.logo {
+    width: 300px;
+    height: 200px;
+    margin: 0 auto; /* Centra el logo horizontalmente */
+}
+
+nav.login {
+    margin-left: auto; /* Empuja el nav hacia la derecha */
+}
