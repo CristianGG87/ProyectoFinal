@@ -1,32 +1,26 @@
 .news-container {
-  display: flex;
-  background-color: #f1f1f1;
-  color: black;
-  padding: 0px;
+    display: flex;
+    flex-direction: row;
+    background-color: #f1f1f1;
+    color: black;
+    border-top: 1px solid black;
+    padding: 0px;
 }
 
 .nav-bar {
-  width: 200px;
-  min-height: 100vh; /* Establece una altura mínima para que sea visible */
-  padding: 10px;
-  border-right: 1px solid black; /* Agrega un borde derecho negro */
-  box-sizing: border-box; /* Incluye el espacio del borde en el ancho y alto */
+    width: 200px;
+    padding: 10px;
+    border-right: 2px solid #050202;
 }
 
 .news-list {
-  flex: 1;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box; /* Incluye el espacio del borde en el ancho y alto */
+    flex: 1;
+    padding: 0px;
 }
-
 ul {
     list-style: none;
+    margin-top: 0px;
 }
-
-
 .news-item {
     border: 1px solid black; /* Borde alrededor de cada noticia */
     margin-bottom: 10px; /* Margen inferior para separar las noticias */
@@ -37,28 +31,17 @@ ul {
     flex-direction: row;
     justify-content: center;
 }
-
 .acordeon {
-  margin-top: auto; /* Para que el botón se ubique en la parte inferior del contenedor */
-  margin-bottom: 10px; /* Separación desde la línea divisoria */
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 28px;
-  padding: 10px 20px;
-  cursor: pointer;
+    margin-top: 10px; /* Para que el botón se ubique en la parte inferior del contenedor */
+    margin-bottom: 10px; /* Separación desde la línea divisoria */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 28px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
-  .acordeon:hover {
+.acordeon:hover {
     background-color: #0056b3;
-  }
-
-  .button-container {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente el botón */
-    padding: 10px; /* Espaciado para separar el botón de las noticias */
-  }
-
-  section.acordeon{
-    border-top: 1px solid black; /* Agrega un borde superior negro */
-  }
+}

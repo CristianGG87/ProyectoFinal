@@ -5,22 +5,21 @@ import './NewsList.css';
 import Acordeon from './Acordeon';
 import { AuthContext } from '../context/AuthContext';
 
-
 export const NewsList = ({ news, setNews, removeNews, addNews }) => {
     const [filteredNews, setFilteredNews] = useState([]);
     const [showAllNews, setShowAllNews] = useState(true);
     const [sortByVotes, setSortByVotes] = useState(false);
     const [error, setError] = useState('');
     const [sending, setSending] = useState(false);
-    const [image, setImage] =useState();
+    const [image, setImage] = useState();
     const { token } = useContext(AuthContext);
-
+    const { user } = useContext(AuthContext);
     const handleForm = async (e) => {
         e.preventDefault();
         try {
             setSending(true);
             const data = new FormData(e.target);
-            
+
             addNews(data, token);
             e.target.reset();
             setImage(null);
@@ -82,7 +81,6 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
 
     return (
         <main className="news-container">
-
             <section className="nav-bar">
                 <NavBar
                     onTopicClick={handleTopicClick}
@@ -91,45 +89,81 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
                 />
             </section>
 
-
             <section className="news-list">
-
-            <Acordeon>
-                    <form onSubmit={handleForm}>
-                        <fieldset>
-                            <label htmlFor="title">Titulo de la notica </label>
-                            <input type="text" id="title" name="title" required />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="intro">Resumen noticia </label>
-                            <input type="text" id="intro" name="intro" required />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="topic">Tema de la noticia </label>
-                            <select id="topic" name="topic">
-                                <option value="ciencia">Ciencia</option>
-                                <option value="deportes">Deportes</option>
-                                <option value="cultura">Cultura</option>
-                                <option value="politica">Politica</option>
-                                <option value="actualidad">Actualidad</option>
-                            </select>
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="text">Text </label>
-                            <input type="text" id="text" name="text" required />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="photo">Foto (opcional)</label>
-                            <input type="file" id="photo" name="photo" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
-                            {image ? <figure><img src={URL.createObjectURL(image)} alt='Preview' style={{width: '100px'}} /></figure> : null}
-                        </fieldset>
-                        <div className="button-container"></div>
-                        <button>Publicar noticia</button>
-                        {sending ? <p>Publicando noticia</p> : null}
-                        {error ? <p>{error}</p> : null}
-                    </form>
-                </Acordeon>
-
+                {user ? (
+                    <Acordeon>
+                        <form onSubmit={handleForm}>
+                            <fieldset>
+                                <label htmlFor="title">
+                                    Titulo de la notica{' '}
+                                </label>
+                                <input
+                                    type="text"
+                                    id="title"
+                                    name="title"
+                                    required
+                                />
+                            </fieldset>
+                            <fieldset>
+                                <label htmlFor="intro">Resumen noticia </label>
+                                <input
+                                    type="text"
+                                    id="intro"
+                                    name="intro"
+                                    required
+                                />
+                            </fieldset>
+                            <fieldset>
+                                <label htmlFor="topic">
+                                    Tema de la noticia{' '}
+                                </label>
+                                <select id="topic" name="topic">
+                                    <option value="ciencia">Ciencia</option>
+                                    <option value="deportes">Deportes</option>
+                                    <option value="cultura">Cultura</option>
+                                    <option value="politica">Politica</option>
+                                    <option value="actualidad">
+                                        Actualidad
+                                    </option>
+                                </select>
+                            </fieldset>
+                            <fieldset>
+                                <label htmlFor="text">Text </label>
+                                <input
+                                    type="text"
+                                    id="text"
+                                    name="text"
+                                    required
+                                />
+                            </fieldset>
+                            <fieldset>
+                                <label htmlFor="photo">Foto (opcional)</label>
+                                <input
+                                    type="file"
+                                    id="photo"
+                                    name="photo"
+                                    accept="image/*"
+                                    onChange={(e) =>
+                                        setImage(e.target.files[0])
+                                    }
+                                />
+                                {image ? (
+                                    <figure>
+                                        <img
+                                            src={URL.createObjectURL(image)}
+                                            alt="Preview"
+                                            style={{ width: '100px' }}
+                                        />
+                                    </figure>
+                                ) : null}
+                            </fieldset>
+                            <div className="button-container"></div>
+                            <button>Publicar noticia</button>
+                            {sending ? <p>Publicando noticia</p> : null}
+                            {error ? <p>{error}</p> : null}
+                        </form>
+                    </Acordeon>
+                ) : null}
                 {newsToDisplay.length > 0 ? (
                     <ul>
                         {newsToDisplay.map((newsItem) => (
