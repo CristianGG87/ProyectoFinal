@@ -9,6 +9,7 @@ const SearchBar = ({ onSearch }) => {
 
     const handleSearch = () => {
         onSearch(searchKeyword);
+        setSearchKeyword('');
     };
 
     return (
@@ -25,3 +26,4 @@ const SearchBar = ({ onSearch }) => {
 };
 
 export default SearchBar;
+////

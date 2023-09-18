@@ -4,6 +4,7 @@ import { News } from './News';
 import './NewsList.css';
 import Acordeon from './Acordeon';
 import { AuthContext } from '../context/AuthContext';
+import SearchBar from './SearchBar';
 
 export const NewsList = ({ news, setNews, removeNews, addNews }) => {
     const [filteredNews, setFilteredNews] = useState([]);
@@ -12,8 +13,10 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
     const [error, setError] = useState('');
     const [sending, setSending] = useState(false);
     const [image, setImage] = useState();
-    const { token } = useContext(AuthContext);
-    const { user } = useContext(AuthContext);
+    const { token, user } = useContext(AuthContext);
+    const [searchResults, setSearchResults] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState('');
+
     const handleForm = async (e) => {
         e.preventDefault();
         try {
@@ -30,12 +33,25 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
         }
     };
 
+    const handleSearch = (keyword) => {
+        fetch(`http://localhost:8000/news?keyword=${keyword}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setSearchResults(data.data.news);
+                setSearchKeyword('');
+            })
+            .catch((error) => {
+                console.error('Error al buscar noticias:', error);
+            });
+    };
+
     const handleSortByVotes = () => {
         const sortedNews = [...news.news].sort(
             (a, b) => b.vPositive - a.vPositive
         );
         setFilteredNews(sortedNews);
         setSortByVotes(true);
+        setSearchResults([]);
     };
 
     const handleTopicClick = (topic) => {
@@ -47,18 +63,21 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
         setFilteredNews(filteredNews);
         // Cambia el estado para indicar que se están mostrando noticias filtradas.
         setShowAllNews(false);
+        setSearchResults([]);
     };
 
     const handleShowAllNews = () => {
-        console.log("Botón 'Volver a la página principal' clickeado");
         // Mostrar todas las noticias nuevamente al hacer clic en "Volver a la página principal".
         setFilteredNews([]);
+        // Restablecer los resultados de búsqueda a un array vacío
+        setSearchResults([]);
+        // Limpiar el valor del campo de búsqueda
+        setSearchKeyword('');
         // Cambia el estado para indicar que se están mostrando todas las noticias.
         setShowAllNews(true);
         // Establecer sortByVotes a false cuando vuelves a mostrar todas las noticias
         setSortByVotes(false);
     };
-
     useEffect(() => {
         if (showAllNews) {
             // Establecer sortByVotes a false cuando se muestran todas las noticias
@@ -66,19 +85,25 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
         }
     }, [showAllNews]);
 
-    let newsToDisplay = [...news.news]; // Mostrar todas las noticias
+    let newsToDisplay = [];
 
-    if (showAllNews && sortByVotes) {
+    if (searchResults.length > 0) {
+        // Si hay resultados de búsqueda, mostrar solo esos resultados
+        newsToDisplay = searchResults;
+    } else if (showAllNews && sortByVotes) {
         // Ordenar por votos positivos si showAllNews y sortByVotes son true
-        newsToDisplay.sort((a, b) => b.vPositive - a.vPositive);
+        newsToDisplay = [...news.news].sort(
+            (a, b) => b.vPositive - a.vPositive
+        );
     } else if (showAllNews) {
         // Ordenar por fecha si solo showAllNews es true y sortByVotes es false
-        newsToDisplay.sort((a, b) => new Date(b.date) - new Date(a.date));
+        newsToDisplay = [...news.news].sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+        );
     } else {
         // Mostrar noticias filtradas por tema sin orden específico
         newsToDisplay = filteredNews;
     }
-
     return (
         <main className="news-container">
             <section className="nav-bar">
@@ -87,6 +112,7 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
                     onShowAllNews={handleShowAllNews}
                     onSortByVotes={handleSortByVotes}
                 />
+                <SearchBar onSearch={handleSearch} value={searchKeyword} />
             </section>
 
             <section className="news-list">
@@ -164,6 +190,8 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
                         </form>
                     </Acordeon>
                 ) : null}
+
+                {/* Renderizar las noticias */}
                 {newsToDisplay.length > 0 ? (
                     <ul>
                         {newsToDisplay.map((newsItem) => (
@@ -183,10 +211,6 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
                                 ? 'No hay noticias.'
                                 : 'No hay noticias para este tema.'}
                         </p>
-
-                        <button onClick={handleShowAllNews}>
-                            Volver a la página principal
-                        </button>
                     </>
                 )}
             </section>
