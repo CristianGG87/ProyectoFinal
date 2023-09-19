@@ -5,15 +5,8 @@ import './NewsList.css';
 import Acordeon from './Acordeon';
 import { AuthContext } from '../context/AuthContext';
 import SearchBar from './SearchBar';
-///////////////
-export const NewsList = ({
-    news,
-    setNews,
-    removeNews,
-    addNews,
-    userNews,
-    isUserNews,
-}) => {
+
+export const NewsList = ({ news, setNews, removeNews, addNews }) => {
     const [filteredNews, setFilteredNews] = useState([]);
     const [showAllNews, setShowAllNews] = useState(true);
     const [sortByVotes, setSortByVotes] = useState(false);
@@ -199,19 +192,7 @@ export const NewsList = ({
                 ) : null}
 
                 {/* Renderizar las noticias */}
-                {isUserNews && userNews.length > 0 ? (
-                    <ul>
-                        {userNews.map((newsItem) => (
-                            <li key={newsItem.id} className="news-item">
-                                <News
-                                    news={newsItem}
-                                    setNews={setNews}
-                                    removeNews={removeNews}
-                                />
-                            </li>
-                        ))}
-                    </ul>
-                ) : newsToDisplay.length > 0 ? (
+                {newsToDisplay.length > 0 ? (
                     <ul>
                         {newsToDisplay.map((newsItem) => (
                             <li key={newsItem.id} className="news-item">
@@ -224,11 +205,13 @@ export const NewsList = ({
                         ))}
                     </ul>
                 ) : (
-                    <p>
-                        {showAllNews
-                            ? 'No hay noticias.'
-                            : 'No hay noticias para este tema.'}
-                    </p>
+                    <>
+                        <p>
+                            {showAllNews
+                                ? 'No hay noticias.'
+                                : 'No hay noticias para este tema.'}
+                        </p>
+                    </>
                 )}
             </section>
         </main>

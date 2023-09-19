@@ -3,8 +3,7 @@ import { NewsList } from '../components/NewsList';
 import useNews from '../hooks/useNews';
 
 export const HomePage = () => {
-    const { news, setNews, loading, error, addNews, removeNews, userNews } =
-        useNews();
+    const { news, setNews, loading, error, addNews, removeNews } = useNews();
 
     if (loading) return <p>Cargando noticias...</p>;
     if (error) return <ErrorMessage message={error} />;
@@ -13,12 +12,10 @@ export const HomePage = () => {
         <main className="main-news">
             <div className="news-list">
                 <NewsList
-                    news={news} // Noticias generales
-                    userNews={userNews} // Noticias del usuario
+                    news={news}
                     setNews={setNews}
                     addNews={addNews}
                     removeNews={removeNews}
-                    isUserNews={false} // Indicar que no son noticias del usuario
                 />
             </div>
         </main>
