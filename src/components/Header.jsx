@@ -6,7 +6,7 @@ export const Header = () => {
     return (
         <header>
             <Link to="/">
-                <img className="logo" src="logo.gif" alt="logo" />
+                <h1>NOTICIAS COLABORATIVAS</h1>
             </Link>
             <nav className="login">
                 <Auth />

@@ -9,11 +9,11 @@ export const OneNews = ({ news }) => {
     const [error, setError] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [editedNews, setEditedNews] = useState({ ...news });
-    const [image, setImage] = useState(null); // Nuevo estado para la imagen
-    const [responseError, setResponseError] = useState(null);
+    const [image, setImage] = useState(null);
     const { photo, userName, date, topic } = news;
     const [likes, setLikes] = useState(news.vPositive || 0);
     const [dislikes, setDislikes] = useState(news.vNegative || 0);
+
     const sendVoteToBackend = async (value) => {
         try {
             const response = await fetch(`${env}/news/${news.id}/votes`, {
@@ -36,19 +36,17 @@ export const OneNews = ({ news }) => {
         }
     };
     const handleLikeClick = () => {
-        // Envía un voto de "like" (valor 1) al backend y actualiza el recuento local.
         sendVoteToBackend('1');
         console.log('votos:', news.vPositive);
     };
     const handleDislikeClick = () => {
-        // Envía un voto de "dislike" (valor 2) al backend y actualiza el recuento local.
         sendVoteToBackend('2');
     };
     const handleEditClick = () => {
         setIsEditing(true);
     };
     const handleEditPhotoClick = () => {
-        setIsEditing(true); // Habilitar la edición de la foto
+        setIsEditing(true);
     };
     const handleSaveClick = async () => {
         try {
@@ -66,11 +64,12 @@ export const OneNews = ({ news }) => {
             if (!response.ok) {
                 throw new Error('Error al actualizar la noticia.');
             }
+            const responseData = await response.json();
+            setEditedNews({ ...editedNews, ...responseData.data });
+            console.log('responseData', responseData.data);
             setIsEditing(false);
-            window.location.reload(); // Recargar la página para reflejar los cambios
         } catch (error) {
-            console.error('Error en la solicitud fetch:', error);
-            setResponseError(error.message);
+            setError(error.message);
         }
     };
     const handleEditPhotoSave = async () => {
@@ -90,12 +89,14 @@ export const OneNews = ({ news }) => {
             if (!response.ok) {
                 throw new Error('Error al actualizar la foto de la noticia.');
             }
-            setIsEditing(false); // Deshabilitar la edición de la foto
-            // Recargar la página para reflejar los cambios en la foto
-            window.location.reload();
+
+            const responseData = await response.json();
+            console.log('resp', responseData.data);
+            setEditedNews({ ...editedNews, ...responseData.data });
+
+            setIsEditing(false);
         } catch (error) {
-            console.error('Error en la solicitud fetch:', error);
-            setResponseError(error.message);
+            setError(error.message);
         }
     };
     const { removeNews } = useNews();
@@ -108,6 +109,7 @@ export const OneNews = ({ news }) => {
             setError(error.message);
         }
     };
+    console.log(editedNews.photo);
     return (
         <article>
             <div>
@@ -148,14 +150,19 @@ export const OneNews = ({ news }) => {
                     </div>
                 ) : (
                     <div>
-                        <h2>{news.title}</h2>
-                        <h3>{news.intro}</h3>
-                        <p>{news.text}</p>
+                        <h2>{editedNews.title}</h2>
+                        <h3>{editedNews.intro}</h3>
+                        <p>{editedNews.text}</p>
+
                         {photo ? (
-                            <img src={`${env}/${photo}`} alt={news.title} />
+                            <img
+                                src={`${env}/${editedNews.photo.name}`}
+                                alt={editedNews.title}
+                            />
                         ) : null}
+
                         <p>Tema: {topic}</p>
-                        <section>
+                        <section className="likes">
                             <button onClick={handleLikeClick}>👍{likes}</button>
                             <button onClick={handleDislikeClick}>
                                 👎{dislikes}
@@ -212,4 +219,4 @@ export const OneNews = ({ news }) => {
     );
 };
 
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
