@@ -10,7 +10,7 @@ export const NewsPage = () => {
 
     if (loading) return <p>Cargando noticia...</p>;
     if (error) return <ErrorMessage message={error} />;
-    console.log('news', news);
+
     return (
         <section>
             <OneNews news={news} />

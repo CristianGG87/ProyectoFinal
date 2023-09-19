@@ -73,12 +73,14 @@ export const OneNews = ({ news }) => {
         }
     };
     const handleEditPhotoSave = async () => {
+        console.log('Hola');
         try {
             if (!image) {
                 throw new Error('No se ha seleccionado una imagen.');
             }
             const formData = new FormData();
             formData.append('photo', image);
+            console.log(formData);
             const response = await fetch(`${env}/news/${news.id}/photos`, {
                 method: 'PUT',
                 headers: {
@@ -156,7 +158,7 @@ export const OneNews = ({ news }) => {
 
                         {photo ? (
                             <img
-                                src={`${env}/${editedNews.photo.name}`}
+                                src={`${env}/${editedNews.photo}`}
                                 alt={editedNews.title}
                             />
                         ) : null}
@@ -201,7 +203,7 @@ export const OneNews = ({ news }) => {
                 )}
             </div>
             {isEditing && (
-                <div>
+                <form onSubmit={handleEditPhotoSave}>
                     <fieldset>
                         <label htmlFor="photo">Editar foto</label>
                         <input
@@ -209,11 +211,14 @@ export const OneNews = ({ news }) => {
                             id="photo"
                             name="photo"
                             accept="image/*"
-                            onChange={(e) => setImage(e.target.files[0])}
+                            onChange={(e) => {
+                                console.log(e.target.files[0]);
+                                setImage(e.target.files[0]);
+                            }}
                         />
                     </fieldset>
-                    <button onClick={handleEditPhotoSave}>Guardar Foto</button>
-                </div>
+                    <button>Guardar Foto</button>
+                </form>
             )}
         </article>
     );
