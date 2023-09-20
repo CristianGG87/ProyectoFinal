@@ -1,39 +1,64 @@
+/* Estilos para el contenido de la barra de navegación que debe quedar fijo */
+.nav-bar {
+    width: 200px;
+    padding: 10px;
+    position: fixed;
+}
+
+/* Añade un margen izquierdo para compensar el espacio ocupado por .nav-bar */
 .news-container {
     display: flex;
     flex-direction: row;
     background-color: #f1f1f1;
     color: black;
-    border-top: 1px solid black;
-    padding: 0px;
 }
 
-.nav-bar {
-    width: 200px;
-    padding: 10px;
-    border-right: 2px solid #050202;
+/* Estilos para la lista <ul> */
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    padding-left: 250px;
 }
 
+/* Ajusta el ancho de <ul> según el espacio disponible */
+@media (min-width: 768px) {
+    ul {
+        flex-basis: calc(50% - 5px);
+    }
+}
+
+@media (min-width: 1024px) {
+    ul {
+        flex-basis: calc(33.333% - 10px);
+    }
+}
+
+/* Resto de estilos (sin cambios) */
 .news-list {
     flex: 1;
     padding: 0px;
 }
-ul {
-    list-style: none;
-    margin-top: 0px;
-}
+
 .news-item {
-    border: 1px solid black; /* Borde alrededor de cada noticia */
-    margin-bottom: 10px; /* Margen inferior para separar las noticias */
-    padding: 10px; /* Relleno interno para dar espacio al contenido */
+    border: 1px solid black;
+    margin-bottom: 10px;
+    padding: 10px;
     border-radius: 10px;
     background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
+
 .acordeon {
-    margin-top: 10px; /* Para que el botón se ubique en la parte inferior del contenedor */
-    margin-bottom: 10px; /* Separación desde la línea divisoria */
+    margin-top: 10px;
+    margin-bottom: 40px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -45,3 +70,59 @@ ul {
 .acordeon:hover {
     background-color: #0056b3;
 }
+
+form {
+    width: 80%;
+    max-width: 400px;
+    margin: 35px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin-top: 0;
+  }
+  
+  fieldset {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+  
+  /* Estilos para el botón */
+  .publicar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 28px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+  
+  .button-container {
+    text-align: center;
+    margin-top: 10px;
+  }

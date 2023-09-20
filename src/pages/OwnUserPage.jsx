@@ -6,6 +6,7 @@ import {
     getMyUserDataService,
     editUserBioService,
     editUserPhotoService,
+    changePasswordService,
 } from '../services';
 
 import useNews from '../hooks/useNews';
@@ -24,8 +25,29 @@ export const OwnUserPage = () => {
     const [isEditingBiography, setIsEditingBiography] = useState(false); // Estado para controlar la edición de la biografía
     const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen seleccionada
     const [isEditingPhoto, setIsEditingPhoto] = useState(false); // Estado para controlar la edición de la foto
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
+    const [editPassword, setEditPassword] = useState(false);
 
     const { removeNews } = useNews();
+
+    const handleSavePassword = async () => {
+        try {
+            await changePasswordService(token, currentPassword, newPassword);
+            setCurrentPassword('');
+            setNewPassword('');
+            setConfirmNewPassword('');
+            setEditPassword(false);
+        } catch (error) {
+            console.error(error);
+            setError('Error al cambiar la contraseña');
+        }
+    };
+
+    const handleEditPassword = () => {
+        setEditPassword(true);
+    };
 
     const handleDelete = async (news) => {
         try {
@@ -147,6 +169,34 @@ export const OwnUserPage = () => {
                 )}
                 <button onClick={handleEditEmail}>Editar Email</button>
 
+
+                {editPassword ? (
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Contraseña actual"
+                            value={currentPassword}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Nueva contraseña"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Confirmar nueva contraseña"
+                            value={confirmNewPassword}
+                            onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        />
+                        <button onClick={handleSavePassword}>Guardar Contraseña</button>
+                    </div>
+                ) : (
+                    <p>Contraseña: {user.user.password}</p>
+                )}
+                <button onClick={handleEditPassword}>Cambiar Contraseña</button>
+                
                 {isEditingBiography ? (
                     <div>
                         <textarea

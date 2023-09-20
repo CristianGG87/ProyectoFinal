@@ -178,3 +178,23 @@ export const editUserPhotoService = async (token, photo) => {
     }
     return json;
 };
+
+export const changePasswordService = async (token, currentPassword, newPassword) => {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/password`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+    },
+    body: JSON.stringify({
+        oldPass: currentPassword,
+        newPass: newPassword,
+    }),
+});
+    const json = await response.json();
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+    return json;
+};

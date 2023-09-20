@@ -184,7 +184,7 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
                                 ) : null}
                             </fieldset>
                             <div className="button-container"></div>
-                            <button>Publicar noticia</button>
+                            <button className='publicar'>Publicar noticia</button>
                             {sending ? <p>Publicando noticia</p> : null}
                             {error ? <p>{error}</p> : null}
                         </form>
