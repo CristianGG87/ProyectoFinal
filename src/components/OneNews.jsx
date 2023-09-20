@@ -7,12 +7,14 @@ export const OneNews = ({ news }) => {
     const navigate = useNavigate();
     const env = import.meta.env.VITE_BACKEND;
     const [error, setError] = useState('');
+    const [errorVisible, setErrorVisible] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editedNews, setEditedNews] = useState({ ...news });
     const [image, setImage] = useState(null);
     const { photo, userName, date, topic } = news;
     const [likes, setLikes] = useState(news.vPositive || 0);
     const [dislikes, setDislikes] = useState(news.vNegative || 0);
+    const [thumbnail, setThumbnail] = useState(null);
 
     const sendVoteToBackend = async (value) => {
         try {
@@ -24,8 +26,9 @@ export const OneNews = ({ news }) => {
                 },
                 body: JSON.stringify({ value }),
             });
+            console.log('response', response);
             if (!response.ok) {
-                throw new Error('Error al enviar el voto.');
+                throw new Error('No puedes votar tu propia noticia');
             }
             const responseData = await response.json();
             console.log('Respuesta del servidor:', responseData);
@@ -33,6 +36,10 @@ export const OneNews = ({ news }) => {
             setDislikes(responseData.data.vNeg);
         } catch (error) {
             setError(error.message);
+            setErrorVisible(true);
+            setTimeout(() => {
+                setErrorVisible(false);
+            }, 3000);
         }
     };
     const handleLikeClick = () => {
@@ -97,12 +104,13 @@ export const OneNews = ({ news }) => {
             setEditedNews({ ...editedNews, ...responseData.data });
 
             setIsEditing(false);
+            setThumbnail(responseData.data.photo);
         } catch (error) {
             setError(error.message);
         }
     };
     const { removeNews } = useNews();
-    const handleDelete = async (id) => {
+    const deleteNews = async (id) => {
         console.log(id);
         try {
             await removeNews(id, token);
@@ -169,6 +177,7 @@ export const OneNews = ({ news }) => {
                             <button onClick={handleDislikeClick}>
                                 👎{dislikes}
                             </button>
+                            {errorVisible && <p>{error}</p>}
                         </section>
                         <p>
                             Autor: {userName} el{' '}
@@ -176,31 +185,26 @@ export const OneNews = ({ news }) => {
                         </p>
                     </div>
                 )}
-                {user && user.user.id === news.userId && (
+
+                {user && user.user.id === news.userId && !isEditing ? (
                     <section>
-                        {isEditing ? (
-                            <>
-                                <button onClick={handleEditPhotoClick}>
-                                    Editar Foto
-                                </button>
-                                <button onClick={handleDelete}>
-                                    Borrar Noticia
-                                </button>
-                                {error && <p>{error}</p>}
-                            </>
-                        ) : (
-                            <>
-                                <button onClick={handleEditClick}>
-                                    Editar Noticia
-                                </button>
-                                <button onClick={handleDelete}>
-                                    Borrar Noticia
-                                </button>
-                                {error && <p>{error}</p>}
-                            </>
-                        )}
+                        <button onClick={handleEditPhotoClick}>
+                            Editar noticia
+                        </button>
+                        <button
+                            onClick={() => {
+                                if (
+                                    window.confirm(
+                                        'Se borrara la Noticia, esta seguro?'
+                                    )
+                                )
+                                    deleteNews(news.id);
+                            }}
+                        >
+                            Borrar noticia
+                        </button>
                     </section>
-                )}
+                ) : null}
             </div>
             {isEditing && (
                 <form onSubmit={handleEditPhotoSave}>
@@ -214,14 +218,29 @@ export const OneNews = ({ news }) => {
                             onChange={(e) => {
                                 console.log(e.target.files[0]);
                                 setImage(e.target.files[0]);
+
+                                if (e.target.files[0]) {
+                                    setThumbnail(
+                                        URL.createObjectURL(e.target.files[0])
+                                    );
+                                } else {
+                                    setThumbnail(null);
+                                }
                             }}
                         />
+                        {thumbnail && (
+                            <img
+                                src={thumbnail}
+                                alt="Miniatura de la imagen seleccionada"
+                                style={{ maxWidth: '200px' }}
+                            />
+                        )}
+
+                        <button>Guardar Foto</button>
                     </fieldset>
-                    <button>Guardar Foto</button>
                 </form>
             )}
         </article>
     );
 };
-
-///////////////////////////////////////////////////////////
+////////////////

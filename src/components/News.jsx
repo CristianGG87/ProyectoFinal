@@ -53,7 +53,7 @@ export const News = ({ news, removeNews }) => {
 
     const deleteNews = async (id) => {
         try {
-            removeNews(id, token);
+            await removeNews(id, token);
         } catch (error) {
             setError(error.message);
         }

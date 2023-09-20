@@ -20,7 +20,7 @@ export const OwnUserPage = () => {
     const [editEmail, setEditEmail] = useState(false);
     const [newEmail, setNewEmail] = useState('');
     const [oldEmail, setOldEmail] = useState('');
-    const [biography, setBiography] = useState(''); // Estado para la biografía
+    const [biography, setBiography] = useState('');
     const [isEditingBiography, setIsEditingBiography] = useState(false); // Estado para controlar la edición de la biografía
     const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen seleccionada
     const [isEditingPhoto, setIsEditingPhoto] = useState(false); // Estado para controlar la edición de la foto
@@ -39,8 +39,14 @@ export const OwnUserPage = () => {
         const fetchUser = async () => {
             try {
                 const userData = await getMyUserDataService({ token });
-                setUser(userData);
-                setBiography(userData.user.biography); // Establecer la biografía desde los datos del usuario
+                const sortedNews = userData.user.news.sort(
+                    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                );
+                setUser({
+                    ...userData,
+                    user: { ...userData.user, news: sortedNews },
+                });
+                setBiography(userData.user.biography);
                 setLoading(false);
             } catch (error) {
                 console.error(error);
