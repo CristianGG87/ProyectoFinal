@@ -4,6 +4,9 @@
     padding: 10px;
     position: fixed;
 }
+.nav-bar button {
+    font-size: 1em;
+}
 
 /* Añade un margen izquierdo para compensar el espacio ocupado por .nav-bar */
 .news-container {
@@ -11,38 +14,24 @@
     flex-direction: row;
     background-color: #f1f1f1;
     color: black;
+
+    padding: 0px;
 }
 
 /* Estilos para la lista <ul> */
 ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    padding-left: 250px;
-}
-
-/* Ajusta el ancho de <ul> según el espacio disponible */
-@media (min-width: 768px) {
-    ul {
-        flex-basis: calc(50% - 5px);
-    }
-}
-
-@media (min-width: 1024px) {
-    ul {
-        flex-basis: calc(33.333% - 10px);
-    }
+    margin-top: 0px;
+    padding: 10px;
+    padding-top: 0px;
 }
 
 /* Resto de estilos (sin cambios) */
-.news-list {
+section.news-list {
     flex: 1;
     padding: 0px;
+    margin-left: 220px;
+    border-left: 2px solid #050202;
 }
 
 .news-item {
@@ -54,11 +43,22 @@ ul {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 10px 50px;
+}
+
+.news-item button {
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+.news-item button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
 }
 
 .acordeon {
-    margin-top: 10px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -81,32 +81,32 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
     margin-top: 0;
-  }
-  
-  fieldset {
+}
+
+fieldset {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
-  
-  label {
+}
+
+label {
     display: block;
     font-weight: bold;
-  }
-  
-  input[type="text"],
-  select {
-    width: 100%;
+}
+
+input[type='text'],
+select {
+    width: 180px;
     padding: 8px;
-    margin-top: 4px;
+    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
     font-size: 16px;
-  }
-  
-  /* Estilos para el botón */
-  .publicar {
+}
+
+/* Estilos para el botón */
+.publicar {
     background-color: #007bff;
     color: white;
     border: none;
@@ -114,15 +114,25 @@ form {
     border-radius: 28px;
     cursor: pointer;
     font-size: 16px;
-  }
-  
-  img {
+}
+
+img {
     max-width: 100%;
     height: auto;
     margin-top: 10px;
-  }
-  
-  .button-container {
+}
+
+.button-container {
     text-align: center;
     margin-top: 10px;
-  }
+}
+
+.search-bar button {
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+.search-bar button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}

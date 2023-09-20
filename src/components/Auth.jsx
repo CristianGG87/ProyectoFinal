@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import './Auth.css'
+import './Auth.css';
+import { IconPower } from '@tabler/icons-react';
 
 export const Auth = () => {
     const { logout, user } = useContext(AuthContext);
@@ -14,9 +15,10 @@ export const Auth = () => {
     return user ? (
         <>
             <p>
-                ¡Hola, <Link to={`/users/`}>{user.user.userName}</Link>
-                ! 
-                <button className='cerrarSesion' onClick={handleLogout}>Cerrar sesión</button>
+                ¡Hola, <Link to={`/users/`}>{user.user.userName}</Link>!
+                <button className="cerrarSesion" onClick={handleLogout}>
+                    <IconPower />
+                </button>
             </p>
         </>
     ) : (

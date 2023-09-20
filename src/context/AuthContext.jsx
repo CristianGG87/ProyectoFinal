@@ -35,8 +35,14 @@ export const AuthProviderComponent = ({ children }) => {
         setUser(null);
     };
 
+    const updateUserName = (newUserName) => {
+        setUser({ ...user, user: { ...user.user, userName: newUserName } });
+    };
+
     return (
-        <AuthContext.Provider value={{ token, user, login, logout, email }}>
+        <AuthContext.Provider
+            value={{ token, user, login, logout, email, updateUserName }}
+        >
             {children}
         </AuthContext.Provider>
     );

@@ -146,6 +146,23 @@ export const updateEmailService = async (token, oldEmail, newEmail) => {
     return json;
 };
 
+export const editUserNameService = async (token, userName) => {
+    const env = import.meta.env.VITE_BACKEND;
+    const response = await fetch(`${env}/users/name`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+        },
+        body: JSON.stringify({ userName }),
+    });
+    const json = await response.json();
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+    return json;
+};
+
 export const editUserBioService = async (token, biography) => {
     const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/biography`, {
@@ -179,19 +196,23 @@ export const editUserPhotoService = async (token, photo) => {
     return json;
 };
 
-export const changePasswordService = async (token, currentPassword, newPassword) => {
+export const changePasswordService = async (
+    token,
+    currentPassword,
+    newPassword
+) => {
     const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/password`, {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-    },
-    body: JSON.stringify({
-        oldPass: currentPassword,
-        newPass: newPassword,
-    }),
-});
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+        },
+        body: JSON.stringify({
+            oldPass: currentPassword,
+            newPass: newPassword,
+        }),
+    });
     const json = await response.json();
     if (!response.ok) {
         throw new Error(json.message);

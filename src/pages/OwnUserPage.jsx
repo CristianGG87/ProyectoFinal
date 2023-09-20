@@ -7,13 +7,14 @@ import {
     editUserBioService,
     editUserPhotoService,
     changePasswordService,
+    editUserNameService,
 } from '../services';
 
 import useNews from '../hooks/useNews';
 import UserNewsList from '../components/UserNewsList';
 
 export const OwnUserPage = () => {
-    const { token } = useContext(AuthContext);
+    const { token, updateUserName } = useContext(AuthContext);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -21,7 +22,9 @@ export const OwnUserPage = () => {
     const [editEmail, setEditEmail] = useState(false);
     const [newEmail, setNewEmail] = useState('');
     const [oldEmail, setOldEmail] = useState('');
+    const [userName, setUserName] = useState('');
     const [biography, setBiography] = useState('');
+    const [isEditingUserName, setIsEditingUserName] = useState('');
     const [isEditingBiography, setIsEditingBiography] = useState(false); // Estado para controlar la edición de la biografía
     const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen seleccionada
     const [isEditingPhoto, setIsEditingPhoto] = useState(false); // Estado para controlar la edición de la foto
@@ -88,10 +91,14 @@ export const OwnUserPage = () => {
         setEditEmail(true);
     };
 
-    // Función para activar la edición de la biografía
     const handleEditBiography = () => {
         setIsEditingBiography(true);
     };
+
+    const handleEditUserName = () => {
+        setIsEditingUserName(true);
+    };
+
     const handleSaveEmail = async () => {
         try {
             await updateEmailService(token, oldEmail, newEmail);
@@ -100,6 +107,18 @@ export const OwnUserPage = () => {
         } catch (error) {
             console.error(error);
             setError('Error al actualizar el correo electrónico');
+        }
+    };
+
+    const handleSaveName = async () => {
+        try {
+            await editUserNameService(token, userName);
+            setUser({ ...user, user: { ...user.user, userName: userName } });
+            updateUserName(userName);
+            setIsEditingUserName(false);
+        } catch (error) {
+            console.error(error);
+            setError('Error al actualizar el nombre');
         }
     };
 
@@ -138,6 +157,11 @@ export const OwnUserPage = () => {
             setError('Error al actualizar la foto del usuario');
         }
     };
+    const cancelEditPhoto = () => {
+        setIsEditingPhoto(false);
+        setSelectedImage(null); // Borra la imagen seleccionada si la había
+        // Puedes agregar más lógica para restaurar otros estados si es necesario
+    };
 
     if (error) {
         return <ErrorMessage message={error} />;
@@ -147,76 +171,113 @@ export const OwnUserPage = () => {
         return (
             <section>
                 <h1>Perfil Propio</h1>
-                <p>Nombre: {user.user.userName}</p>
-                {editEmail ? (
-                    <div>
-                        <input
-                            type="email"
-                            placeholder="Antiguo correo electrónico"
-                            value={oldEmail}
-                            onChange={(e) => setOldEmail(e.target.value)}
-                        />
-                        <input
-                            type="email"
-                            placeholder="Nuevo correo electrónico"
-                            value={newEmail}
-                            onChange={(e) => setNewEmail(e.target.value)}
-                        />
-                        <button onClick={handleSaveEmail}>Guardar</button>
-                    </div>
-                ) : (
-                    <p>Correo electrónico: {user.user.email}</p>
-                )}
-                <button onClick={handleEditEmail}>Editar Email</button>
+                <section>
+                    {isEditingUserName ? (
+                        <div>
+                            <textarea
+                                placeholder="Nombre de usuario"
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                            />
+                            <button onClick={handleSaveName}>
+                                Guardar nombre
+                            </button>
+                        </div>
+                    ) : (
+                        <div
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <p style={{ marginRight: '10px' }}>
+                                Nombre: {user.user.userName}
+                            </p>
+                            <button onClick={handleEditUserName}>✏️</button>
+                        </div>
+                    )}
+                </section>
 
-
-                {editPassword ? (
-                    <div>
-                        <input
-                            type="password"
-                            placeholder="Contraseña actual"
-                            value={currentPassword}
-                            onChange={(e) => setCurrentPassword(e.target.value)}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Nueva contraseña"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Confirmar nueva contraseña"
-                            value={confirmNewPassword}
-                            onChange={(e) => setConfirmNewPassword(e.target.value)}
-                        />
-                        <button onClick={handleSavePassword}>Guardar Contraseña</button>
-                    </div>
-                ) : (
-                    <p>Contraseña: {user.user.password}</p>
-                )}
-                <button onClick={handleEditPassword}>Cambiar Contraseña</button>
-                
-                {isEditingBiography ? (
-                    <div>
-                        <textarea
-                            placeholder="Nueva biografía del usuario"
-                            value={biography}
-                            onChange={(e) => setBiography(e.target.value)}
-                        />
-                        <button onClick={handleSaveBiography}>
-                            Guardar Biografía
-                        </button>
-                    </div>
-                ) : (
-                    <p>Biografía: {user.user.biography}</p>
-                )}
-                {isEditingBiography ? null : (
-                    <button onClick={handleEditBiography}>
-                        Editar Biografía
+                <section>
+                    {editEmail ? (
+                        <div>
+                            <input
+                                type="email"
+                                placeholder="Antiguo correo electrónico"
+                                value={oldEmail}
+                                onChange={(e) => setOldEmail(e.target.value)}
+                            />
+                            <input
+                                type="email"
+                                placeholder="Nuevo correo electrónico"
+                                value={newEmail}
+                                onChange={(e) => setNewEmail(e.target.value)}
+                            />
+                            <button onClick={handleSaveEmail}>Guardar</button>
+                        </div>
+                    ) : (
+                        <p>Correo electrónico: {user.user.email}</p>
+                    )}
+                    <button onClick={handleEditEmail}>Editar Email</button>
+                </section>
+                <section>
+                    {editPassword ? (
+                        <div>
+                            <input
+                                type="password"
+                                placeholder="Contraseña actual"
+                                value={currentPassword}
+                                onChange={(e) =>
+                                    setCurrentPassword(e.target.value)
+                                }
+                            />
+                            <input
+                                type="password"
+                                placeholder="Nueva contraseña"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Confirmar nueva contraseña"
+                                value={confirmNewPassword}
+                                onChange={(e) =>
+                                    setConfirmNewPassword(e.target.value)
+                                }
+                            />
+                            <button onClick={handleSavePassword}>
+                                Guardar Contraseña
+                            </button>
+                        </div>
+                    ) : null}
+                </section>
+                <section>
+                    <button onClick={handleEditPassword}>
+                        Cambiar Contraseña
                     </button>
-                )}
-
+                </section>
+                <section>
+                    {isEditingBiography ? (
+                        <div>
+                            <textarea
+                                placeholder="Nueva biografía del usuario"
+                                value={biography}
+                                onChange={(e) => setBiography(e.target.value)}
+                            />
+                            <button onClick={handleSaveBiography}>
+                                Guardar Biografía
+                            </button>
+                        </div>
+                    ) : (
+                        <p>Biografía: {user.user.biography}</p>
+                    )}
+                    {isEditingBiography ? null : (
+                        <button onClick={handleEditBiography}>
+                            Editar Biografía
+                        </button>
+                    )}
+                </section>
                 <div>
                     {selectedImage ? (
                         <figure>
@@ -232,13 +293,29 @@ export const OwnUserPage = () => {
                             alt={user.user.userName}
                         />
                     ) : null}
-                    <button
-                        onClick={() => {
-                            document.getElementById('imageUpload').click();
-                        }}
-                    >
-                        Editar Foto
-                    </button>
+                    {isEditingPhoto ? (
+                        <div>
+                            <button onClick={handleUploadImage}>
+                                Guardar Foto
+                            </button>
+                            <button onClick={() => cancelEditPhoto()}>
+                                Cancelar
+                            </button>
+                        </div>
+                    ) : (
+                        <div>
+                            <button
+                                onClick={() => {
+                                    document
+                                        .getElementById('imageUpload')
+                                        .click();
+                                    setIsEditingPhoto(true);
+                                }}
+                            >
+                                Editar Foto
+                            </button>
+                        </div>
+                    )}
                     <input
                         type="file"
                         accept="image/*"
@@ -246,11 +323,6 @@ export const OwnUserPage = () => {
                         style={{ display: 'none' }}
                         onChange={handleImageChange}
                     />
-                    {selectedImage ? (
-                        <button onClick={handleUploadImage}>
-                            Guardar Foto
-                        </button>
-                    ) : null}
                 </div>
 
                 <p>

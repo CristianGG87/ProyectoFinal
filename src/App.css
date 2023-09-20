@@ -20,7 +20,7 @@ header {
 /* Estilo para el titulo */
 .header-title {
     margin-left: 20px;
-    color: #b52b2b;
+    color: #0e0864;
 }
 
 /* Estilo para el menu de nevegacion*/
@@ -44,7 +44,7 @@ main {
 
 /* Estilo para los enlaces de navegación */
 nav a {
-    color: #b52b2b;
+    color: #0e0864;
     text-decoration: none;
     padding: 10px;
     font-weight: bold;
@@ -67,7 +67,7 @@ nav a:hover {
 
 /* Estilo para el título de las noticias */
 .news h2 {
-    color: #b52b2b;
+    color: #0e0864;
     background-color: #555555;
     padding: 10px;
     margin-top: 0;
@@ -106,7 +106,7 @@ nav a:hover {
 
 a {
     text-decoration: none;
-    color: #b52b2b;
+    color: #0e0864;
 }
 
 body {

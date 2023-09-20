@@ -1,5 +1,10 @@
 button.cerrarSesion {
-    padding: 5px;
-    margin: 10px;
-    border-radius: 28px;
+    border-radius: 5px;
+    padding-bottom: 0px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+button.cerrarSesion img {
+    margin: 0px;
 }

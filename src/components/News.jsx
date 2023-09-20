@@ -82,9 +82,11 @@ export const News = ({ news, removeNews }) => {
                 <h2>{news.title}</h2>
             </Link>
             <h3>{news.intro}</h3>
-            {news.photo ? (
-                <img src={`${env}/${news.photo}`} alt={news.title} />
-            ) : null}
+            <Link to={`/news/${news.id}`}>
+                {news.photo ? (
+                    <img src={`${env}/${news.photo}`} alt={news.title} />
+                ) : null}
+            </Link>
             <p className="topic">Tema: {news.topic}</p>
             <section className="likes">
                 <button onClick={handleLikeClick}>👍{likes}</button>

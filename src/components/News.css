@@ -19,4 +19,11 @@ article img {
 section.likes button {
     background-color: transparent;
     border: none;
+    transition: transform 0.2s ease;
+    color: black;
+}
+
+section.likes button:hover {
+    transform: scale(1.3);
+    background-color: transparent;
 }
