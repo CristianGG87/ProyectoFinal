@@ -14,51 +14,24 @@ import useNews from '../hooks/useNews';
 import UserNewsList from '../components/UserNewsList';
 
 export const OwnUserPage = () => {
+    const env = import.meta.env.VITE_BACKEND;
     const { token, updateUserName } = useContext(AuthContext);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const env = import.meta.env.VITE_BACKEND;
-    const [editEmail, setEditEmail] = useState(false);
+    const [userName, setUserName] = useState('');
+    const [isEditingUserName, setIsEditingUserName] = useState(false);
     const [newEmail, setNewEmail] = useState('');
     const [oldEmail, setOldEmail] = useState('');
-    const [userName, setUserName] = useState('');
+    const [isEditingEmail, setIsEditingEmail] = useState('');
     const [biography, setBiography] = useState('');
-    const [isEditingUserName, setIsEditingUserName] = useState('');
     const [isEditingBiography, setIsEditingBiography] = useState(false); // Estado para controlar la edición de la biografía
     const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen seleccionada
     const [isEditingPhoto, setIsEditingPhoto] = useState(false); // Estado para controlar la edición de la foto
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
-    const [editPassword, setEditPassword] = useState(false);
-
-    const { removeNews } = useNews();
-
-    const handleSavePassword = async () => {
-        try {
-            await changePasswordService(token, currentPassword, newPassword);
-            setCurrentPassword('');
-            setNewPassword('');
-            setConfirmNewPassword('');
-            setEditPassword(false);
-        } catch (error) {
-            console.error(error);
-            setError('Error al cambiar la contraseña');
-        }
-    };
-
-    const handleEditPassword = () => {
-        setEditPassword(true);
-    };
-
-    const handleDelete = async (news) => {
-        try {
-            await removeNews(news, token);
-        } catch (error) {
-            setError(error.message);
-        }
-    };
+    const [isEditingPassword, setIsEditingPassword] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -71,7 +44,7 @@ export const OwnUserPage = () => {
                     ...userData,
                     user: { ...userData.user, news: sortedNews },
                 });
-                setBiography(userData.user.biography);
+                //setBiography(userData.user.biography);
                 setLoading(false);
             } catch (error) {
                 console.error(error);
@@ -83,12 +56,36 @@ export const OwnUserPage = () => {
         fetchUser();
     }, [token]);
 
+    const { removeNews } = useNews();
+    const handleDelete = async (news) => {
+        try {
+            await removeNews(news, token);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     if (loading) {
         return <p>Cargando los datos del usuario...</p>;
     }
+    const handleSavePassword = async () => {
+        try {
+            await changePasswordService(token, currentPassword, newPassword);
+            setCurrentPassword('');
+            setNewPassword('');
+            setConfirmNewPassword('');
+            setIsEditingPassword(false);
+        } catch (error) {
+            console.error(error);
+            setError('Error al cambiar la contraseña');
+        }
+    };
+    const handleEditPassword = () => {
+        setIsEditingPassword(true);
+    };
 
     const handleEditEmail = () => {
-        setEditEmail(true);
+        setIsEditingEmail(true);
     };
 
     const handleEditBiography = () => {
@@ -103,7 +100,7 @@ export const OwnUserPage = () => {
         try {
             await updateEmailService(token, oldEmail, newEmail);
             setUser({ ...user, user: { ...user.user, email: newEmail } });
-            setEditEmail(false);
+            setIsEditingEmail(false);
         } catch (error) {
             console.error(error);
             setError('Error al actualizar el correo electrónico');
@@ -144,11 +141,9 @@ export const OwnUserPage = () => {
 
                 await editUserPhotoService(token, formData);
 
-                // Actualiza el estado del usuario con la nueva foto
                 const updatedUserData = await getMyUserDataService({ token });
                 setUser(updatedUserData);
 
-                // Reinicia el estado de la imagen seleccionada y la edición de la foto
                 setSelectedImage(null);
                 setIsEditingPhoto(false);
             }
@@ -159,8 +154,7 @@ export const OwnUserPage = () => {
     };
     const cancelEditPhoto = () => {
         setIsEditingPhoto(false);
-        setSelectedImage(null); // Borra la imagen seleccionada si la había
-        // Puedes agregar más lógica para restaurar otros estados si es necesario
+        setSelectedImage(null);
     };
 
     if (error) {
@@ -174,7 +168,7 @@ export const OwnUserPage = () => {
                 <section>
                     {isEditingUserName ? (
                         <div>
-                            <textarea
+                            <input
                                 placeholder="Nombre de usuario"
                                 value={userName}
                                 onChange={(e) => setUserName(e.target.value)}
@@ -182,25 +176,22 @@ export const OwnUserPage = () => {
                             <button onClick={handleSaveName}>
                                 Guardar nombre
                             </button>
+                            <button onClick={() => setIsEditingUserName(false)}>
+                                Cancelar
+                            </button>
                         </div>
                     ) : (
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            <p style={{ marginRight: '10px' }}>
-                                Nombre: {user.user.userName}
+                        <div>
+                            <p>
+                                Nombre: {user.user.userName}{' '}
+                                <button onClick={handleEditUserName}>✏️</button>
                             </p>
-                            <button onClick={handleEditUserName}>✏️</button>
                         </div>
                     )}
                 </section>
 
                 <section>
-                    {editEmail ? (
+                    {isEditingEmail ? (
                         <div>
                             <input
                                 type="email"
@@ -215,14 +206,19 @@ export const OwnUserPage = () => {
                                 onChange={(e) => setNewEmail(e.target.value)}
                             />
                             <button onClick={handleSaveEmail}>Guardar</button>
+                            <button onClick={() => setIsEditingEmail(false)}>
+                                Cancelar
+                            </button>
                         </div>
                     ) : (
-                        <p>Correo electrónico: {user.user.email}</p>
+                        <p>
+                            Correo electrónico: {user.user.email}{' '}
+                            <button onClick={handleEditEmail}> ✏️</button>
+                        </p>
                     )}
-                    <button onClick={handleEditEmail}>Editar Email</button>
                 </section>
                 <section>
-                    {editPassword ? (
+                    {isEditingPassword ? (
                         <div>
                             <input
                                 type="password"
@@ -249,18 +245,24 @@ export const OwnUserPage = () => {
                             <button onClick={handleSavePassword}>
                                 Guardar Contraseña
                             </button>
+                            <button onClick={() => setIsEditingPassword(false)}>
+                                Cancelar
+                            </button>
                         </div>
                     ) : null}
                 </section>
                 <section>
-                    <button onClick={handleEditPassword}>
-                        Cambiar Contraseña
-                    </button>
+                    {!isEditingPassword && (
+                        <button onClick={handleEditPassword}>
+                            Cambiar Contraseña
+                        </button>
+                    )}
                 </section>
+
                 <section>
                     {isEditingBiography ? (
                         <div>
-                            <textarea
+                            <input
                                 placeholder="Nueva biografía del usuario"
                                 value={biography}
                                 onChange={(e) => setBiography(e.target.value)}
@@ -268,14 +270,17 @@ export const OwnUserPage = () => {
                             <button onClick={handleSaveBiography}>
                                 Guardar Biografía
                             </button>
+                            <button
+                                onClick={() => setIsEditingBiography(false)}
+                            >
+                                Cancelar
+                            </button>
                         </div>
                     ) : (
-                        <p>Biografía: {user.user.biography}</p>
-                    )}
-                    {isEditingBiography ? null : (
-                        <button onClick={handleEditBiography}>
-                            Editar Biografía
-                        </button>
+                        <p>
+                            Biografía: {user.user.biography}{' '}
+                            <button onClick={handleEditBiography}>✏️</button>
+                        </p>
                     )}
                 </section>
                 <div>
@@ -312,7 +317,7 @@ export const OwnUserPage = () => {
                                     setIsEditingPhoto(true);
                                 }}
                             >
-                                Editar Foto
+                                ✏️
                             </button>
                         </div>
                     )}
@@ -326,8 +331,7 @@ export const OwnUserPage = () => {
                 </div>
 
                 <p>
-                    {' '}
-                    Registrado el:
+                    Registrado el:{' '}
                     {new Date(user.user.createdAt).toLocaleDateString()}
                 </p>
 
@@ -345,4 +349,3 @@ export const OwnUserPage = () => {
 
     return null;
 };
-///////////////////////////////////////////////////////////////////////////////////

@@ -44,7 +44,7 @@ main {
 
 /* Estilo para los enlaces de navegación */
 nav a {
-    color: #0e0864;
+    color: #ffffff;
     text-decoration: none;
     padding: 10px;
     font-weight: bold;
@@ -106,7 +106,7 @@ nav a:hover {
 
 a {
     text-decoration: none;
-    color: #0e0864;
+    color: #ffffff;
 }
 
 body {
