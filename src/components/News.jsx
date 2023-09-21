@@ -2,53 +2,43 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import './News.css';
+import { IconThumbUp, IconThumbDown } from '@tabler/icons-react';
+import { sendVoteService } from '../services';
 
 export const News = ({ news, removeNews }) => {
     const { user, token } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [likes, setLikes] = useState(news.vPositive || 0);
     const [dislikes, setDislikes] = useState(news.vNegative || 0);
+    const [errorVisible, setErrorVisible] = useState(false);
     const env = import.meta.env.VITE_BACKEND;
 
-    const sendVoteToBackend = async (value) => {
+    const handleLikeClick = async () => {
         try {
-            console.log('Sending vote with value:', value);
-            const response = await fetch(`${env}/news/${news.id}/votes`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: token,
-                },
-                body: JSON.stringify({ value }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al enviar el voto.');
-            }
-
-            // Parsea la respuesta para obtener el nuevo recuento de votos.
-            const responseData = await response.json();
-            console.log('Respuesta del servidor:', responseData);
-            // Actualiza los estados locales con el nuevo recuento de votos.
-            setLikes(responseData.data.vPos);
-            console.log('importante', responseData.data.vPos);
-            setDislikes(responseData.data.vNeg);
-            console.log('Likes:', likes); // Agregar logs para verificar los valores de likes y dislikes después de la actualización.
-            console.log('Dislikes:', dislikes);
+            const response = await sendVoteService(news.id, '1', token);
+            setLikes(response.vPos);
+            setDislikes(response.vNeg);
         } catch (error) {
             setError(error.message);
+            setErrorVisible(true);
+            setTimeout(() => {
+                setErrorVisible(false);
+            }, 3000);
         }
     };
 
-    const handleLikeClick = () => {
-        // Envía un voto de "like" (valor 1) al backend y actualiza el recuento local.
-        sendVoteToBackend('1');
-        console.log('votos:', news.vPositive);
-    };
-
-    const handleDislikeClick = () => {
-        // Envía un voto de "dislike" (valor 2) al backend y actualiza el recuento local.
-        sendVoteToBackend('2');
+    const handleDislikeClick = async () => {
+        try {
+            const response = await sendVoteService(news.id, '2', token);
+            setLikes(response.vPos);
+            setDislikes(response.vNeg);
+        } catch (error) {
+            setError(error.message);
+            setErrorVisible(true);
+            setTimeout(() => {
+                setErrorVisible(false);
+            }, 3000);
+        }
     };
 
     const deleteNews = async (id) => {
@@ -89,8 +79,14 @@ export const News = ({ news, removeNews }) => {
             </Link>
             <p className="topic">Tema: {news.topic}</p>
             <section className="likes">
-                <button onClick={handleLikeClick}>👍{likes}</button>
-                <button onClick={handleDislikeClick}>👎 {dislikes}</button>
+                <button onClick={handleLikeClick}>
+                    <IconThumbUp />
+                    {likes}
+                </button>
+                <button onClick={handleDislikeClick}>
+                    <IconThumbDown /> {dislikes}
+                </button>
+                {errorVisible && <p>{error}</p>}
             </section>
             <p>
                 Autor: <Link to={`/users/${news.userId}`}>{news.userName}</Link>{' '}
@@ -116,4 +112,4 @@ export const News = ({ news, removeNews }) => {
         </article>
     );
 };
-/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////

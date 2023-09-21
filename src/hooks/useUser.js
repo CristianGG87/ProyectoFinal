@@ -5,7 +5,7 @@ const useUser = (id) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    //////////////////////
+
     useEffect(() => {
         const loadUser = async () => {
             try {

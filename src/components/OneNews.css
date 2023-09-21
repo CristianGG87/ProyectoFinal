@@ -1,0 +1,5 @@
+.edit-news div input,
+.edit-news div textarea {
+    width: 60%;
+    margin-bottom: 10px; /* Puedes ajustar el valor de margen según tus preferencias */
+}

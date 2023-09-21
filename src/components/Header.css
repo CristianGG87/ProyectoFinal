@@ -42,3 +42,9 @@ nav.login {
     height: 55px;
     transition: 0.9;
 }
+#header a {
+    color: white;
+}
+#header p {
+    color: white;
+}

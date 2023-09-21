@@ -16,6 +16,7 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
     const { token, user } = useContext(AuthContext);
     const [searchResults, setSearchResults] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState('');
+    const env = import.meta.env.VITE_BACKEND;
 
     const handleForm = async (e) => {
         e.preventDefault();
@@ -34,7 +35,7 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
     };
 
     const handleSearch = (keyword) => {
-        fetch(`http://localhost:8000/news?keyword=${keyword}`)
+        fetch(`${env}/news?keyword=${keyword}`)
             .then((response) => response.json())
             .then((data) => {
                 setSearchResults(data.data.news);
@@ -184,7 +185,9 @@ export const NewsList = ({ news, setNews, removeNews, addNews }) => {
                                 ) : null}
                             </fieldset>
                             <div className="button-container"></div>
-                            <button className='publicar'>Publicar noticia</button>
+                            <button className="publicar">
+                                Publicar noticia
+                            </button>
                             {sending ? <p>Publicando noticia</p> : null}
                             {error ? <p>{error}</p> : null}
                         </form>

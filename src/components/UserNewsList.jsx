@@ -3,16 +3,19 @@ import useNews from '../hooks/useNews';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { getMyUserDataService } from '../services';
+import { IconThumbUp, IconThumbDown } from '@tabler/icons-react';
+
 const UserNewsList = ({ news, setUser, env }) => {
     const [error, setError] = useState('');
     const { removeNews } = useNews();
     const { token } = useContext(AuthContext);
+
     const handleDelete = async (id) => {
         try {
             await removeNews(id, token);
-            //tengo que recuperar el usuario porque contiene el listado nuevo
+
             const userData = await getMyUserDataService({ token });
-            //setear el usuario
+
             setUser(userData);
         } catch (error) {
             setError(error.message);
@@ -35,7 +38,8 @@ const UserNewsList = ({ news, setUser, env }) => {
                     <p>Tema: {newsItem.topic}</p>
                     <section>
                         <p>
-                            👍 {newsItem.votes.positivos} 👎
+                            <IconThumbUp /> {newsItem.votes.positivos}{' '}
+                            <IconThumbDown />
                             {newsItem.votes.negativos}
                         </p>
                     </section>

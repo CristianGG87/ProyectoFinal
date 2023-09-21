@@ -1,0 +1,13 @@
+button.edit {
+    border: none;
+    background-color: transparent;
+}
+button {
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}

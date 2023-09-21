@@ -1,5 +1,6 @@
+import env from '../hooks/backendEnv';
+
 export const getAllNewsService = async () => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/news`);
     const json = await response.json();
     if (!response.ok) {
@@ -9,7 +10,6 @@ export const getAllNewsService = async () => {
 };
 
 export const getUserNewsService = async (id) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/${id}/news`);
     const json = await response.json();
     if (!response.ok) {
@@ -19,7 +19,6 @@ export const getUserNewsService = async (id) => {
 };
 
 export const getSingleNewsService = async (id) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/news/${id}`);
     const json = await response.json();
     if (!response.ok) {
@@ -29,7 +28,6 @@ export const getSingleNewsService = async (id) => {
 };
 
 export const registerUserService = async ({ userName, email, password }) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/register`, {
         method: 'POST',
         headers: {
@@ -44,7 +42,6 @@ export const registerUserService = async ({ userName, email, password }) => {
 };
 
 export const loginUserService = async ({ email, password }) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/login`, {
         method: 'POST',
         headers: {
@@ -60,7 +57,6 @@ export const loginUserService = async ({ email, password }) => {
 };
 
 export const getMyUserDataService = async ({ token }) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users`, {
         headers: {
             Authorization: token,
@@ -74,7 +70,6 @@ export const getMyUserDataService = async ({ token }) => {
 };
 
 export const getUserDataService = async (id) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/${id}`);
 
     const json = await response.json();
@@ -85,7 +80,6 @@ export const getUserDataService = async (id) => {
 };
 
 export const sendNewsService = async (data, token) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/news`, {
         method: 'POST',
         body: data,
@@ -101,7 +95,6 @@ export const sendNewsService = async (data, token) => {
 };
 
 export const deleteNewsService = async (id, token) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/news/${id}`, {
         method: 'DELETE',
         headers: {
@@ -115,7 +108,6 @@ export const deleteNewsService = async (id, token) => {
 };
 
 export const voteNewsService = async (id, token) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/news/${id}/votes`, {
         method: 'POST',
         headers: {
@@ -130,7 +122,6 @@ export const voteNewsService = async (id, token) => {
 };
 
 export const updateEmailService = async (token, oldEmail, newEmail) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/email`, {
         method: 'PUT',
         headers: {
@@ -147,7 +138,6 @@ export const updateEmailService = async (token, oldEmail, newEmail) => {
 };
 
 export const editUserNameService = async (token, userName) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/name`, {
         method: 'PUT',
         headers: {
@@ -164,7 +154,6 @@ export const editUserNameService = async (token, userName) => {
 };
 
 export const editUserBioService = async (token, biography) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/biography`, {
         method: 'PUT',
         headers: {
@@ -181,13 +170,12 @@ export const editUserBioService = async (token, biography) => {
 };
 
 export const editUserPhotoService = async (token, photo) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/photo`, {
         method: 'PUT',
         headers: {
             Authorization: token,
         },
-        body: photo, // Asegúrate de enviar los datos de la imagen adecuadamente
+        body: photo,
     });
     const json = await response.json();
     if (!response.ok) {
@@ -201,7 +189,6 @@ export const changePasswordService = async (
     currentPassword,
     newPassword
 ) => {
-    const env = import.meta.env.VITE_BACKEND;
     const response = await fetch(`${env}/users/password`, {
         method: 'PUT',
         headers: {
@@ -218,4 +205,81 @@ export const changePasswordService = async (
         throw new Error(json.message);
     }
     return json;
+};
+
+export const sendVoteService = async (newsId, value, token) => {
+    try {
+        const response = await fetch(`${env}/news/${newsId}/votes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+            body: JSON.stringify({ value }),
+        });
+        if (!response.ok) {
+            throw new Error('No puedes votar tu propia noticia');
+        }
+        const responseData = await response.json();
+        return {
+            vPos: responseData.data.vPos,
+            vNeg: responseData.data.vNeg,
+        };
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+export const updateNewsService = async (newsId, editedNews, token) => {
+    try {
+        const formData = new FormData();
+        formData.append('title', editedNews.title);
+        formData.append('intro', editedNews.intro);
+        formData.append('text', editedNews.text);
+        const response = await fetch(`${env}/news/${newsId}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: token,
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al actualizar la noticia.');
+        }
+
+        const responseData = await response.json();
+        return responseData.data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+export const updateNewsPhotoService = async (newsId, image, token) => {
+    try {
+        if (!image) {
+            throw new Error('No se ha seleccionado una imagen.');
+        }
+
+        const formData = new FormData();
+        formData.append('photo', image);
+
+        const response = await fetch(`${env}/news/${newsId}/photos`, {
+            method: 'PUT',
+            headers: {
+                Authorization: token,
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al actualizar la foto de la noticia.');
+        }
+
+        const responseData = await response.json();
+
+        return responseData.data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
 };

@@ -11,7 +11,7 @@ export const Auth = () => {
         logout();
         navigate('/');
     };
-    console.log(user);
+
     return user ? (
         <>
             <p>

@@ -44,7 +44,7 @@ main {
 
 /* Estilo para los enlaces de navegación */
 nav a {
-    color: #ffffff;
+    color: darkblue;
     text-decoration: none;
     padding: 10px;
     font-weight: bold;
@@ -106,7 +106,7 @@ nav a:hover {
 
 a {
     text-decoration: none;
-    color: #ffffff;
+    color: darkblue;
 }
 
 body {
@@ -132,4 +132,9 @@ code {
     --border: 1px solid #474a4d;
     --border-radius: 8px;
     --speed: 500ms;
+}
+
+footer {
+    background-color: black;
+    color: white;
 }

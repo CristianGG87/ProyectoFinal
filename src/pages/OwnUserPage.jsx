@@ -1,3 +1,4 @@
+import './OwnUserPage.css';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { ErrorMessage } from '../components/ErrorMessage';
@@ -9,7 +10,6 @@ import {
     changePasswordService,
     editUserNameService,
 } from '../services';
-
 import useNews from '../hooks/useNews';
 import UserNewsList from '../components/UserNewsList';
 
@@ -24,10 +24,10 @@ export const OwnUserPage = () => {
     const [newEmail, setNewEmail] = useState('');
     const [oldEmail, setOldEmail] = useState('');
     const [isEditingEmail, setIsEditingEmail] = useState('');
-    const [biography, setBiography] = useState('');
-    const [isEditingBiography, setIsEditingBiography] = useState(false); // Estado para controlar la edición de la biografía
-    const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen seleccionada
-    const [isEditingPhoto, setIsEditingPhoto] = useState(false); // Estado para controlar la edición de la foto
+    const [biography, setBiography] = useState(user?.user.biography || '');
+    const [isEditingBiography, setIsEditingBiography] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [isEditingPhoto, setIsEditingPhoto] = useState(false);
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -40,11 +40,12 @@ export const OwnUserPage = () => {
                 const sortedNews = userData.user.news.sort(
                     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                 );
+
                 setUser({
                     ...userData,
                     user: { ...userData.user, news: sortedNews },
                 });
-                //setBiography(userData.user.biography);
+                setBiography(userData.user.biography);
                 setLoading(false);
             } catch (error) {
                 console.error(error);
@@ -163,7 +164,7 @@ export const OwnUserPage = () => {
 
     if (user) {
         return (
-            <section>
+            <section className="user-data">
                 <h1>Perfil Propio</h1>
                 <section>
                     {isEditingUserName ? (
@@ -184,7 +185,12 @@ export const OwnUserPage = () => {
                         <div>
                             <p>
                                 Nombre: {user.user.userName}{' '}
-                                <button onClick={handleEditUserName}>✏️</button>
+                                <button
+                                    className="edit"
+                                    onClick={handleEditUserName}
+                                >
+                                    ✏️
+                                </button>
                             </p>
                         </div>
                     )}
@@ -213,7 +219,10 @@ export const OwnUserPage = () => {
                     ) : (
                         <p>
                             Correo electrónico: {user.user.email}{' '}
-                            <button onClick={handleEditEmail}> ✏️</button>
+                            <button className="edit" onClick={handleEditEmail}>
+                                {' '}
+                                ✏️
+                            </button>
                         </p>
                     )}
                 </section>
@@ -279,7 +288,12 @@ export const OwnUserPage = () => {
                     ) : (
                         <p>
                             Biografía: {user.user.biography}{' '}
-                            <button onClick={handleEditBiography}>✏️</button>
+                            <button
+                                className="edit"
+                                onClick={handleEditBiography}
+                            >
+                                ✏️
+                            </button>
                         </p>
                     )}
                 </section>
@@ -310,6 +324,7 @@ export const OwnUserPage = () => {
                     ) : (
                         <div>
                             <button
+                                className="edit"
                                 onClick={() => {
                                     document
                                         .getElementById('imageUpload')
