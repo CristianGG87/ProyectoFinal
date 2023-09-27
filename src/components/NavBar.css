@@ -1,32 +1,29 @@
 /* NavBar.css */
 
-#root > main > main > div > main > section.nav-bar {
-  margin-right: 70%;
-  margin-top: 50px;
-  justify-content: left;
-}
-
 .navBar {
-  display: flex;
-  margin-left: 20%;
-  flex-direction: column;
-  padding: 10px;
-  background-color: black;
+    margin-top: 70px;
+    display: flex;
+    margin-left: 20%;
+    flex-direction: column;
+    padding: 10px;
+    background-color: black;
+    position: static;
+    width: 140px;
 }
 
 .navBar button {
-  margin: 5px 0; /* Agrega margen vertical entre los botones */
-  background-color: transparent; /* Color de fondo */
-  color: rgb(249, 249, 249); /* Color del texto */
-  border: none;
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 5px 5px; /* Relleno interno */
-  cursor: pointer;
-  transition: background-color 0.3s; /* Transición suave para el color de fondo */
-  font-size: 0.9em;
-  width: 85px;
+    margin: 5px 0; /* Agrega margen vertical entre los botones */
+    background-color: transparent; /* Color de fondo */
+    color: rgb(249, 249, 249); /* Color del texto */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 20px 5px; /* Relleno interno */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+    font-size: 0.9em;
+    font-size: 1.3em;
 }
 
 .navBar button:hover {
-  background-color: #6c69719c; /* Cambia el color de fondo al pasar el cursor por encima */
+    background-color: #6c69719c; /* Cambia el color de fondo al pasar el cursor por encima */
 }
