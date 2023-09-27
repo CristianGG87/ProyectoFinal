@@ -1,138 +1,182 @@
 /* Estilos para el contenido de la barra de navegación que debe quedar fijo */
 .nav-bar {
-    width: 200px;
-    padding: 10px;
-    position: fixed;
+  width: 200px;
+  padding: 1px;
+  position: fixed;
+  background-color: #050202;
 }
 .nav-bar button {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 /* Añade un margen izquierdo para compensar el espacio ocupado por .nav-bar */
 .news-container {
-    display: flex;
-    flex-direction: row;
-    background-color: #f1f1f1;
-    color: black;
+  display: flex;
+  flex-direction: row;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+}
 
-    padding: 0px;
+section.news-list > div > form {
+  color: white;
+}
+
+.section.news-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.li.news-container {
+  background-color: #000000;
 }
 
 /* Estilos para la lista <ul> */
 ul {
-    list-style: none;
-    margin-top: 0px;
-    padding: 10px;
-    padding-top: 0px;
+  list-style: none;
+  margin-top: 0px;
+  padding: 10px;
+  padding-top: 0px;
 }
 
 /* Resto de estilos (sin cambios) */
 section.news-list {
-    flex: 1;
-    padding: 0px;
-    margin-left: 220px;
-    border-left: 2px solid #050202;
+  flex: 1;
+  padding: 0px;
+  margin-left: 220px;
+  border-left: 2px solid #000000;
 }
 
 .news-item {
-    border: 1px solid black;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 10px 50px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(69, 69, 69);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px 50px;
 }
 
 .news-item button {
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
 }
 .news-item button:hover {
-    background-color: #0056b3;
-    cursor: pointer;
+  background-color: #0056b3;
+  cursor: pointer;
 }
 
 .acordeon {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 28px;
-    padding: 10px 20px;
-    cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 28px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
 .acordeon:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 form {
-    width: 80%;
-    max-width: 400px;
-    margin: 35px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    margin-top: 0;
+  width: 80%;
+  max-width: 400px;
+  margin: 35px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  margin-top: 0;
 }
 
 fieldset {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 label {
-    display: block;
-    font-weight: bold;
+  display: block;
+  font-weight: bold;
 }
 
-input[type='text'],
+input[type="text"],
 select {
-    width: 180px;
-    padding: 8px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
+  width: 180px;
+  padding: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
 }
 
 /* Estilos para el botón */
 .publicar {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 28px;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 28px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
 }
 
 .button-container {
-    text-align: center;
-    margin-top: 10px;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .search-bar button {
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  width: 80;
+  margin-top: 5px;
 }
 .search-bar button:hover {
-    background-color: #0056b3;
-    cursor: pointer;
+  background-color: #0056b3;
+  cursor: pointer;
+}
+#root > main > main > div > main > section.nav-bar > div > input[type="text"] {
+  width: 100px;
+}
+
+.mobile-buttons {
+  display: flex;
+  justify-content: space-between; /* Coloca los botones en los extremos del contenedor */
+  align-items: center; /* Centra verticalmente los botones */
+}
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  section.news-list {
+    margin: 0px;
+  }
+  li.news-item {
+    margin: 0px;
+    margin-bottom: 5px;
+  }
+  ul {
+    padding: 5px;
+  }
+  div.mobile-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
 }

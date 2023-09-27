@@ -1,13 +1,76 @@
 button.edit {
-    border: none;
-    background-color: transparent;
+  border: none;
+  background-color: transparent;
 }
 button {
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
 }
 button:hover {
-    background-color: #0056b3;
-    cursor: pointer;
+  background-color: #48494a;
+  cursor: pointer;
+}
+
+h3 {
+  color: white;
+}
+
+section.user-data {
+  margin-top: 10px;
+  border: 2px solid black;
+  width: 50%;
+  margin: 0 auto;
+}
+.user-data {
+  background-color: #1c1c1c; /* Fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.user-data h1 {
+  font-size: 24px;
+}
+.user-data section {
+  margin-bottom: 20px;
+}
+.user-data p {
+  font-size: 18px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+.user-data p .edit {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.user-data img {
+  border-radius: 50%; /* Hace la imagen de perfil circular */
+  max-width: 150px; /* Tamaño máximo de la imagen de perfil */
+  display: block;
+  margin: 0 auto; /* Centrar la imagen de perfil */
+  position: relative;
+}
+.user-data img .edit {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: #ffffff;
+  color: #1c1c1c;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+.user-data input[type="file"] {
+  display: none;
+}
+.user-data button {
+  background-color: transparent; /* Color de fondo verde */
+  color: #ffffff; /* Texto blanco */
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }

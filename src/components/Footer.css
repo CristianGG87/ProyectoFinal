@@ -1,0 +1,8 @@
+#root > main > footer {
+  position: fixed; /* Fijar el footer en la parte inferior de la pantalla */
+  left: 0;
+  bottom: 0;
+  width: 100%; /* Asegurarse de que el footer ocupe todo el ancho de la pantalla */
+  text-align: center; /* Centrar el contenido del footer */
+  padding: 10px 0; /* Agregar espacio de relleno vertical y eliminar el espacio horizontal */
+}

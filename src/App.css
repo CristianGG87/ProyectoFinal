@@ -1,140 +1,143 @@
 /* Estilo para el cuerpo de la página */
 body {
-    background-color: #f1f1f1;
-
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  background-color: black;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* Estilo para el encabezado */
 header {
-    background-color: #f1f1f1;
-    text-align: left;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color: black;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Estilo para el titulo */
 .header-title {
-    margin-left: 20px;
-    color: #0e0864;
+  margin-left: 20px;
+  color: #000000;
 }
 
-/* Estilo para el menu de nevegacion*/
+/* Estilo para el menu de navegacion*/
 nav {
-    margin-right: 20px;
-}
-
-/* Estilo para el pie de página */
-footer {
-    background-color: #f1f1f1;
-    text-align: center;
-    padding: 20px 0;
+  margin-right: 50px;
 }
 
 /* Estilo para el contenido principal */
 main {
-    background-color: #f1f1f1; /* Color de fondo gris claro */
-    padding: 0px;
-    text-align: center;
+  background-color: #000000; /* Color de fondo gris claro */
+  padding: 0px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 86vh;
 }
 
 /* Estilo para los enlaces de navegación */
 nav a {
-    color: darkblue;
-    text-decoration: none;
-    padding: 10px;
-    font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  padding: 10px;
+  font-weight: bold;
 }
 
 nav a:hover {
-    color: #fff; /* Color de texto blanco al pasar el mouse */
-    background-color: #333; /* Color de fondo oscuro al pasar el mouse */
-    border-radius: 5px;
+  color: #fff; /* Color de texto blanco al pasar el mouse */
+  background-color: transparent; /* Color de fondo oscuro al pasar el mouse */
+  border-radius: 5px;
+  box-sizing: 5px;
 }
 
 /* Estilo para las noticias */
 .news {
-    background-color: #d7d9d6;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 10px;
-    text-align: left;
+  background-color: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: left;
 }
 
 /* Estilo para el título de las noticias */
 .news h2 {
-    color: #0e0864;
-    background-color: #555555;
-    padding: 10px;
-    margin-top: 0;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  color: #ffffff;
+  background-color: #555555;
+  padding: 10px;
+  margin-top: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 /* Estilo para el contenido de las noticias */
 .news p {
-    color: #426fb2;
-    margin: 10px 0;
+  color: #000000;
+  margin: 10px 0;
 }
 
 /* Estilo para el botón de registro y login */
 .button {
-    background-color: #555555;
-    color: #426fb2;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
+  background-color: #363434;
+  color: #426fb2;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 10px;
 }
 
 .button:hover {
-    background-color: #ff007f; /* Color de fondo al pasar el mouse */
+  background-color: #bbb5b8; /* Color de fondo al pasar el mouse */
 }
 
 /* Estilo para la página no encontrada */
 .not-found {
-    font-size: 24px;
-    color: #ff0000; /* Color de texto rojo */
-    margin-top: 20px;
+  font-size: 24px;
+  color: #ff0000; /* Color de texto rojo */
+  margin-top: 20px;
 }
 
 a {
-    text-decoration: none;
-    color: darkblue;
+  text-decoration: none;
+  color: darkblue;
 }
 
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  width: 80%; /*Ancho de la noticia*/
+  margin: auto;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+#root > main > footer {
+  position: fixed; /* Fijar el footer en la parte inferior de la pantalla */
+  left: 0;
+  bottom: 0;
+  width: 100%; /* Asegurarse de que el footer ocupe todo el ancho de la pantalla */
+  text-align: center; /* Centrar el contenido del footer */
+  padding: 10px 0; /* Agregar espacio de relleno vertical y eliminar el espacio horizontal */
 }
 
 /* CSS Variables */
 :root {
-    --bg: #242526;
-    --bg-accent: #484a4d;
-    --text-color: #dadce1;
-    --nav-size: 60px;
-    --border: 1px solid #474a4d;
-    --border-radius: 8px;
-    --speed: 500ms;
-}
-
-footer {
-    background-color: black;
-    color: white;
+  --bg: #242526;
+  --bg-accent: #484a4d;
+  --text-color: #000000;
+  --nav-size: 60px;
+  --border: 1px solid #474a4d;
+  --border-radius: 8px;
+  --speed: 500ms;
 }
