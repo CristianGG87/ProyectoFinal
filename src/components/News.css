@@ -1,50 +1,70 @@
 p.topic {
-  font-size: 0.8em;
-  margin: 0;
+    font-size: 0.8em;
+    margin: 0;
 }
 h3 {
-  font-weight: normal;
+    font-weight: normal;
 }
-
-#root > main > section > section > div > h3 {
-  color: rgb(250, 250, 250);
-}
-
 article h2 {
-  margin: 0;
+    margin: 0;
 }
 article h3 {
-  margin: 10px;
-  color: rgb(255, 255, 255);
+    margin: 10px;
 }
 article img {
-  height: auto; /* Ejemplo de estilo para mantener la proporción de la imagen */
-  border-radius: 10px;
-  width: 700px;
-}
+    height: auto; /* Ejemplo de estilo para mantener la proporción de la imagen */
 
-section.edit-news {
-  background-color: rgb(69, 69, 69);
-  color: rgb(255, 255, 255);
-  border-radius: 5px;
+    width: 100%;
 }
-
 section.likes button {
-  background-color: transparent;
-  border: none;
-  transition: transform 0.2s ease;
-  color: rgb(255, 254, 254);
+    background-color: transparent;
+    border: none;
+    transition: transform 0.2s ease;
+    color: black;
 }
 
 section.likes button:hover {
-  transform: scale(1.3);
-  background-color: transparent;
+    transform: scale(1.3);
+    background-color: transparent;
 }
 
 .news-list a {
-  color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
 }
-
-#root > main > section > section > div > img {
-  border-radius: 5px;
+.custom-modal {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Alinea elementos horizontalmente al centro */
+    gap: 10px; /* /* Otros estilos para centrar el modal en la pantalla */
+}
+.custom-modal p {
+    margin: 0;
+}
+.custom-modal h2 {
+    margin: 0;
+}
+article.news-display {
+    display: flex;
+}
+section.news-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.news-display img {
+    min-width: 100%; /* Establece el ancho fijo deseado */
+    max-width: 100%;
+    max-height: 100%;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+}
+@media screen and (max-width: 768px) {
+    article.news-display {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
 }

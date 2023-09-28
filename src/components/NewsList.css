@@ -41,6 +41,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 6%;
 }
 
 /* Resto de estilos (sin cambios) */
@@ -50,16 +51,14 @@ section.news-list {
 }
 
 .news-item {
-    border: 1px solid black;
-    margin-bottom: 10px;
+    border-top: 1px solid rgb(255, 255, 255);
+
     padding: 10px;
-    border-radius: 10px;
-    background-color: rgb(69, 69, 69);
+
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    margin: 10px 50px;
-    width: 60%;
+
+    width: 70%;
 }
 
 .news-item button {
@@ -72,8 +71,7 @@ section.news-list {
     cursor: pointer;
 }
 
-.acordeon {
-    margin-top: 20px;
+.button-create-news {
     margin-bottom: 10px;
     background-color: #007bff;
     color: white;
@@ -83,20 +81,8 @@ section.news-list {
     cursor: pointer;
 }
 
-.acordeon:hover {
+.button-create-news:hover {
     background-color: #0056b3;
-}
-
-form {
-    width: 80%;
-    max-width: 400px;
-    margin: 35px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    margin-top: 0;
 }
 
 fieldset {
@@ -115,7 +101,6 @@ input[type='text'],
 select {
     width: 180px;
     padding: 8px;
-    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
     font-size: 16px;
@@ -130,12 +115,6 @@ select {
     border-radius: 28px;
     cursor: pointer;
     font-size: 16px;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
 }
 
 .button-container {
@@ -163,6 +142,9 @@ img {
     justify-content: center; /* Coloca los botones en los extremos del contenedor */
     align-items: center; /* Centra verticalmente los botones */
 }
+li.news-item {
+    padding-left: 0;
+}
 @media screen and (max-width: 768px) {
     body {
         font-size: 14px;
@@ -173,12 +155,33 @@ img {
     li.news-item {
         margin: 0px;
         margin-bottom: 5px;
+
+        width: 95vw;
     }
     ul {
         padding: 5px;
+        margin: 0;
     }
     div.mobile-buttons {
         display: flex;
         justify-content: space-around;
+    }
+    section.navBar {
+        margin-top: 5px;
+        background-color: rgba(0, 0, 0, 0.65);
+    }
+    section.nav-bar-mobile {
+        display: flex;
+    }
+    button.acordeon {
+        margin-left: 20px;
+        margin-right: 10px;
+        background-color: transparent;
+        border: none;
+    }
+    input[type='text'],
+    select {
+        width: 100px;
+        height: 7px;
     }
 }

@@ -55,7 +55,6 @@ section.user-data {
     max-width: 200px; /* Tamaño máximo de la imagen de perfil */
     display: block;
     margin: 0 auto; /* Centrar la imagen de perfil */
-    position: relative;
 }
 .user-data img .edit {
     position: absolute;

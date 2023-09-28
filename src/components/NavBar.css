@@ -3,11 +3,11 @@
 .navBar {
     margin-top: 70px;
     display: flex;
-    margin-left: 20%;
+    margin-left: 10px;
     flex-direction: column;
     padding: 10px;
     background-color: black;
-    position: static;
+    position: fixed;
     width: 140px;
 }
 

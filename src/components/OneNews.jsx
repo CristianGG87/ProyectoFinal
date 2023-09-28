@@ -124,18 +124,18 @@ export const OneNews = ({ news }) => {
                     <button onClick={handleSaveClick}>Guardar Cambios</button>
                 </div>
             ) : (
-                <div>
+                <section>
                     <h2>{editedNews.title}</h2>
                     <h3>{editedNews.intro}</h3>
-                    <p>{editedNews.text}</p>
                     {photo ? (
                         <img
                             src={`${env}/${editedNews.photo}`}
                             alt={editedNews.title}
                         />
                     ) : null}
+                    <p>{editedNews.text}</p>
                     <p>Tema: {topic}</p>
-                    <section className="likes">
+                    <section className="like-buttons">
                         <button onClick={handleLikeClick}>
                             <IconThumbUp />
                             {likes}
@@ -144,15 +144,16 @@ export const OneNews = ({ news }) => {
                             <IconThumbDown />
                             {dislikes}
                         </button>
-                        {errorVisible && <p>{error}</p>}
                     </section>
+                    {errorVisible && <p>{error}</p>}
+
                     <p>
                         Autor: {userName} el {new Date(date).toLocaleString()}
                     </p>
-                </div>
+                </section>
             )}
             {user && user.user.id === news.userId && !isEditing ? (
-                <section>
+                <section className="edit-buttons">
                     <button onClick={handleEditClick}>Editar noticia</button>
                     <button
                         onClick={() => {

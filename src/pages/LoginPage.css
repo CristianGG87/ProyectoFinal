@@ -21,7 +21,7 @@ export const LoginPage = () => {
         }
     };
     return (
-        <main>
+        <>
             <Header />
             <section>
                 <h1>Iniciar Sesion</h1>
@@ -50,6 +50,6 @@ export const LoginPage = () => {
                     {error ? <p>{error}</p> : null}
                 </form>
             </section>
-        </main>
+        </>
     );
 };

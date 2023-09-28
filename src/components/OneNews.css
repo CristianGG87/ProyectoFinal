@@ -3,3 +3,62 @@
     width: 60%;
     margin-bottom: 10px; /* Puedes ajustar el valor de margen según tus preferencias */
 }
+h2 {
+    color: white;
+}
+p {
+    color: white;
+}
+section.likes button {
+    color: white;
+    display: flex;
+}
+section.edit-news h2 {
+    font-size: 3rem;
+    line-height: 2.625rem;
+    letter-spacing: -0.0675rem;
+    font-family: MajritTx, serif;
+}
+section.edit-news h3 {
+    font-family: MajritTxRoman;
+    font-size: 1.5rem;
+    line-height: 1.8125rem;
+    letter-spacing: -0.0675rem;
+    margin-bottom: 3rem;
+}
+section.edit-news p {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    letter-spacing: -0.0675rem;
+    font-family: MajritTxRoman, serif;
+}
+section.edit-news {
+    display: flex;
+
+    flex-direction: column;
+    text-align: left;
+    margin: auto;
+}
+section.edit-news section {
+    margin-top: 100px;
+    max-width: 55rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section.edit-news section img {
+    width: 70rem;
+}
+section.edit-news section section.like-buttons {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+section.edit-news section section.like-buttons button {
+    background-color: transparent;
+    border: none;
+}
+section.edit-news section.edit-buttons {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

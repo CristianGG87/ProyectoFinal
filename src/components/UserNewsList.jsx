@@ -19,9 +19,9 @@ const UserNewsList = ({ news, setUser, env }) => {
         }
     };
     return (
-        <div>
+        <section className="show-own-news">
             {news.map((newsItem) => (
-                <div className="own-news" key={newsItem.id}>
+                <article className="own-news" key={newsItem.id}>
                     <Link to={`/news/${newsItem.id}`}>
                         <h3>{newsItem.title}</h3>
                     </Link>
@@ -55,9 +55,9 @@ const UserNewsList = ({ news, setUser, env }) => {
                         </button>
                         {error && <p>{error}</p>}
                     </section>
-                </div>
+                </article>
             ))}
-        </div>
+        </section>
     );
 };
 export default UserNewsList;

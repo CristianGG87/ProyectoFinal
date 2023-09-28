@@ -1,11 +1,25 @@
 div.own-news {
-    background-color: rgb(69, 69, 69);
     padding: 10px;
     border-radius: 10px;
-    background-color: rgb(69, 69, 69);
+    background-color: #1c1c1c;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 10px 50p;
-    width: 70%;
+    width: 55%;
+}
+article.own-news {
+    background-color: #1c1c1c;
+    width: 55%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    color: white;
+}
+section.show-own-news {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+article.own-news img {
+    width: 500px;
 }
