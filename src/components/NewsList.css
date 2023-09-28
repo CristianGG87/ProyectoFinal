@@ -48,6 +48,7 @@ ul {
 section.news-list {
     flex: 1;
     padding: 0px;
+    margin-top: 67px;
 }
 
 .news-item {
@@ -164,7 +165,7 @@ li.news-item {
     }
     div.mobile-buttons {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
     }
     section.navBar {
         margin-top: 5px;
@@ -183,5 +184,8 @@ li.news-item {
     select {
         width: 100px;
         height: 7px;
+    }
+    li.news-item {
+        padding: 0;
     }
 }
