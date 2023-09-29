@@ -15,9 +15,8 @@ article img {
     height: auto;
 }
 .image-container {
-    width: 100%; /* Porcentaje del ancho del contenedor principal */
-    /* Esto mantiene la relación de aspecto (150/200) */
-    position: relative;
+    width: 100%;
+
     overflow: hidden;
 }
 section.likes button {
@@ -97,6 +96,7 @@ section.news-text h3 {
         width: 100vw;
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     .news-display img {
         min-width: 350px; /* Establece el ancho fijo deseado */
@@ -113,5 +113,8 @@ section.news-text h3 {
     }
     li.news-item {
         margin-right: 0;
+    }
+    section.news-text {
+        align-items: center;
     }
 }

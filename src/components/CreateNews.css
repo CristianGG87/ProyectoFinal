@@ -22,3 +22,8 @@ section.create-news form textarea {
 section.create-news form input.image-input {
     width: auto;
 }
+@media screen and (max-width: 768px) {
+    section.create-news {
+        width: 90vw;
+    }
+}

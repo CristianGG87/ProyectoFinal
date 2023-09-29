@@ -1,4 +1,3 @@
-/* Estilos para el contenido de la barra de navegación que debe quedar fijo */
 .nav-bar {
     width: 200px;
     padding: 1px;
@@ -9,7 +8,6 @@
     font-size: 1em;
 }
 
-/* Añade un margen izquierdo para compensar el espacio ocupado por .nav-bar */
 .news-container {
     display: flex;
     flex-direction: row;
@@ -32,7 +30,6 @@ section.news-list > div > form {
     background-color: #000000;
 }
 
-/* Estilos para la lista <ul> */
 ul {
     list-style: none;
     margin-top: 0px;
@@ -44,7 +41,6 @@ ul {
     margin-left: 6%;
 }
 
-/* Resto de estilos (sin cambios) */
 section.news-list {
     flex: 1;
     padding: 0px;
@@ -107,7 +103,6 @@ select {
     font-size: 16px;
 }
 
-/* Estilos para el botón */
 .publicar {
     background-color: #007bff;
     color: white;
@@ -140,8 +135,8 @@ select {
 
 .mobile-buttons {
     display: flex;
-    justify-content: center; /* Coloca los botones en los extremos del contenedor */
-    align-items: center; /* Centra verticalmente los botones */
+    justify-content: center;
+    align-items: center;
 }
 li.news-item {
     padding-left: 0;
@@ -160,7 +155,6 @@ li.news-item {
         width: 95vw;
     }
     ul {
-        padding: 5px;
         margin: 0;
     }
     div.mobile-buttons {
@@ -168,8 +162,9 @@ li.news-item {
         justify-content: space-between;
     }
     section.navBar {
-        margin-top: 5px;
-        background-color: rgba(0, 0, 0, 0.65);
+        margin-top: 35px;
+        background-color: rgba(81, 70, 70, 0.75);
+        z-index: 1000;
     }
     section.nav-bar-mobile {
         display: flex;
@@ -179,6 +174,7 @@ li.news-item {
         margin-right: 10px;
         background-color: transparent;
         border: none;
+        position: fixed;
     }
     input[type='text'],
     select {
@@ -187,5 +183,28 @@ li.news-item {
     }
     li.news-item {
         padding: 0;
+    }
+    #root
+        > main
+        > main
+        > div
+        > main
+        > section.news-list
+        > div
+        > section
+        > section:nth-child {
+        position: fixed;
+    }
+    #root
+        > main
+        > main
+        > div
+        > main
+        > section.news-list
+        > div
+        > section
+        > section:nth-child(1)
+        > section {
+        position: absolute;
     }
 }

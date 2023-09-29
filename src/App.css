@@ -138,6 +138,13 @@ code {
     --border-radius: 8px;
     --speed: 500ms;
 }
-#root > main > section > form {
-    border: 3px solid red;
+#root > main > section > form.register-form {
+    border: 3px solid rgb(255, 255, 255);
+    width: 35%;
+}
+#root > main > section > form.register-form fieldset {
+    border: none;
+}
+#root > main > section > form.register-form button {
+    margin-bottom: 15px;
 }

@@ -6,12 +6,12 @@ function Acordeon({ children }) {
         setShowForm(!showForm);
     };
     return (
-        <div>
+        <section>
             <button className="acordeon" onClick={toggleForm}>
                 <IconMenu2 className="menu-button" />
             </button>
             {showForm && children}
-        </div>
+        </section>
     );
 }
 export default Acordeon;
