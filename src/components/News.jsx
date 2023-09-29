@@ -73,11 +73,14 @@ export const News = ({ news, removeNews }) => {
         fechaTexto = `Hace unos segundos`;
     }
     ////
+
     return (
         <article className="news-display">
             <Link to={`/news/${news.id}`}>
                 {news.photo ? (
-                    <img src={`${env}/${news.photo}`} alt={news.title} />
+                    <div className="image-container">
+                        <img src={`${env}/${news.photo}`} alt={news.title} />
+                    </div>
                 ) : null}
             </Link>
             <section className="news-text">
@@ -122,7 +125,7 @@ export const News = ({ news, removeNews }) => {
                     shouldCloseOnEsc={true}
                     style={{
                         overlay: {
-                            backgroundColor: 'rgba(0, 0, 0, 0)', // Cambia el color de fondo del overlay
+                            backgroundColor: 'rgba(0, 0, 0, 0)',
                         },
                         content: {
                             display: 'flex',
@@ -133,11 +136,11 @@ export const News = ({ news, removeNews }) => {
                             right: '50px',
                             bottom: '40px',
                             backgroundColor: 'rgba(255,255,255,0.6)',
-                            width: '280px', // Cambia el ancho del modal
+                            width: '280px',
                             height: '100px',
                             border: '1px solid black',
-                            margin: '0 auto', // Centra horizontalmente el modal
-                            padding: '20px', // Agrega relleno interior al modal
+                            margin: '0 auto',
+                            padding: '20px',
                         },
                     }}
                 >

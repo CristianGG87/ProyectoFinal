@@ -168,7 +168,7 @@ export const OwnUserPage = () => {
                                 />
                             ) : (
                                 <img
-                                    src="/user.png" // Ruta de la imagen por defecto en el directorio public
+                                    src="/user.png"
                                     alt="Imagen por defecto"
                                     style={{ width: '100px' }}
                                 />
@@ -381,6 +381,7 @@ export const OwnUserPage = () => {
                             env={env}
                             handleDelete={handleDelete}
                             error={error}
+                            removeNews={removeNews}
                         />
                     </section>
                 </main>

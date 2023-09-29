@@ -12,7 +12,13 @@ article h3 {
     margin: 10px;
 }
 article img {
-    height: auto; /* Ejemplo de estilo para mantener la proporción de la imagen */
+    height: auto;
+}
+.image-container {
+    width: 100%; /* Porcentaje del ancho del contenedor principal */
+    /* Esto mantiene la relación de aspecto (150/200) */
+    position: relative;
+    overflow: hidden;
 }
 section.likes button {
     background-color: transparent;
@@ -51,15 +57,40 @@ section.news-text {
     flex-direction: column;
     align-items: flex-start;
 }
+section.news-text h2 {
+    font-family: MajritTxRoman;
+    font-size: 1.7rem;
+    line-height: 1.8125rem;
+    letter-spacing: -0.0675rem;
+    margin: 3px;
+}
+section.news-text h3 {
+    font-family: MajritTxRoman;
+    font-size: 1.2rem;
+    line-height: 1.8125rem;
+    letter-spacing: -0.0675rem;
+    margin: 3px;
+}
 .news-display img {
-    min-width: 600px; /* Establece el ancho fijo deseado */
-    max-width: 600px;
-    min-height: 350px;
-    max-height: 350px;
+    max-width: 30vw;
+
     border-radius: 8px;
     top: 0px;
     left: 0px;
     bottom: 0px;
+}
+#root
+    > main
+    > main
+    > div
+    > main
+    > section.news-list
+    > ul
+    > li
+    > article
+    > section
+    > section.likes {
+    display: flex;
 }
 @media screen and (max-width: 768px) {
     article.news-display {

@@ -15,19 +15,17 @@ export const NewsList = ({
     showAllNews,
 }) => {
     const { user } = useContext(AuthContext);
-    console.log('Hola', news);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
-        // Agregar un evento de escucha para el cambio de tamaño de la ventana.
         window.addEventListener('resize', handleResize);
-        // Limpia el evento de escucha cuando el componente se desmonta.
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
     return (
         <main className="news-container">
             <section className="nav-bar-normal">
@@ -40,7 +38,6 @@ export const NewsList = ({
                     />
                 ) : null}
             </section>
-            {/* <SearchBar onSearch={handleSearch} value={keywordNews} />*/}
             <section className="news-list">
                 <div className="mobile-buttons">
                     <section className="nav-bar-mobile">

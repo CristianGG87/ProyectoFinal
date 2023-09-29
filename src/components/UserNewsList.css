@@ -23,3 +23,23 @@ section.show-own-news {
 article.own-news img {
     width: 500px;
 }
+article.own-news h3 {
+    font-family: MajritTxRoman;
+    font-size: 1.5rem;
+    line-height: 1.8125rem;
+    letter-spacing: -0.0675rem;
+}
+article.own-news p {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    letter-spacing: -0.0675rem;
+    font-family: MajritTxRoman, serif;
+    margin: 0 10px;
+    padding: 10px;
+}
+article.own-news button {
+    margin-bottom: 10px;
+}
+section.own-news h2 {
+    margin: 40px;
+}
