@@ -72,7 +72,7 @@ export const News = ({ news, removeNews }) => {
     } else {
         fechaTexto = `Hace unos segundos`;
     }
-
+    console.log('dfcjnsofjsdok', news);
     return (
         <article className="news-display">
             <div className="topic-container">

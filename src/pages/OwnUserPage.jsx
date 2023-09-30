@@ -33,6 +33,7 @@ export const OwnUserPage = () => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [isEditingPassword, setIsEditingPassword] = useState(false);
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -168,7 +169,7 @@ export const OwnUserPage = () => {
                                 />
                             ) : (
                                 <img
-                                    src="/user.png"
+                                    src="/user.svg"
                                     alt="Imagen por defecto"
                                     style={{ width: '100px' }}
                                 />

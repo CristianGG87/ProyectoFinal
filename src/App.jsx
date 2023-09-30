@@ -13,7 +13,7 @@ import Modal from 'react-modal';
 function App() {
     Modal.setAppElement('#root');
     return (
-        <main>
+        <main className="main-container">
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/register" element={<RegisterPage />} />

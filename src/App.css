@@ -30,7 +30,6 @@ main {
     display: flex;
     flex-direction: column;
     color: white;
-    min-height: 86vh;
 }
 
 nav a {
@@ -141,6 +140,9 @@ code {
 #root > main > section > form.register-form fieldset input#userName {
     padding: 0;
     border: 2px solid white;
+}
+main.main-container {
+    height: 100vh;
 }
 @media screen and (max-width: 768px) {
     #root > main > section > form.register-form {

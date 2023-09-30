@@ -3,14 +3,21 @@ import { Link } from 'react-router-dom';
 import { Auth } from './Auth';
 import SearchBar from './SearchBar';
 import './Header.css';
+
 export const Header = ({ showAllNews, keywordNews }) => {
     const [altTop, setAtTop] = useState(true);
+    const renderSearchBar =
+        window.location.pathname !== '/register' &&
+        window.location.pathname !== '/login' &&
+        !window.location.pathname.startsWith('/news/');
+
     useEffect(() => {
         const handler = () =>
             setAtTop(document.scrollingElement.scrollTop === 0);
         window.addEventListener('scroll', handler);
         return () => window.removeEventListener('scroll', handler);
     }, []);
+
     return (
         <header id="header" className={altTop ? 'top' : 'not-top'}>
             <Link to="/" className="header-link" onClick={showAllNews}>
@@ -23,7 +30,8 @@ export const Header = ({ showAllNews, keywordNews }) => {
                     <h1> Hack a Boss News</h1>
                 </div>
             </Link>
-            <SearchBar keywordNews={keywordNews} />
+
+            {renderSearchBar && <SearchBar keywordNews={keywordNews} />}
             <nav className="login">
                 <Auth />
             </nav>

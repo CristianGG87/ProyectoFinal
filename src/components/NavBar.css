@@ -22,6 +22,8 @@
     transition: background-color 0.3s; /* Transición suave para el color de fondo */
     font-size: 0.9em;
     font-size: 1.3em;
+    display: flex;
+    gap: 2px;
 }
 
 .navBar button:hover {
