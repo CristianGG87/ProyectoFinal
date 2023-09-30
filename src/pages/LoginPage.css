@@ -1,8 +1,0 @@
-@media screen and (max-width: 768px) {
-    #root > main > section > form > fieldset {
-        border: none;
-    }
-    #root > main > section > form > fieldset:nth-child(1) {
-        border: none;
-    }
-}

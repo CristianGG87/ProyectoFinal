@@ -1,9 +1,28 @@
 p.topic {
     font-size: 0.8em;
-    margin: 0;
+    position: absolute;
+    text-transform: uppercase;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+        1px 1px 0 black;
+    margin-left: 10px;
 }
 h3 {
     font-weight: normal;
+}
+#root
+    > main
+    > main
+    > div
+    > main
+    > section.news-list
+    > ul
+    > li
+    > article
+    > section
+    > p.autor {
+    margin: 0;
+    margin-bottom: 5px;
+    margin-left: 3px;
 }
 article h2 {
     margin: 0;
@@ -39,8 +58,8 @@ section.likes button:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Alinea elementos horizontalmente al centro */
-    gap: 10px; /* /* Otros estilos para centrar el modal en la pantalla */
+    align-items: center;
+    gap: 10px;
 }
 .custom-modal p {
     margin: 0;
@@ -99,7 +118,7 @@ section.news-text h3 {
         align-items: center;
     }
     .news-display img {
-        min-width: 350px; /* Establece el ancho fijo deseado */
+        min-width: 350px;
         max-width: 350px;
         min-height: 280px;
         max-height: 280px;

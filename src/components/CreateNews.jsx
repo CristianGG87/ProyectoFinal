@@ -34,8 +34,16 @@ export const CreateNews = ({ addNews }) => {
             {showForm && (
                 <form onSubmit={handleForm}>
                     <fieldset>
-                        <label htmlFor="title">Titulo de la noticia </label>
-                        <input type="text" id="title" name="title" required />
+                        <label htmlFor="title">
+                            Titulo de la noticia (máximo 100 caracteres)
+                        </label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            maxLength={100}
+                            required
+                        />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="intro">Resumen noticia </label>
@@ -52,7 +60,7 @@ export const CreateNews = ({ addNews }) => {
                         </select>
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="text">Texto </label>
+                        <label htmlFor="text">Contenido de la noticia</label>
                         <textarea
                             type="text"
                             id="text"

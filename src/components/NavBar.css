@@ -3,7 +3,7 @@
 .navBar {
     margin-top: 70px;
     display: flex;
-    margin-left: 10px;
+    margin-left: 30px;
     flex-direction: column;
     padding: 10px;
     background-color: black;
@@ -26,4 +26,10 @@
 
 .navBar button:hover {
     background-color: #6c69719c; /* Cambia el color de fondo al pasar el cursor por encima */
+}
+@media screen and (max-width: 768px) {
+    .navBar {
+        margin-left: 0;
+        border-radius: 5px;
+    }
 }

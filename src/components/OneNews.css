@@ -1,4 +1,3 @@
-.edit-news div input,
 .edit-news div textarea {
     width: 60%;
     margin-bottom: 10px; /* Puedes ajustar el valor de margen según tus preferencias */
@@ -61,4 +60,65 @@ section.edit-news section section.like-buttons button {
 section.edit-news section.edit-buttons {
     margin-top: 10px;
     margin-bottom: 20px;
+}
+#root > main > section > div.modify-news {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    width: 60vw;
+}
+#root > main > section > div.modify-news input {
+    margin-bottom: 15px;
+    width: 100%;
+}
+#root > main > section > div.modify-news textarea {
+    margin-bottom: 30px;
+    width: 100%;
+}
+#root > main > section > div.modify-news p {
+    font-size: 1.5rem;
+    margin: 0;
+}
+#root > main > section > div.modify-news {
+    margin-bottom: 20px;
+}
+@media screen and (max-width: 768px) {
+    section.edit-news h2 {
+        font-size: 2rem;
+        line-height: 2.625rem;
+        letter-spacing: -0.0675rem;
+        font-family: MajritTx, serif;
+    }
+    section.edit-news h3 {
+        font-family: MajritTxRoman;
+        font-size: 1.2rem;
+        line-height: 1.8125rem;
+        letter-spacing: -0.0675rem;
+        margin-bottom: 3rem;
+    }
+    section.edit-news p {
+        font-size: 1.2rem;
+        line-height: 2rem;
+        letter-spacing: -0.0675rem;
+        font-family: MajritTxRoman, serif;
+    }
+    section.edit-news section {
+        margin-top: 0;
+        max-width: 96vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    section.edit-news section img {
+        width: 100%;
+    }
+    section.edit-news {
+        display: flex;
+
+        flex-direction: column;
+        text-align: center;
+        margin: auto;
+        align-items: center;
+    }
 }

@@ -72,23 +72,28 @@ export const News = ({ news, removeNews }) => {
     } else {
         fechaTexto = `Hace unos segundos`;
     }
-    ////
 
     return (
         <article className="news-display">
-            <Link to={`/news/${news.id}`}>
-                {news.photo ? (
-                    <div className="image-container">
-                        <img src={`${env}/${news.photo}`} alt={news.title} />
-                    </div>
-                ) : null}
-            </Link>
+            <div className="topic-container">
+                <p className="topic">{news.topic}</p>
+                <Link to={`/news/${news.id}`}>
+                    {news.photo ? (
+                        <div className="image-container">
+                            <img
+                                src={`${env}/${news.photo}`}
+                                alt={news.title}
+                            />
+                        </div>
+                    ) : null}
+                </Link>
+            </div>
             <section className="news-text">
                 <Link to={`/news/${news.id}`}>
                     <h2>{news.title}</h2>
                 </Link>
                 <h3>{news.intro}</h3>
-                <p className="topic">Tema: {news.topic}</p>
+
                 <section className="likes">
                     <button onClick={handleLikeClick}>
                         <IconThumbUp />
@@ -99,7 +104,7 @@ export const News = ({ news, removeNews }) => {
                     </button>
                     {errorVisible && <p>{error}</p>}
                 </section>
-                <p>
+                <p className="autor">
                     Autor:{' '}
                     {user && user.user && user.user.id === news.userId ? (
                         <Link to="/users">{news.userName}</Link>

@@ -25,7 +25,18 @@ section.news-list > div > form {
     flex-direction: column;
     align-items: center;
 }
-
+#root
+    > main
+    > main
+    > div
+    > main
+    > section.news-list
+    > ul
+    > li
+    > article
+    > section
+    > p.topic {
+}
 .li.news-container {
     background-color: #000000;
 }
@@ -85,13 +96,8 @@ section.news-list {
 fieldset {
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
 }
 
 input[type='text'],

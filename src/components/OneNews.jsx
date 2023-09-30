@@ -90,7 +90,8 @@ export const OneNews = ({ news }) => {
     return (
         <section className="edit-news">
             {isEditing ? (
-                <div>
+                <div className="modify-news">
+                    <p>Titulo de la noticia</p>
                     <input
                         type="text"
                         value={editedNews.title}
@@ -101,6 +102,7 @@ export const OneNews = ({ news }) => {
                             })
                         }
                     />
+                    <p>Resumen</p>
                     <input
                         type="text"
                         value={editedNews.intro}
@@ -111,8 +113,10 @@ export const OneNews = ({ news }) => {
                             })
                         }
                     />
+                    <p>Contenido de la noticia</p>
                     <textarea
                         type="text"
+                        rows="17"
                         value={editedNews.text}
                         onChange={(e) =>
                             setEditedNews({
@@ -172,7 +176,7 @@ export const OneNews = ({ news }) => {
             {isEditing && (
                 <form onSubmit={handleEditPhotoSave}>
                     <fieldset>
-                        <label htmlFor="photo">Editar foto</label>
+                        <label htmlFor="photo"></label>
                         <input
                             type="file"
                             id="photo"

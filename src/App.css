@@ -1,4 +1,3 @@
-/* Estilo para el cuerpo de la página */
 body {
     background-color: black;
     font-family: Arial, sans-serif;
@@ -6,7 +5,6 @@ body {
     padding: 0;
 }
 
-/* Estilo para el encabezado */
 header {
     background-color: black;
 
@@ -15,20 +13,17 @@ header {
     align-items: center;
 }
 
-/* Estilo para el titulo */
 .header-title {
     margin-left: 20px;
     color: #000000;
 }
 
-/* Estilo para el menu de navegacion*/
 nav {
     margin-right: 50px;
 }
 
-/* Estilo para el contenido principal */
 main {
-    background-color: #000000; /* Color de fondo gris claro */
+    background-color: #000000;
     padding: 0px;
     text-align: center;
     flex-grow: 1;
@@ -38,7 +33,6 @@ main {
     min-height: 86vh;
 }
 
-/* Estilo para los enlaces de navegación */
 nav a {
     color: rgb(0, 0, 0);
     text-decoration: none;
@@ -47,13 +41,12 @@ nav a {
 }
 
 nav a:hover {
-    color: #fff; /* Color de texto blanco al pasar el mouse */
-    background-color: transparent; /* Color de fondo oscuro al pasar el mouse */
+    color: #fff;
+    background-color: transparent;
     border-radius: 5px;
     box-sizing: 5px;
 }
 
-/* Estilo para las noticias */
 .news {
     background-color: white;
     padding: 20px;
@@ -62,7 +55,6 @@ nav a:hover {
     text-align: left;
 }
 
-/* Estilo para el título de las noticias */
 .news h2 {
     color: #ffffff;
     background-color: #555555;
@@ -72,13 +64,11 @@ nav a:hover {
     border-top-right-radius: 10px;
 }
 
-/* Estilo para el contenido de las noticias */
 .news p {
     color: #000000;
     margin: 10px 0;
 }
 
-/* Estilo para el botón de registro y login */
 .button {
     background-color: #363434;
     color: #426fb2;
@@ -92,13 +82,12 @@ nav a:hover {
 }
 
 .button:hover {
-    background-color: #bbb5b8; /* Color de fondo al pasar el mouse */
+    background-color: #bbb5b8;
 }
 
-/* Estilo para la página no encontrada */
 .not-found {
     font-size: 24px;
-    color: #ff0000; /* Color de texto rojo */
+    color: #ff0000;
     margin-top: 20px;
 }
 
@@ -123,12 +112,11 @@ code {
 #root > main > footer {
     left: 0;
     bottom: 0;
-    width: 100%; /* Asegurarse de que el footer ocupe todo el ancho de la pantalla */
-    text-align: center; /* Centrar el contenido del footer */
-    padding: 10px 0; /* Agregar espacio de relleno vertical y eliminar el espacio horizontal */
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
 }
 
-/* CSS Variables */
 :root {
     --bg: #242526;
     --bg-accent: #484a4d;
@@ -139,12 +127,24 @@ code {
     --speed: 500ms;
 }
 #root > main > section > form.register-form {
-    border: 3px solid rgb(255, 255, 255);
-    width: 35%;
+    width: 20%;
 }
 #root > main > section > form.register-form fieldset {
     border: none;
 }
 #root > main > section > form.register-form button {
     margin-bottom: 15px;
+}
+#root > main > section > form.register-form fieldset input {
+    height: 20px;
+}
+#root > main > section > form.register-form fieldset input#userName {
+    padding: 0;
+    border: 2px solid white;
+}
+@media screen and (max-width: 768px) {
+    #root > main > section > form.register-form {
+        border: 3px solid rgb(255, 255, 255);
+        width: 50%;
+    }
 }

@@ -43,3 +43,11 @@ article.own-news button {
 section.own-news h2 {
     margin: 40px;
 }
+@media screen and (max-width: 768px) {
+    article.own-news img {
+        width: 100%;
+    }
+    article.own-news {
+        width: 80vw;
+    }
+}
