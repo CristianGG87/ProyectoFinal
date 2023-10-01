@@ -58,9 +58,6 @@ section.own-news h2 {
     margin: 0 auto;
     padding: 20px;
 }
-.ReactModal__Overlay {
-    background-color: rgba(0, 0, 0, 0);
-}
 
 @media screen and (max-width: 768px) {
     article.own-news img {
