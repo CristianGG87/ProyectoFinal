@@ -23,7 +23,7 @@ export const Header = ({ showAllNews, keywordNews }) => {
             <Link to="/" className="header-link" onClick={showAllNews}>
                 <div className="logo-container">
                     <img
-                        src="../public/news_128x128-32_22252.ico"
+                        src="../news_128x128-32_22252.ico"
                         className="logo"
                         alt="Logo"
                     />
