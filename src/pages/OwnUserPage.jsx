@@ -48,8 +48,7 @@ export const OwnUserPage = () => {
                 setBiography(userData.user.biography);
                 setLoading(false);
             } catch (error) {
-                console.error(error);
-                setError('Error al obtener el perfil del usuario');
+                setError(error.message);
                 setLoading(false);
             }
         };
@@ -74,8 +73,7 @@ export const OwnUserPage = () => {
             setConfirmNewPassword('');
             setIsEditingPassword(false);
         } catch (error) {
-            console.error(error);
-            setError('Error al cambiar la contraseña');
+            setError(error.message);
         }
     };
     const handleEditPassword = () => {
@@ -96,8 +94,7 @@ export const OwnUserPage = () => {
             setUser({ ...user, user: { ...user.user, email: newEmail } });
             setIsEditingEmail(false);
         } catch (error) {
-            console.error(error);
-            setError('Error al actualizar el correo electrónico');
+            setError(error.message);
         }
     };
     const handleSaveName = async () => {
@@ -107,8 +104,7 @@ export const OwnUserPage = () => {
             updateUserName(userName);
             setIsEditingUserName(false);
         } catch (error) {
-            console.error(error);
-            setError('Error al actualizar el nombre');
+            setError(error.message);
         }
     };
     const handleSaveBiography = async () => {
@@ -117,8 +113,7 @@ export const OwnUserPage = () => {
             setUser({ ...user, user: { ...user.user, biography: biography } });
             setIsEditingBiography(false);
         } catch (error) {
-            console.error(error);
-            setError('Error al actualizar la biografía');
+            setError(error.message);
         }
     };
     const handleImageChange = (e) => {
@@ -136,8 +131,7 @@ export const OwnUserPage = () => {
                 setIsEditingPhoto(false);
             }
         } catch (error) {
-            console.error(error);
-            setError('Error al actualizar la foto del usuario');
+            setError(error.message);
         }
     };
     const cancelEditPhoto = () => {
