@@ -2,6 +2,8 @@ import { Link, useParams } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import { ErrorMessage } from "../components/ErrorMessage";
 import Header from "../components/Header";
+import "./UserPage.css";
+import { IconThumbUp, IconThumbDown } from "@tabler/icons-react";
 export const UserPage = () => {
   const { id } = useParams();
   const { user, loading, error } = useUser(id);
@@ -9,37 +11,50 @@ export const UserPage = () => {
   return (
     <>
       <Header />
-      <section>
-        <h1> Datos del perfil </h1>
+      <main>
         {loading && <p>Cargando los datos del usuario...</p>}
         {error && <ErrorMessage message={error} />}
         {user && (
           <>
-            <p>Nombre: {user.user.userName}</p>
-            <p>Correo electrónico: {user.user.email}</p>
-            <p>Biografía: {user.user.biography}</p>
-            {user.user.photo ? (
-              <img src={`${env}/${user.user.photo}`} alt={user.user.userName} />
-            ) : null}
-            <p>
-              Registrado el:
-              {new Date(user.user.createdAt).toLocaleDateString()}
-            </p>
+            <section className="user-data">
+              <section className="user-image">
+                {user.user.photo ? (
+                  <img
+                    src={`${env}/${user.user.photo}`}
+                    alt={user.user.userName}
+                  />
+                ) : null}
+              </section>
+              <h2>{user.user.userName}</h2>
+              <p>Biografía: {user.user.biography}</p>
+              <p>{user.user.email}</p>
+            </section>
             <h2>Noticias:</h2>
-            {user.user.news.map((newsItem) => (
-              <div key={newsItem.id}>
-                <Link to={`/news/${newsItem.id}`}>
-                  <h3>{newsItem.title}</h3>
-                </Link>
-                <p>{newsItem.intro}</p>
-                {newsItem.photo && (
-                  <img src={`${env}/${newsItem.photo}`} alt={newsItem.title} />
-                )}
-              </div>
-            ))}
+            <section className="show-user-news">
+              {user.user.news.map((newsItem) => (
+                <article className="own-news" key={newsItem.id}>
+                  <Link to={`/news/${newsItem.id}`}>
+                    <h3>{newsItem.title}</h3>
+                    <p>{newsItem.intro}</p>
+                    {newsItem.photo && (
+                      <img
+                        src={`${env}/${newsItem.photo}`}
+                        alt={newsItem.title}
+                      />
+                    )}
+                  </Link>
+                  <section>
+                    <p>
+                      <IconThumbUp /> {newsItem.votes.positivos}{" "}
+                      <IconThumbDown /> {newsItem.votes.negativos}
+                    </p>
+                  </section>
+                </article>
+              ))}
+            </section>
           </>
         )}
-      </section>
+      </main>
     </>
   );
 };

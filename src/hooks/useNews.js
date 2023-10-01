@@ -35,7 +35,6 @@ const useNews = (id) => {
   };
   const topicNews = async (topic) => {
     const allNews = await getAllNewsService({ topic });
-    console.log("Desde useNews", allNews);
     setNews(allNews);
   };
   const keywordNews = async (keyword) => {

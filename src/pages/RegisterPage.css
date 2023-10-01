@@ -1,14 +1,30 @@
+#root > main > section.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+#root > main > section.register form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#root > main > section.register form fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 @media screen and (max-width: 768px) {
-    #root > main > section > form > fieldset {
-        border: none;
-    }
-    #root > main > section > form > fieldset:nth-child(1) {
-        border: none;
-    }
+  #root > main > section > form > fieldset {
+    border: none;
+  }
+  #root > main > section > form > fieldset:nth-child(1) {
+    border: none;
+  }
 }
 #root > main > section.register {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
 }

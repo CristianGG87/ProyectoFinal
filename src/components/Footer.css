@@ -1,13 +1,12 @@
 #root > main > footer {
-    width: 100%;
-    text-align: center;
-    padding: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
 }
 footer {
-    color: white;
-    bottom: 0;
+  color: white;
+  bottom: 0;
 }

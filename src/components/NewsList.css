@@ -1,216 +1,196 @@
 .nav-bar {
-    width: 200px;
-    padding: 1px;
-    position: fixed;
-    background-color: #050202;
+  width: 200px;
+  padding: 1px;
+  position: fixed;
+  background-color: #050202;
 }
 .nav-bar button {
-    font-size: 1em;
+  font-size: 1em;
 }
-
 .news-container {
-    display: flex;
-    flex-direction: row;
-    background-color: #000000;
-    color: rgb(255, 255, 255);
-    padding: 0px;
+  display: flex;
+  flex-direction: row;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  padding: 0px;
 }
-
 section.news-list > div > form {
-    color: white;
+  color: white;
 }
-
 .section.news-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #root
+  > main
+  > main
+  > div
+  > main
+  > section.news-list
+  > ul
+  > li
+  > article
+  > section
+  > p.topic {
+}
+.li.news-container {
+  background-color: #000000;
+}
+ul {
+  list-style: none;
+  margin-top: 0px;
+  padding: 10px;
+  padding-top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 6%;
+}
+section.news-list {
+  flex: 1;
+  padding: 0px;
+  margin-top: 67px;
+}
+.news-item {
+  border-top: 1px solid rgb(255, 255, 255);
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+}
+.news-item button {
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+}
+.news-item button:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+.button-create-news {
+  margin-bottom: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 28px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.button-create-news:hover {
+  background-color: #0056b3;
+}
+fieldset {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+input[type="text"],
+select {
+  width: 180px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+}
+.publicar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 28px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.button-container {
+  text-align: center;
+  margin-top: 10px;
+}
+.search-bar button {
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  width: 80;
+  margin-top: 5px;
+}
+.search-bar button:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+#root > main > main > div > main > section.nav-bar > div > input[type="text"] {
+  width: 100px;
+}
+.mobile-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+li.news-item {
+  padding-left: 0;
+}
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  section.news-list {
+    margin: 0px;
+  }
+  li.news-item {
+    margin: 0px;
+    margin-bottom: 5px;
+    width: 95vw;
+  }
+  ul {
+    margin: 0;
+  }
+  div.mobile-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  section.navBar {
+    margin-top: 35px;
+    background-color: rgba(81, 70, 70, 0.75);
+    z-index: 1000;
+  }
+  section.nav-bar-mobile {
+    display: flex;
+  }
+  button.acordeon {
+    margin-left: 20px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    position: fixed;
+  }
+  input[type="text"],
+  select {
+    height: 7px;
+  }
+  li.news-item {
+    padding: 0;
+  }
+  #root
     > main
     > main
     > div
     > main
     > section.news-list
-    > ul
-    > li
-    > article
+    > div
     > section
-    > p.topic {
-}
-.li.news-container {
-    background-color: #000000;
-}
-
-ul {
-    list-style: none;
-    margin-top: 0px;
-    padding: 10px;
-    padding-top: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 6%;
-}
-
-section.news-list {
-    flex: 1;
-    padding: 0px;
-    margin-top: 67px;
-}
-
-.news-item {
-    border-top: 1px solid rgb(255, 255, 255);
-
-    padding: 10px;
-
-    display: flex;
-    flex-direction: row;
-
-    width: 70%;
-}
-
-.news-item button {
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-}
-.news-item button:hover {
-    background-color: #0056b3;
-    cursor: pointer;
-}
-
-.button-create-news {
-    margin-bottom: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 28px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.button-create-news:hover {
-    background-color: #0056b3;
-}
-
-fieldset {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-}
-
-input[type='text'],
-select {
-    width: 180px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-}
-
-.publicar {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 28px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.button-container {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.search-bar button {
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    width: 80;
-    margin-top: 5px;
-}
-.search-bar button:hover {
-    background-color: #0056b3;
-    cursor: pointer;
-}
-#root > main > main > div > main > section.nav-bar > div > input[type='text'] {
-    width: 100px;
-}
-
-.mobile-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-li.news-item {
-    padding-left: 0;
-}
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-    section.news-list {
-        margin: 0px;
-    }
-    li.news-item {
-        margin: 0px;
-        margin-bottom: 5px;
-
-        width: 95vw;
-    }
-    ul {
-        margin: 0;
-    }
-    div.mobile-buttons {
-        display: flex;
-        justify-content: space-between;
-    }
-    section.navBar {
-        margin-top: 35px;
-        background-color: rgba(81, 70, 70, 0.75);
-        z-index: 1000;
-    }
-    section.nav-bar-mobile {
-        display: flex;
-    }
-    button.acordeon {
-        margin-left: 20px;
-        margin-right: 10px;
-        background-color: transparent;
-        border: none;
-        position: fixed;
-    }
-    input[type='text'],
-    select {
-        width: 100px;
-        height: 7px;
-    }
-    li.news-item {
-        padding: 0;
-    }
-    #root
-        > main
-        > main
-        > div
-        > main
-        > section.news-list
-        > div
-        > section
-        > section:nth-child {
-        position: fixed;
-    }
-    #root
-        > main
-        > main
-        > div
-        > main
-        > section.news-list
-        > div
-        > section
-        > section:nth-child(1)
-        > section {
-        position: absolute;
-    }
+    > section:nth-child {
+    position: fixed;
+  }
+  #root
+    > main
+    > main
+    > div
+    > main
+    > section.news-list
+    > div
+    > section
+    > section:nth-child(1)
+    > section {
+    position: absolute;
+  }
 }
