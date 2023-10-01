@@ -1,8 +1,11 @@
-# React + Vite
+# Web de noticias colaborativas.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pagina web de noticias colaborativas, estilo reddit o menéame, donde los usuarios puedan registrarse y publicar una noticia en una serie de categorías temáticas fijas.
 
-Currently, two official plugins are available:
+## Instalar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Instalar las dependencias mediante el comando npm install o npm i.
+
+Guardar el archivo .env.example como .env y cubrir los datos necesarios.
+
+Ejecutar npm run dev para lanzar el servidor en conjunto con el backend.
