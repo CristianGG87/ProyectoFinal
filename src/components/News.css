@@ -1,3 +1,7 @@
+.topic-container {
+  position: relative; /* Importante: el contenedor debe ser relativo */
+}
+
 p.topic {
   font-size: 0.8em;
   position: absolute;
@@ -5,10 +9,13 @@ p.topic {
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
   margin-left: 10px;
+  align-self: flex-start;
+  margin-top: 7px;
 }
 h3 {
   font-weight: normal;
 }
+
 #root
   > main
   > main
@@ -76,15 +83,19 @@ section.news-text h2 {
   font-family: MajritTxRoman;
   font-size: 1.7rem;
   line-height: 1.8125rem;
-  letter-spacing: -0.0675rem;
+
   margin: 3px;
 }
 section.news-text h3 {
   font-family: MajritTxRoman;
   font-size: 1.2rem;
   line-height: 1.8125rem;
-  letter-spacing: -0.0675rem;
+
   margin: 3px;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 .news-display img {
   max-width: 30vw;
@@ -169,6 +180,26 @@ section.news-text h3 {
   color: #b1ab8f;
   font-weight: bold;
 }
+#root > main > main > div > main > section.news-list > ul > li > article > div {
+  display: flex;
+  align-items: center;
+}
+@media screen and (min-width: 1450px) {
+  section.news-text h2 {
+    font-size: 2.1rem;
+    line-height: 2rem;
+    margin-bottom: 30px;
+  }
+  section.news-text h3 {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 1025px) and (max-width: 1118px) {
+  section.news-text h2 {
+    font-size: 1.5rem;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   article.news-display {
     width: 100vw;

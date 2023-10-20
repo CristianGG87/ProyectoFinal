@@ -1,8 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import "./News.css";
-import { IconThumbUp, IconThumbDown } from "@tabler/icons-react";
+import {
+  IconThumbUp,
+  IconThumbDown,
+  IconThumbUpFilled,
+  IconThumbDownFilled,
+} from "@tabler/icons-react";
 import { sendVoteService } from "../services";
 export const News = ({ news }) => {
   const { user, token } = useContext(AuthContext);
@@ -11,11 +16,24 @@ export const News = ({ news }) => {
   const [dislikes, setDislikes] = useState(news.vNegative || 0);
   const [errorVisible, setErrorVisible] = useState(false);
   const env = import.meta.env.VITE_BACKEND;
+  const [userVote, setUserVote] = useState(news.userVote || 0);
+
+  useEffect(() => {
+    setUserVote(news.userVote || 0);
+  }, [news.userVote]);
+
   const handleLikeClick = async () => {
     try {
-      const response = await sendVoteService(news.id, "1", token);
-      setLikes(response.vPos);
-      setDislikes(response.vNeg);
+      if (userVote === 1) {
+        const response = await sendVoteService(news.id, "1", token);
+        setLikes(response.vPos);
+        setUserVote(0);
+      } else {
+        const response = await sendVoteService(news.id, "1", token);
+        setLikes(response.vPos);
+        setDislikes(response.vNeg);
+        setUserVote(1);
+      }
     } catch (error) {
       setError(error.message);
       setErrorVisible(true);
@@ -24,11 +42,19 @@ export const News = ({ news }) => {
       }, 3000);
     }
   };
+
   const handleDislikeClick = async () => {
     try {
-      const response = await sendVoteService(news.id, "2", token);
-      setLikes(response.vPos);
-      setDislikes(response.vNeg);
+      if (userVote === 2) {
+        const response = await sendVoteService(news.id, "2", token);
+        setDislikes(response.vNeg);
+        setUserVote(0);
+      } else {
+        const response = await sendVoteService(news.id, "2", token);
+        setLikes(response.vPos);
+        setDislikes(response.vNeg);
+        setUserVote(2);
+      }
     } catch (error) {
       setError(error.message);
       setErrorVisible(true);
@@ -54,6 +80,7 @@ export const News = ({ news }) => {
   } else {
     fechaTexto = `Hace unos segundos`;
   }
+
   return (
     <article className="news-display">
       <div className="topic-container">
@@ -73,13 +100,28 @@ export const News = ({ news }) => {
         </Link>
         <div className="likes-autor">
           <section className="likes">
-            <button onClick={handleLikeClick}>
-              <IconThumbUp />
-              {likes}
-            </button>
-            <button onClick={handleDislikeClick}>
-              <IconThumbDown /> {dislikes}
-            </button>
+            {userVote === 1 ? (
+              <button onClick={handleLikeClick}>
+                <IconThumbUpFilled />
+                {likes}
+              </button>
+            ) : (
+              <button onClick={handleLikeClick}>
+                <IconThumbUp />
+                {likes}
+              </button>
+            )}
+            {userVote === 2 ? (
+              <button onClick={handleDislikeClick}>
+                <IconThumbDownFilled />
+                {dislikes}
+              </button>
+            ) : (
+              <button onClick={handleDislikeClick}>
+                <IconThumbDown />
+                {dislikes}
+              </button>
+            )}
             {errorVisible && <p>{error}</p>}
           </section>
           <p className="autor">

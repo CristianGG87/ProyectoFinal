@@ -1,37 +1,41 @@
-/* NavBar.css */
-
 .navBar {
-    margin-top: 70px;
-    display: flex;
-    margin-left: 30px;
-    flex-direction: column;
-    padding: 10px;
-    background-color: black;
-    position: fixed;
-    width: 140px;
+  margin-top: 95px;
+  display: flex;
+  margin-left: 30px;
+  flex-direction: column;
+  padding: 10px 0px 10px 10px;
+
+  position: fixed;
+  width: 140px;
 }
 
 .navBar button {
-    margin: 5px 0; /* Agrega margen vertical entre los botones */
-    background-color: transparent; /* Color de fondo */
-    color: rgb(249, 249, 249); /* Color del texto */
-    border: none;
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 20px 5px; /* Relleno interno */
-    cursor: pointer;
-    transition: background-color 0.3s; /* Transición suave para el color de fondo */
-    font-size: 0.9em;
-    font-size: 1.3em;
-    display: flex;
-    gap: 2px;
+  margin: 5px 0;
+  background-color: transparent;
+  color: rgb(249, 249, 249);
+  border: none;
+  border-radius: 5px;
+  padding: 20px 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.9em;
+  font-size: 1.3em;
+  display: flex;
+  gap: 2px;
 }
 
 .navBar button:hover {
-    background-color: #6c69719c; /* Cambia el color de fondo al pasar el cursor por encima */
+  background-color: #6c69719c;
+}
+@media screen and (min-width: 768px) and (max-width: 1086px) {
+  .navBar {
+    margin-left: 1px;
+    padding-left: 0;
+  }
 }
 @media screen and (max-width: 768px) {
-    .navBar {
-        margin-left: 0;
-        border-radius: 5px;
-    }
+  .navBar {
+    margin-left: 0;
+    border-radius: 5px;
+  }
 }

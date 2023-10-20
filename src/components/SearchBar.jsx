@@ -8,6 +8,11 @@ const SearchBar = ({ keywordNews }) => {
     keywordNews(searchKeyword);
     setSearchKeyword("");
   };
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  }
   return (
     <section className="search-bar">
       <input
@@ -15,8 +20,8 @@ const SearchBar = ({ keywordNews }) => {
         placeholder="Buscar noticias"
         onChange={handleInputChange}
         value={searchKeyword}
+        onKeyPress={handleKeyPress}
       />
-      <button onClick={handleSearch}>Buscar</button>
     </section>
   );
 };

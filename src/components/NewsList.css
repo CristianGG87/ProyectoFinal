@@ -22,18 +22,7 @@ section.news-list > div > form {
   flex-direction: column;
   align-items: center;
 }
-#root
-  > main
-  > main
-  > div
-  > main
-  > section.news-list
-  > ul
-  > li
-  > article
-  > section
-  > p.topic {
-}
+
 .li.news-container {
   background-color: #000000;
 }
@@ -162,9 +151,11 @@ li.news-item {
     background-color: transparent;
     border: none;
     position: fixed;
+    margin-top: 10px;
   }
   input[type="text"],
   select {
+    width: 70%;
     height: 7px;
   }
   li.news-item {

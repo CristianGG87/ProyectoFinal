@@ -5,7 +5,7 @@ import {
   getUserNewsService,
   sendNewsService,
 } from "../services";
-const useNews = (id) => {
+const useNews = (token, id) => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -13,7 +13,10 @@ const useNews = (id) => {
     const loadNews = async () => {
       try {
         setLoading(true);
-        const data = id ? getUserNewsService(id) : await getAllNewsService();
+        const data = id
+          ? getUserNewsService(id)
+          : await getAllNewsService({ token });
+        console.log(data);
         setNews(data);
       } catch (error) {
         setError(error.message);
@@ -25,29 +28,29 @@ const useNews = (id) => {
   }, [id]);
   const addNews = async (oneNews, token) => {
     await sendNewsService(oneNews, token);
-    const allNews = await getAllNewsService();
+    const allNews = await getAllNewsService({ token });
     setNews(allNews);
   };
   const removeNews = async (id, token) => {
     await deleteNewsService(id, token);
-    const allNews = await getAllNewsService();
+    const allNews = await getAllNewsService({ token });
     setNews(allNews);
   };
   const topicNews = async (topic) => {
-    const allNews = await getAllNewsService({ topic });
+    const allNews = await getAllNewsService({ token, topic });
     setNews(allNews);
   };
   const keywordNews = async (keyword) => {
-    const allNews = await getAllNewsService({ keyword });
+    const allNews = await getAllNewsService({ token, keyword });
     setNews(allNews);
   };
   const hotNews = async () => {
-    const allNews = await getAllNewsService();
+    const allNews = await getAllNewsService({ token });
     allNews.news.sort((a, b) => b.vPositive - a.vPositive);
     setNews(allNews);
   };
   const showAllNews = async () => {
-    const allNews = await getAllNewsService();
+    const allNews = await getAllNewsService({ token });
     setNews(allNews);
   };
   return {

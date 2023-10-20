@@ -1,13 +1,19 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "./CreateNews.css";
+import { IconMessage2Plus } from "@tabler/icons-react";
+import { IconX } from "@tabler/icons-react";
 export const CreateNews = ({ addNews }) => {
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const { token } = useContext(AuthContext);
   const toggleForm = () => {
+    if (!showForm) {
+      // Si se está abriendo el formulario, establece la imagen en null
+      setImage(null);
+    }
     setShowForm(!showForm);
   };
   const handleForm = async (e) => {
@@ -28,7 +34,7 @@ export const CreateNews = ({ addNews }) => {
   return (
     <section className="create-news">
       <button className="button-create-news" onClick={toggleForm}>
-        {showForm ? "cerrar" : "Crear noticia"}
+        {showForm ? <IconX /> : <IconMessage2Plus />}
       </button>
       {showForm && (
         <form onSubmit={handleForm}>

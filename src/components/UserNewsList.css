@@ -1,69 +1,75 @@
 div.own-news {
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #1c1c1c;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 10px 50p;
-    width: 55%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px 50p;
+  width: 55%;
 }
 article.own-news {
-    background-color: #1c1c1c;
-    width: 55%;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    color: white;
+  background-color: #1c1c1c;
+  width: 55%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  color: white;
 }
 section.show-own-news {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 article.own-news img {
-    width: 500px;
+  width: 500px;
 }
 article.own-news h3 {
-    font-family: MajritTxRoman;
-    font-size: 1.5rem;
-    line-height: 1.8125rem;
-    letter-spacing: -0.0675rem;
+  font-family: MajritTxRoman;
+  font-size: 1.5rem;
+  line-height: 1.8125rem;
+  letter-spacing: -0.0675rem;
 }
 article.own-news p {
-    font-size: 1.2rem;
-    line-height: 2rem;
-    letter-spacing: -0.0675rem;
-    font-family: MajritTxRoman, serif;
-    margin: 0 10px;
-    padding: 1px;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  letter-spacing: -0.0675rem;
+  font-family: MajritTxRoman, serif;
+  margin: 0 10px;
+  padding: 1px;
 }
 article.own-news button {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 section.own-news h2 {
-    margin: 40px;
+  margin: 40px;
 }
 .custom-modal {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 350px;
-    left: 0px;
-    right: 0px;
-    bottom: 40px;
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 280px;
-    height: 100px;
-    border: 1px solid black;
-    margin: 0 auto;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 350px;
+  left: 0px;
+  right: 0px;
+  bottom: 40px;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 280px;
+  height: 100px;
+  border: 1px solid black;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+@media screen and (min-width: 769px) and (max-width: 925px) {
+  article.own-news img {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    article.own-news img {
-        width: 100%;
-    }
-    article.own-news {
-        width: 80vw;
-    }
+  article.own-news img {
+    width: 100%;
+  }
+  article.own-news {
+    width: 80vw;
+  }
 }

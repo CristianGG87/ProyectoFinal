@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import useNews from "../hooks/useNews";
+import ReactModal from "react-modal";
 import {
   sendVoteService,
   updateNewsService,
@@ -22,6 +23,9 @@ export const OneNews = ({ news }) => {
   const [likes, setLikes] = useState(news.vPositive || 0);
   const [dislikes, setDislikes] = useState(news.vNegative || 0);
   const [thumbnail, setThumbnail] = useState(null);
+  const [deleteConfirmationVisible, setDeleteConfirmationVisible] =
+    useState(false);
+  const [newsToDeleteId, setNewsToDeleteId] = useState(null);
   const handleLikeClick = async () => {
     try {
       const response = await sendVoteService(news.id, "1", token);
@@ -78,6 +82,13 @@ export const OneNews = ({ news }) => {
     } catch (error) {
       setError(error.message);
     }
+  };
+  const showDeleteConfirmation = (id) => {
+    setNewsToDeleteId(id);
+    setDeleteConfirmationVisible(true);
+  };
+  const hideDeleteConfirmation = () => {
+    setDeleteConfirmationVisible(false);
   };
   return (
     <section className="edit-news">
@@ -147,14 +158,38 @@ export const OneNews = ({ news }) => {
       {user && user.user.id === news.userId && !isEditing ? (
         <section className="edit-buttons">
           <button onClick={handleEditClick}>Editar noticia</button>
-          <button
-            onClick={() => {
-              if (window.confirm("Se borrara la Noticia, esta seguro?"))
-                deleteNews(news.id);
-            }}
-          >
+          <button onClick={() => showDeleteConfirmation(editedNews.id)}>
             Borrar noticia
           </button>
+          <ReactModal
+            isOpen={deleteConfirmationVisible}
+            onRequestClose={hideDeleteConfirmation}
+            contentLabel="Confirmar eliminación"
+            className="custom-modal"
+            shouldCloseOnEsc={true}
+            style={{
+              overlay: {
+                backgroundColor: "rgba(0, 0, 0, 0)",
+              },
+            }}
+          >
+            <h2>Confirmar eliminación</h2>
+            <p>¿Está seguro de que desea eliminar esta noticia?</p>
+            <section className="button-confirm">
+              <button
+                className="cancel-button"
+                onClick={hideDeleteConfirmation}
+              >
+                Cancelar
+              </button>
+              <button
+                className="confirm-button"
+                onClick={() => deleteNews(newsToDeleteId)}
+              >
+                Confirmar
+              </button>
+            </section>
+          </ReactModal>
         </section>
       ) : null}
       {isEditing && (
@@ -189,3 +224,4 @@ export const OneNews = ({ news }) => {
     </section>
   );
 };
+///////////////

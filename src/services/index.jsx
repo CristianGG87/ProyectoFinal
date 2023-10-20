@@ -21,13 +21,20 @@ export const getAllNewsService = async (data) => {
       `${url.pathname}?${searchParams.toString()}`
     );
   }
-  const response = await fetch(path);
+  const response = data.token
+    ? await fetch(path, {
+        headers: {
+          Authorization: data.token,
+        },
+      })
+    : await fetch(path);
   if (!response.ok) {
     throw new Error(json.message);
   }
   const json = await response.json();
   return json.data;
 };
+
 export const getUserNewsService = async (id) => {
   const response = await fetch(`${env}/users/${id}/news`);
   const json = await response.json();
@@ -36,8 +43,10 @@ export const getUserNewsService = async (id) => {
   }
   return json.data;
 };
-export const getSingleNewsService = async (id) => {
-  const response = await fetch(`${env}/news/${id}`);
+export const getSingleNewsService = async (id, token) => {
+  const response = await fetch(`${env}/news/${id}`, {
+    headers: { Authorization: token },
+  });
   const json = await response.json();
   if (!response.ok) {
     throw new Error(json.message);
