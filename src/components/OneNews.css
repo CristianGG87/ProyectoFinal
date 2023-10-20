@@ -1,124 +1,170 @@
 .edit-news div textarea {
-    width: 60%;
-    margin-bottom: 10px; /* Puedes ajustar el valor de margen según tus preferencias */
+  width: 60%;
+  margin-bottom: 10px;
 }
 h2 {
-    color: white;
+  color: white;
 }
 p {
-    color: white;
+  color: white;
 }
 section.likes button {
-    color: white;
-    display: flex;
+  color: white;
+  display: flex;
 }
 section.edit-news h2 {
-    font-size: 3rem;
+  font-size: 3rem;
+  line-height: 2.625rem;
+  letter-spacing: -0.0675rem;
+  font-family: MajritTx, serif;
+}
+section.edit-news h3 {
+  font-family: MajritTxRoman;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  letter-spacing: -0.0675rem;
+  margin-bottom: 3rem;
+}
+section.edit-news p {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  letter-spacing: -0.0675rem;
+  font-family: MajritTxRoman, serif;
+}
+section.edit-news {
+  display: flex;
+
+  flex-direction: column;
+  text-align: left;
+  margin: auto;
+}
+section.edit-news section {
+  margin-top: 100px;
+  max-width: 55rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+section.edit-news section img {
+  width: 70rem;
+}
+section.edit-news section section.like-buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+}
+section.edit-news section section.like-buttons button {
+  background-color: transparent;
+  border: none;
+}
+section.edit-news section.edit-buttons {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+#root > main > section > div.modify-news {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  width: 60vw;
+}
+#root > main > section > div.modify-news input {
+  margin-bottom: 15px;
+  width: 100%;
+}
+#root > main > section > div.modify-news textarea {
+  margin-bottom: 30px;
+  width: 100%;
+}
+#root > main > section > div.modify-news p {
+  font-size: 1.5rem;
+  margin: 0;
+}
+#root > main > section > div.modify-news {
+  margin-bottom: 20px;
+}
+
+div.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.edit-button {
+  background-color: transparent;
+  border: none;
+  font-size: 2.7em;
+  color: white;
+  margin-left: 20%;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2.5em;
+  color: rgb(255, 255, 255);
+  margin-right: 20%;
+}
+
+#root > main > section > form > fieldset.edit-photo {
+  display: flex;
+  justify-content: center;
+}
+#root > main > section > form > fieldset > button {
+  background-color: transparent;
+  border: none;
+}
+#root > main > section > form > div.cancel-button {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  section.edit-news h2 {
+    font-size: 2rem;
     line-height: 2.625rem;
     letter-spacing: -0.0675rem;
     font-family: MajritTx, serif;
-}
-section.edit-news h3 {
+  }
+  section.edit-news h3 {
     font-family: MajritTxRoman;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     line-height: 1.8125rem;
     letter-spacing: -0.0675rem;
     margin-bottom: 3rem;
-}
-section.edit-news p {
-    font-size: 1.8rem;
+  }
+  section.edit-news p {
+    font-size: 1.2rem;
     line-height: 2rem;
     letter-spacing: -0.0675rem;
     font-family: MajritTxRoman, serif;
-}
-section.edit-news {
+  }
+  section.edit-news section {
+    margin-top: 0;
+    max-width: 96vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  section.edit-news section img {
+    width: 100%;
+  }
+  section.edit-news {
     display: flex;
 
     flex-direction: column;
-    text-align: left;
+    text-align: center;
     margin: auto;
-}
-section.edit-news section {
-    margin-top: 100px;
-    max-width: 55rem;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-}
-section.edit-news section img {
-    width: 70rem;
-}
-section.edit-news section section.like-buttons {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-}
-section.edit-news section section.like-buttons button {
-    background-color: transparent;
-    border: none;
-}
-section.edit-news section.edit-buttons {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-#root > main > section > div.modify-news {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 80px;
-    width: 60vw;
-}
-#root > main > section > div.modify-news input {
-    margin-bottom: 15px;
-    width: 100%;
-}
-#root > main > section > div.modify-news textarea {
-    margin-bottom: 30px;
-    width: 100%;
-}
-#root > main > section > div.modify-news p {
-    font-size: 1.5rem;
-    margin: 0;
-}
-#root > main > section > div.modify-news {
-    margin-bottom: 20px;
-}
-@media screen and (max-width: 768px) {
-    section.edit-news h2 {
-        font-size: 2rem;
-        line-height: 2.625rem;
-        letter-spacing: -0.0675rem;
-        font-family: MajritTx, serif;
-    }
-    section.edit-news h3 {
-        font-family: MajritTxRoman;
-        font-size: 1.2rem;
-        line-height: 1.8125rem;
-        letter-spacing: -0.0675rem;
-        margin-bottom: 3rem;
-    }
-    section.edit-news p {
-        font-size: 1.2rem;
-        line-height: 2rem;
-        letter-spacing: -0.0675rem;
-        font-family: MajritTxRoman, serif;
-    }
-    section.edit-news section {
-        margin-top: 0;
-        max-width: 96vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    section.edit-news section img {
-        width: 100%;
-    }
-    section.edit-news {
-        display: flex;
+  }
+  .edit-button {
+    margin-left: 0;
+  }
 
-        flex-direction: column;
-        text-align: center;
-        margin: auto;
-        align-items: center;
-    }
+  .delete-button {
+    margin-right: 0;
+  }
 }

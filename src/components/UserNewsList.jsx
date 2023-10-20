@@ -2,7 +2,7 @@ import "./UserNewsList.css";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { IconThumbUp, IconThumbDown } from "@tabler/icons-react";
+import { IconThumbUp, IconThumbDown, IconTrash } from "@tabler/icons-react";
 import ReactModal from "react-modal";
 const UserNewsList = ({ news, env, removeNews }) => {
   const [setError] = useState("");
@@ -47,7 +47,7 @@ const UserNewsList = ({ news, env, removeNews }) => {
             </p>
           </section>
           <button onClick={() => showDeleteConfirmation(newsItem.id)}>
-            Borrar noticia
+            <IconTrash />
           </button>
         </article>
       ))}

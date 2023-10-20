@@ -1,7 +1,6 @@
 div.own-news {
   padding: 10px;
   border-radius: 10px;
-  background-color: #1c1c1c;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,7 +8,7 @@ div.own-news {
   width: 55%;
 }
 article.own-news {
-  background-color: #1c1c1c;
+  background-color: #292929;
   width: 55%;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -39,6 +38,8 @@ article.own-news p {
 }
 article.own-news button {
   margin-bottom: 10px;
+  background-color: transparent;
+  border: none;
 }
 section.own-news h2 {
   margin: 40px;

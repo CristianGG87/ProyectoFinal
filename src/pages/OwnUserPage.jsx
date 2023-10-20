@@ -176,13 +176,13 @@ export const OwnUserPage = () => {
               ) : (
                 <div>
                   <button
-                    className="image-edit"
+                    className="edit"
                     onClick={() => {
                       document.getElementById("imageUpload").click();
                       setIsEditingPhoto(true);
                     }}
                   >
-                    <IconEdit />
+                    &#9998;
                   </button>
                 </div>
               )}
@@ -212,7 +212,7 @@ export const OwnUserPage = () => {
                   <h2>
                     {user.user.userName}{" "}
                     <button className="edit" onClick={handleEditUserName}>
-                      <IconEdit />
+                      &#9998;
                     </button>
                   </h2>
                 </div>
@@ -237,7 +237,7 @@ export const OwnUserPage = () => {
                 <p>
                   Biografía: {user.user.biography}{" "}
                   <button className="edit" onClick={handleEditBiography}>
-                    <IconEdit />
+                    &#9998;
                   </button>
                 </p>
               )}
@@ -268,7 +268,7 @@ export const OwnUserPage = () => {
                   {user.user.email}{" "}
                   <button className="edit" onClick={handleEditEmail}>
                     {" "}
-                    <IconEdit />
+                    &#9998;
                   </button>
                 </p>
               )}
@@ -294,9 +294,7 @@ export const OwnUserPage = () => {
                     value={confirmNewPassword}
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                   />
-                  <button onClick={handleSavePassword}>
-                    Guardar Contraseña
-                  </button>
+                  <button onClick={handleSavePassword}>Guardar</button>
                   <button onClick={() => setIsEditingPassword(false)}>
                     Cancelar
                   </button>

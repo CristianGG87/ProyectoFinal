@@ -10,6 +10,8 @@ import {
   updateNewsPhotoService,
 } from "../services";
 import { IconThumbUp, IconThumbDown } from "@tabler/icons-react";
+import { BsTrash } from "react-icons/bs";
+
 export const OneNews = ({ news }) => {
   const { user, token } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -26,6 +28,8 @@ export const OneNews = ({ news }) => {
   const [deleteConfirmationVisible, setDeleteConfirmationVisible] =
     useState(false);
   const [newsToDeleteId, setNewsToDeleteId] = useState(null);
+  const [previousPhoto] = useState(editedNews.photo);
+
   const handleLikeClick = async () => {
     try {
       const response = await sendVoteService(news.id, "1", token);
@@ -157,44 +161,61 @@ export const OneNews = ({ news }) => {
       )}
       {user && user.user.id === news.userId && !isEditing ? (
         <section className="edit-buttons">
-          <button onClick={handleEditClick}>Editar noticia</button>
-          <button onClick={() => showDeleteConfirmation(editedNews.id)}>
-            Borrar noticia
-          </button>
-          <ReactModal
-            isOpen={deleteConfirmationVisible}
-            onRequestClose={hideDeleteConfirmation}
-            contentLabel="Confirmar eliminación"
-            className="custom-modal"
-            shouldCloseOnEsc={true}
-            style={{
-              overlay: {
-                backgroundColor: "rgba(0, 0, 0, 0)",
-              },
-            }}
-          >
-            <h2>Confirmar eliminación</h2>
-            <p>¿Está seguro de que desea eliminar esta noticia?</p>
-            <section className="button-confirm">
-              <button
-                className="cancel-button"
-                onClick={hideDeleteConfirmation}
-              >
-                Cancelar
-              </button>
-              <button
-                className="confirm-button"
-                onClick={() => deleteNews(newsToDeleteId)}
-              >
-                Confirmar
-              </button>
-            </section>
-          </ReactModal>
+          <div className="button-container">
+            <button className="edit-button" onClick={handleEditClick}>
+              &#9998;
+            </button>
+            <button
+              className="delete-button"
+              onClick={() => showDeleteConfirmation(editedNews.id)}
+            >
+              <BsTrash />
+            </button>
+
+            <ReactModal
+              isOpen={deleteConfirmationVisible}
+              onRequestClose={hideDeleteConfirmation}
+              contentLabel="Confirmar eliminación"
+              className="custom-modal"
+              shouldCloseOnEsc={true}
+              style={{
+                overlay: {
+                  backgroundColor: "rgba(0, 0, 0, 0)",
+                },
+              }}
+            >
+              <h2>Confirmar eliminación</h2>
+              <p>¿Está seguro de que desea eliminar esta noticia?</p>
+              <section className="button-confirm">
+                <button
+                  className="cancel-button"
+                  onClick={hideDeleteConfirmation}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className="confirm-button"
+                  onClick={() => deleteNews(newsToDeleteId)}
+                >
+                  Confirmar
+                </button>
+              </section>
+            </ReactModal>
+          </div>
         </section>
       ) : null}
       {isEditing && (
         <form onSubmit={handleEditPhotoSave}>
-          <fieldset>
+          <fieldset className="edit-photo">
+            <label htmlFor="photo"></label>
+            <img
+              src={`${env}/${previousPhoto}`}
+              alt="Foto anterior"
+              style={{ maxWidth: "200px", cursor: "pointer" }}
+              onClick={() => {
+                document.getElementById("photo").click();
+              }}
+            />
             <label htmlFor="photo"></label>
             <input
               type="file"
@@ -209,6 +230,7 @@ export const OneNews = ({ news }) => {
                   setThumbnail(null);
                 }
               }}
+              style={{ display: "none" }}
             />
             {thumbnail && (
               <img
@@ -217,11 +239,14 @@ export const OneNews = ({ news }) => {
                 style={{ maxWidth: "200px" }}
               />
             )}
-            <button>Guardar Foto</button>
+            <button onClick={handleEditPhotoSave}>Guardar Foto</button>
           </fieldset>
+          <div className="cancel-button">
+            <button onClick={() => setIsEditing(false)}>Cancelar</button>
+          </div>
         </form>
       )}
     </section>
   );
 };
-///////////////
+/////////////////////////////////

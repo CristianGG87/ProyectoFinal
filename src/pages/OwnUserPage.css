@@ -13,6 +13,9 @@ button:hover {
   background-color: #48494a;
   cursor: pointer;
 }
+#root > main > section > div > button {
+  height: 30px;
+}
 
 h3 {
   color: white;
@@ -28,8 +31,8 @@ section.user-data {
   align-items: center;
 }
 .user-data {
-  background-color: #1c1c1c; /* Fondo oscuro */
-  color: #ffffff; /* Texto blanco */
+  background-color: #292929;
+  color: #ffffff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -50,11 +53,12 @@ section.user-data {
   margin: 0px;
   cursor: pointer;
 }
+
 .user-data img {
-  border-radius: 50%; /* Hace la imagen de perfil circular */
-  max-width: 200px; /* Tamaño máximo de la imagen de perfil */
+  border-radius: 50%;
+  max-width: 200px;
   display: block;
-  margin: 0 auto; /* Centrar la imagen de perfil */
+  margin: 0 auto;
   width: 200px;
   height: 200px;
   max-height: 200px;
@@ -77,13 +81,18 @@ section.user-data {
   display: none;
 }
 .user-data button {
-  background-color: transparent; /* Color de fondo verde */
-  color: #ffffff; /* Texto blanco */
+  background-color: transparent;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
 
   cursor: pointer;
   border-radius: 5px;
+}
+
+button.edit {
+  transform: rotate(90deg);
+  font-size: x-large;
 }
 button.change-password {
   border-radius: 5px;

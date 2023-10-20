@@ -1,6 +1,7 @@
 section.create-news {
   width: 70vw;
-  margin-left: 4%;
+  /*margin-left: 4%;*/
+  margin-bottom: 12px;
 }
 
 section.create-news form {

@@ -2,17 +2,23 @@
   width: 200px;
   padding: 1px;
   position: fixed;
-  background-color: #050202;
+  background-color: #0f0f0f;
 }
 .nav-bar button {
   font-size: 1em;
 }
 .news-container {
-  display: flex;
-  flex-direction: row;
-  background-color: #000000;
+  background-color: #0f0f0f;
   color: rgb(255, 255, 255);
-  padding: 0px;
+}
+.news-container {
+  padding: 10px;
+}
+#root > main > main > div > main > section.weather {
+  margin-top: 150px;
+  right: 20px;
+  position: fixed;
+  width: 10%;
 }
 section.news-list > div > form {
   color: white;
@@ -24,7 +30,7 @@ section.news-list > div > form {
 }
 
 .li.news-container {
-  background-color: #000000;
+  background-color: #0f0f0f;
 }
 ul {
   list-style: none;
@@ -34,12 +40,11 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 6%;
 }
 section.news-list {
   flex: 1;
   padding: 0px;
-  margin-top: 67px;
+  margin-top: 50px;
 }
 .news-item {
   border-top: 1px solid rgb(255, 255, 255);
@@ -116,7 +121,57 @@ select {
   align-items: center;
 }
 li.news-item {
-  padding-left: 0;
+  width: 70%;
+}
+section.news-text h2:hover {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1401px) {
+  section.news-text h2 {
+    font-size: 1.7rem;
+    line-height: 1.7rem;
+  }
+  section.news-text h3 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  button.acordeon {
+    margin-left: 20px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    position: fixed;
+    margin-top: 5px;
+    left: 0;
+  }
+  section.navBar {
+    margin-top: 40px;
+    display: flex;
+    background-color: rgba(81, 70, 70, 0.65);
+    flex-direction: column;
+    padding: 0;
+    position: fixed;
+    width: 140px;
+    left: 10px;
+    border-radius: 5px;
+  }
+  #root
+    > main
+    > main
+    > div
+    > main
+    > section.news-list
+    > div
+    > section
+    > section:nth-child(1)
+    > section
+    > section
+    > button {
+    margin: 0;
+  }
 }
 @media screen and (max-width: 768px) {
   body {
@@ -138,7 +193,7 @@ li.news-item {
     justify-content: space-between;
   }
   section.navBar {
-    margin-top: 35px;
+    margin-top: 40px;
     background-color: rgba(81, 70, 70, 0.75);
     z-index: 1000;
   }
@@ -146,7 +201,7 @@ li.news-item {
     display: flex;
   }
   button.acordeon {
-    margin-left: 20px;
+    margin-left: 10px;
     margin-right: 10px;
     background-color: transparent;
     border: none;
@@ -170,7 +225,7 @@ li.news-item {
     > div
     > section
     > section:nth-child {
-    position: fixed;
+    position: absolute;
   }
   #root
     > main
@@ -183,5 +238,24 @@ li.news-item {
     > section:nth-child(1)
     > section {
     position: absolute;
+  }
+  #root > main > main > div > main > section.weather {
+    margin: 0;
+    top: 65px;
+    right: 8px;
+    width: 70px;
+  }
+  #root
+    > main
+    > main
+    > div
+    > main
+    > section.weather
+    > div.weather-container
+    > p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  #root > main > main > div > main > section.weather > div {
   }
 }

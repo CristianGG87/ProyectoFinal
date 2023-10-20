@@ -122,7 +122,9 @@ export const News = ({ news }) => {
                 {dislikes}
               </button>
             )}
-            {errorVisible && <p>{error}</p>}
+            <div className="error-container">
+              {errorVisible && <p>{error}</p>}
+            </div>
           </section>
           <p className="autor">
             Autor:{" "}
